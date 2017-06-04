@@ -185,7 +185,7 @@
                             <label class="control-label col-sm-2">Category <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <select style="width:100%" class="form-control select2-hidden-accessible" id="category_id" required="" name="category_id" tabindex="-1" aria-hidden="true"><option value="6" selected="">Woman</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-category_id-container"><span class="select2-selection__rendered" id="select2-category_id-container" title="Woman"><span class="select2-selection__clear">×</span>Woman</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                <select style="width:100%" class="form-control select2-hidden-accessible" id="category_id" required="" name="category_id" tabindex="-1" aria-hidden="true"><option value="6" selected="">Woman</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-category_id-container"><span class="select2-selection__rendered" id="select2-category_id-container" title="Woman"><span class="select2-selection__clear">ï¿½</span>Woman</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
 
@@ -259,7 +259,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ï¿½</span></button>
                                                 <h4 class="modal-title">Add Data</h4>
                                             </div>
                                             <div class="modal-body">
@@ -278,7 +278,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ï¿½</span></button>
                                                 <h4 class="modal-title">Edit Data</h4>
                                             </div>
                                             <div class="modal-body">
