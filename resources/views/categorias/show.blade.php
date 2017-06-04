@@ -22,7 +22,7 @@
                             </a>
 
 
-                            <a href="/categorias/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                                 <i class="fa fa-plus-circle"></i> Agregar nuevo
                             </a>
                             <!--ADD ACTIon-->
@@ -38,37 +38,23 @@
                     <div class="box-body">
                         <div>
 
-                            <p><a title="Return" href="/categorias"><i class="fa fa-chevron-circle-left "></i> &nbsp; Regresar</a></p>
-
+                            <p><a title="Return" href="javascript:history.back(1)"><i class="fa fa-chevron-circle-left "></i> &nbsp; Regresar</a></p>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <strong><i class="fa fa-archive"></i> Detalle</strong>
                                 </div>
-
                                 <div class="panel-body" style="padding:20px 0px 0px 0px">
-                                    <form class="form-horizontal" method="post" id="form" enctype="multipart/form-data" action="https://crudbooster.com/demoo/public/admin/category/edit-save/7">
-                                        <input type="hidden" name="_token" value="7dH0F3dhtMOUPgGxbYORsWo84ftqhqXN7WyfFjco">
                                         <div class="box-body">
-
-                                            <style type="text/css">
-                                                #table-detail tr td:first-child {
-                                                    font-weight: bold;
-                                                    width: 25%;
-                                                }
-                                            </style>
                                             <div class="table-responsive">
                                                 <table id="table-detail" class="table table-striped">
                                                     <tbody>
                                                         <tr>
-                                                            <td>{{$categoria->titulo_categoria}}</td>
+                                                            <td>{{$item->titulo_categoria}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div><!-- /.box-body -->
-
-                                    </form>
-
                                 </div>
                             </div>
                         </div>

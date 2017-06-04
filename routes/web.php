@@ -29,3 +29,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::resource('/paquetesTuristicos', 'PaquetesTuristicosController');
 Route::resource('/categorias', 'CategoriasController');
+Route::resource('/comonosencontro', 'ComoNosEncontroController');
+Route::post('/nuevoItinerario', 'PaquetesTuristicosController@nuevoItinerario');
+Route::post('/mostrarItinerario', 'PaquetesTuristicosController@mostrarItinerario');

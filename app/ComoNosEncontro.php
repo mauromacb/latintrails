@@ -10,4 +10,5 @@ class ComoNosEncontro extends Model
     protected $fillable = ['titulo'];
     //protected $fillable = ['name', 'titulo'];
     protected $guarded = ['id_como_nos_encontro'];
+    protected $primaryKey = 'id_como_nos_encontro';
 }

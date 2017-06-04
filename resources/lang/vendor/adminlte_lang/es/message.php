@@ -133,5 +133,6 @@ return [
     'registered'              => 'Usuario registrado!',
     //Menu
     'categorias'              => 'Categorías',
+    'comonosencontro'              => 'Como no encontro',
 
 ];

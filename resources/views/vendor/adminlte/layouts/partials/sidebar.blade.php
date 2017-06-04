@@ -37,10 +37,11 @@
             <li class="active"><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
             <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turisticos</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-link'></i> <span>Parametros</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="{{ url('comonosencontro') }}"><span>{{ trans('adminlte_lang::message.comonosencontro') }}</span></a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

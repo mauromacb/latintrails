@@ -245,6 +245,8 @@ return [
         * Acacha AdminLTE template alias
         */
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+
+        'Input' => Illuminate\Support\Facades\Input::class,
     ],
 
 ];

@@ -6,32 +6,23 @@ use Illuminate\Http\Request;
 use App\Categoria as categorias;
 use Session;
 use Redirect;
+use Illuminate\Support\Facades\Validator;
+use Input;
 
 class CategoriasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-
-        $categorias=categorias::all();
-
-        return view('categorias/index', compact('categorias'));
+        $items=categorias::all();
+        return view('categorias/index', compact('items'));
         //return "index";
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categoria = new categorias();
-        return view('categorias.create', ['categoria' => $categoria ]);
+        return view('categorias.create', ['item' => $categoria ]);
     }
 
     /**
@@ -42,13 +33,27 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->titulo_categoria);
-        $categoria = new categorias();
-        $categoria->titulo_categoria=$request->titulo_categoria;
-        $categoria->save();
+        $rules = array(
+            'nombre'  => 'required'
+        );
+        // proceso de validacion
+        $messages = [
+            'required' => ':attribute es requerido.',
+        ];
 
-        Session::flash('message', 'Categoria Creada Satistactoriamente!');
-        return Redirect::to('categorias');
+        $validator = Validator::make(Input::all(), $rules, $messages);
+        if ($validator->fails()) {
+            return Redirect::to('categorias/create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $categoria = new categorias();
+            $categoria->titulo_categoria=$request->nombre;
+            $categoria->save();
+            // redirecciona
+            Session::flash('message', 'Categoria Creada Satistactoriamente!');
+            return Redirect::to('categorias');
+        }
     }
 
     /**
@@ -59,9 +64,8 @@ class CategoriasController extends Controller
      */
     public function show($id)
     {
-        $categoria=categorias::where('id_categoria','=',$id)->first();
-        //dd($categoria);
-        return view('categorias/show', compact('categoria'));
+        $item=categorias::find($id);
+        return view('categorias/show', compact('item'));
     }
 
     /**
@@ -72,8 +76,8 @@ class CategoriasController extends Controller
      */
     public function edit($id)
     {
-        $categoria=categorias::where('id_categoria','=',$id)->first();
-        return view('categorias/edit', compact('categoria'));
+        $item=categorias::find($id);
+        return view('categorias/edit', compact('item'));
     }
 
     /**
@@ -85,7 +89,27 @@ class CategoriasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nombre'  => 'required'
+        );
+        // proceso de validacion
+        $messages = [
+            'required' => ':attribute es requerido.',
+        ];
+
+        $validator = Validator::make(Input::all(), $rules, $messages);
+        if ($validator->fails()) {
+            return Redirect::to('categorias/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $categoria = categorias::find($id);
+            $categoria->titulo_categoria = Input::get('nombre');
+            $categoria->save();
+            // redirecciona
+            Session::flash('message', 'Actualizado correctamente');
+            return Redirect::to('categorias');
+        }
     }
 
     /**
@@ -98,8 +122,8 @@ class CategoriasController extends Controller
     {
         $categoria = categorias::find($id);
         $categoria->delete($id);
-        //dd($categoria);
 
+        Session::flash('message', 'Eliminado satisfactoriamente');
         return Redirect::to('categorias');
     }
 }

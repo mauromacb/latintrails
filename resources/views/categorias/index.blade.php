@@ -16,13 +16,10 @@
                         <h3>
                             <i class="fa fa-archive"></i>  Categorías &nbsp;&nbsp;
                             <!--START BUTTON -->
-
-                            <a href="/categorias" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos
                             </a>
-
-
-                            <a href="/categorias/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                                 <i class="fa fa-plus-circle"></i> Agregar nuevo
                             </a>
                             <!--ADD ACTIon-->
@@ -37,13 +34,7 @@
                     </div>
                     <div class="box-body">
                         @include('layouts.scripts')
-                        <script type="application/javascript">
-                            $(document).ready(function() {
-                                $('#example').DataTable();
-                            } );
-                        </script>
-
-                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <td>Nombre</td>
@@ -59,25 +50,21 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            @foreach($categorias as $k)
+                            @foreach($items as $k)
                                 <tr>
-                                    <td><a href="categorias/{{$k->id_categoria}}" class="small-box-footer">{{$k->titulo_categoria}} <i class="fa fa-arrow-circle-right"></i></a></td>
-                                    <td><div class='button_action' style='text-align:right'>&nbsp;
-
-                                            <a class='btn btn-xs btn-primary' title='Ver' href='/categorias/{{$k->id_categoria}}'> <i class='fa fa-eye'></i></a>
-
-                                            <a class='btn btn-xs btn-success' title='Editar' href='/categorias/{{$k->id_categoria}}/edit'><i class='fa fa-pencil'></i></a>
-
-                                            {{ Form::open(['method' => 'DELETE', 'route' => ['categorias.destroy', $k->id_categoria]],array('style'=>'float: right; margin-left: 3px')) }}
-
+                                    <td><a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_categoria}}" class="small-box-footer">{{$k->titulo_categoria}} <i class="fa fa-arrow-circle-right"></i></a></td>
+                                    <td><div class='' style='text-align:right'>
+                                            <a class='btn btn-xs btn-primary' title='Ver' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_categoria}}'> <i class='fa fa-eye'></i></a>
+                                            <a class='btn btn-xs btn-success' title='Editar' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_categoria}}/edit'><i class='fa fa-pencil'></i></a>
+                                            <div style='float: right; margin-left: 3px'>
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['categorias.destroy', $k->id_categoria]]) }}
                                                 <fieldset class="buttons">
                                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                                         <span class="fa fa-trash"></span>
                                                     </button>
                                                 </fieldset>
-
                                             {{ Form::close() }}
-
+                                            </div>
                                         </div></td>
                                 </tr>
                             @endforeach
