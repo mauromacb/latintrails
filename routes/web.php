@@ -31,4 +31,6 @@ Route::resource('/paquetesTuristicos', 'PaquetesTuristicosController');
 Route::resource('/categorias', 'CategoriasController');
 Route::resource('/comonosencontro', 'ComoNosEncontroController');
 Route::post('/nuevoItinerario', 'PaquetesTuristicosController@nuevoItinerario');
-Route::post('/mostrarItinerario', 'PaquetesTuristicosController@mostrarItinerario');
+Route::get('/destroyItinerario', 'PaquetesTuristicosController@destroyItinerario');
+Route::get('/editarItinerario', 'PaquetesTuristicosController@editarItinerario');
+Route::post('/guardarItinerario', 'PaquetesTuristicosController@guardarItinerario');

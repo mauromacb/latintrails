@@ -92,13 +92,13 @@
                             <div class="col-sm-10">
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" required="" value="Active" @if($item->status==1)checked @endif> Active
+                                    <input type="radio" name="status" required="" value="Activo" @if($item->status==1)checked @endif> Activo
 
                                 </label>
 
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value="Unactive" @if($item->status==0)checked @endif> Unactive
+                                    <input type="radio" name="status" value="Inactivo" @if($item->status==0)checked @endif> Inactivo
                                 </label>
 
 
@@ -106,67 +106,7 @@
                                 <p class="help-block"></p>
 
                             </div>
-                        </div>								<script>
-                            $(function() {
-                                $('#category_id').select2({
-                                    placeholder: {
-                                        id: '-1',
-                                        text: '** Please select a Category'
-                                    },
-                                    allowClear: true,
-                                    ajax: {
-                                        url: 'https://crudbooster.com/demoo/public/admin/products/find-data',
-                                        delay: 250,
-                                        data: function (params) {
-                                            var query = {
-                                                q: params.term,
-                                                format: "",
-                                                table1: "category",
-                                                column1: "name",
-                                                table2: "",
-                                                column2: "",
-                                                table3: "",
-                                                column3: "",
-                                                where: ""
-                                            }
-                                            return query;
-                                        },
-                                        processResults: function (data) {
-                                            return {
-                                                results: data.items
-                                            };
-                                        }
-                                    },
-                                    escapeMarkup: function (markup) { return markup; },
-                                    minimumInputLength: 1,
-                                    initSelection: function(element, callback) {
-                                        var id = $(element).val()?$(element).val():"6";
-                                        if(id!=='') {
-                                            $.ajax('https://crudbooster.com/demoo/public/admin/products/find-data', {
-                                                data: {
-                                                    id: id,
-                                                    format: "",
-                                                    table1: "category",
-                                                    column1: "name",
-                                                    table2: "",
-                                                    column2: "",
-                                                    table3: "",
-                                                    column3: ""
-                                                },
-                                                dataType: "json"
-                                            }).done(function(data) {
-                                                callback(data.items[0]);
-                                                $('#category_id').html("<option value='"+data.items[0].id+"' selected >"+data.items[0].text+"</option>");
-                                            });
-                                        }
-                                    }
-
-
-                                });
-
-                            })
-                        </script>
-
+                        </div>
 
                         <div class="form-group header-group-0 " id="form-group-category_id" style="">
                             <label class="control-label col-sm-2">Categoria <span class="text-danger" title="This field is required">*</span></label>
@@ -193,53 +133,12 @@
                                     <div class="box-header">
                                         <h1 class="box-title">Itinerario</h1>
                                         <div class="box-tools">
-                                            <a class="btn btn-primary btn-sm btn-add" href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Agregar</a>
+                                            <a class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#myModal" onclick="agregar()"><i class="fa fa-plus"></i> Agregar</a>
                                         </div>
                                     </div>
-                                    <div class="box-body">
+                                    <div class="box-body" id="itinerarios">
                                         @include('layouts.scripts')
-                                        <script type="application/javascript">
-                                            $(document).ready(function() {
-                                                $('#example').DataTable();
-                                            } );
-                                        </script>
-                                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Description: activate to sort column descending" style="width: 254px;">Descripcion</th><th class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Stock In: activate to sort column ascending" style="width: 175px;">Dia</th>
-                                                <th width="90px" class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 90px;">Action</th></tr>
-                                            </thead>
-                                            <tbody>
-
-                                            @foreach($itinerario as $k)
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1">{{$k->descripcion}}</td>
-                                                    <td>{{$k->dia}}</td>
-                                                    <td>
-                                                        <a href="javascript:void(0)" data-id="3739" class="btn btn-sm btn-success btn-edit"><i class="fa fa-pencil"></i></a>
-                                                        <a href="javascript:void(0)" data-id="3739" class="btn btn-sm btn-warning btn-delete"><i class="fa fa-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                        <?php
-                                        /*echo "Aqui SOAP";
-
-                                        $servicio="http://app.segurosequinoccial.info/WebServiceSybase/Service.asmx?WSDL"; //url del servicio
-                                        $parametros=array(); //parametros de la llamada
-                                        $parametros['string']="es";
-                                        $parametros['double']=0;
-                                        $client = new SoapClient($servicio, array());
-                                        $params=new stdClass();
-                                        $params->nro_doc='es';
-                                        $params->PrimaNeta=(double) 1985.33;
-
-                                        $result=$client->CalcularDeudaSSC($params);
-                                        var_dump($result->CalcularDeudaSSCResult);
-
-                                        //$result = $client->getSoap($parametros);//llamamos al método que nos interesa con los parámetros
-                                            */
-                                        ?>
+                                        @include('paquetesTuristicos.itinerarioLista')
                                     </div>
 
                                     <!-- /.box-body -->
@@ -300,7 +199,7 @@
                                 <a href="/paquetesTuristicos" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
 
 
-                                <input type="submit" name="submit" value="Guardar" class="btn btn-success">
+                                <input type="submit" name="submit" value="Guardar" class="btn btn-success" >
 
                             </div>
                         </div>
@@ -319,37 +218,8 @@
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                             <h4 class="modal-title" id="myModalLabel">Itinerarios</h4>
                         </div>
-                        <div class="modal-body" id="resultado">
-                            <form method="POST" name="form1" id="form1" action="/nuevoItinerario">
-                                {{ csrf_field() }}
-                            <div class="box-body">
-                                <div class="form-group header-group-0 " id="form-group-name" style="">
-                                    <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>
-                                    <div class="col-sm-10">
 
-                                        <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">
-                                        <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required>
-                                    </div>
-                                </div>
-                                <div class="form-group header-group-0 " id="form-group-name" style="">
-                                    <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>
-                                    <div class="col-sm-10">
-                                        <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer" style="background: #F5F5F5">
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <input type="submit" name="submit" value="Guardar" class="btn btn-primary" >
-                                        <button type="button" data-dismiss="modal" class="btn btn-danger">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div><!-- /.box-footer-->
-                            </form>
-                        </div>
+                        <div class="modal-body" id="resultado"></div>
 
                     </div>
                 </div>
@@ -361,8 +231,7 @@
 </section><!-- /.content -->
 
 <script language="javascript">
-
-    function myFunction() {
+    function agregarItinerario() {
         $("#form1").submit(function () {
             $.ajaxSetup({
                 headers: {
@@ -374,37 +243,64 @@
                 url: '/nuevoItinerario',
                 data: $(this).serialize(),
                 success: function (data) {
-                    $('#resultado').html('<form method="POST" name="form2" id="form2"><input type="hidden" name="idpaquetetur" id="idpaquetetur" value="<?php echo $item->id_paquete_tur;?>"><h1 align="center" style="color:#008011">'+data+'</h1><br><input type="submit" name="submit" value="Cerrar" class="btn btn-danger" onclick="cerrarItinerario()" ></form>');
+                    $('#resultado').html('<div class="alert alert-success" align="center"><strong>Itinerario Agregado Exitosamente!</strong></div>');
+                    $('#itinerarios').html(data);
                 }
             })
-
             return false;
         });
     }
+    function agregar() {
+        $('#resultado').html('<form name="form1" id="form1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required>        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">            </textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="agregarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
+    }
+    function editarItinerario(pqtr,itinerario) {
+            $.ajax({
+                type: 'GET',
+                url: '/editarItinerario',
+                data: 'idpt=' + pqtr + '&idit=' + itinerario,
+                success: function (data) {
+                    $('#resultado').html('<form name="forms1" id="forms1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="hidden" name="idit" id="idit" value="'+data.id_itinerario+'"> <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required value="'+data.dia+'">        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">'+data.descripcion+'</textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="guardarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
+                }
+            })
+            return false;
 
-    function cerrarItinerario() {
-        alert();
-        $("#form2").submit(function () {
+    }
+    function guardarItinerario(pqtr,itinerario) {
+        $("#forms1").submit(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            alert($(this).attr('action'));
             $.ajax({
                 type: 'POST',
-                url: '/mostrarItinerario',
+                url: '/guardarItinerario',
                 data: $(this).serialize(),
                 success: function (data) {
-                    $('#myModal').modal('hide');
-                    $('#result').html(data);
+                    $('#resultado').html('<div class="alert alert-success" align="center"><strong>Itinerario Actualizado Exitosamente!</strong></div>');
+                    $('#itinerarios').html(data);
                 }
             })
-
             return false;
         });
     }
-
-
+    function eliminarItinerario(pqtr,itinerario) {
+        if (confirm('¿Está seguro que desea eliminar el registro?')){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/destroyItinerario',
+                data: 'idpt='+pqtr+'&idit='+itinerario,
+                success: function (data) {
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        }
+    }
 </script>
 @endsection
