@@ -12,12 +12,12 @@
 
         <!--START BUTTON -->
 
-        <a href="#" id="btn_show_data" class="btn btn-sm btn-primary" title="Show Data">
+        <a href="{{url('/paquetesTuristicos')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Show Data">
             <i class="fa fa-table"></i> Ver
         </a>
 
 
-        <a href="#" id="btn_add_new_data" class="btn btn-sm btn-success" title="Add Data">
+        <a href="{{url('/paquetesTuristicos/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Add Data">
             <i class="fa fa-plus-circle"></i> Agregar
         </a>
         <!--ADD ACTIon-->
@@ -99,11 +99,11 @@
                             <a class='btn btn-xs btn-danger' title='Set Unactive' href='#'>
                                 <i class='fa fa-ban'></i> Desactivar
                             </a>&nbsp;
-                            <a class='btn btn-xs btn-primary' title='Detail Data' href='/paquetesTuristicos'>
+                            <a class='btn btn-xs btn-primary' title='Detail Data' href='{{url('/paquetesTuristicos')}}'>
                                 <i class='fa fa-eye'></i>
                             </a>
 
-                            <a class='btn btn-xs btn-success' title='Edit Data' href='/paquetesTuristicos/{{$k->id_paquete_tur}}/edit'>
+                            <a class='btn btn-xs btn-success' title='Edit Data' href='{{url('/paquetesTuristicos/'.$k->id_paquete_tur.'/edit')}}'>
                                 <i class='fa fa-pencil'></i>
                             </a>
 
