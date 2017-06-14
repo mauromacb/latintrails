@@ -35,7 +35,8 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li class="active"><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
-            <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turisticos</span></a></li>
+            <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
+            <li><a href="{{ url('hoteles') }}"><i class='fa fa-link'></i> <span>Hoteles</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Parametros</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

@@ -39,7 +39,7 @@ class PaquetesTuristicosController extends Controller
        dd($paquete);
        dd($paq);
         */
-        $paquete_turistico = paqueteturistico::get();
+        $paquete_turistico = paqueteturistico::where('estado','!=',2)->get();
         return view('paquetesTuristicos/index', compact('paquete_turistico'));
     }
 
@@ -52,7 +52,7 @@ class PaquetesTuristicosController extends Controller
     {
         $itinerario = new itinerarios();
         $categorias=categorias::get();
-        return view('paquetesTuristicos/create' ,compact('categorias', 'itinerario'));
+        return view('paquetesTuristicos/create' ,compact('categorias'));
     }
 
     /**
@@ -144,7 +144,19 @@ class PaquetesTuristicosController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $paquete=paqueteturistico::find($id);
+        $paquete->estado =2;
+        $paquete->save();
+        return redirect()->action('PaquetesTuristicosController@index');
+    }
+
+    public function estado(Request $request)
+    {
+        $paquete=paqueteturistico::find($request->idpt);
+        if($paquete->estado==1){$paquete->estado=0;}elseif($paquete->estado==0){$paquete->estado=1;};
+        $paquete->save();
+        return redirect()->action('PaquetesTuristicosController@index');
     }
 
     public function nuevoItinerario(Request $request)

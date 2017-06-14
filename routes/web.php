@@ -23,9 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 Route::resource('/paquetesTuristicos', 'PaquetesTuristicosController');
 Route::resource('/categorias', 'CategoriasController');
@@ -35,3 +33,5 @@ Route::get('/destroyItinerario', 'PaquetesTuristicosController@destroyItinerario
 Route::get('/editarItinerario', 'PaquetesTuristicosController@editarItinerario');
 Route::post('/guardarItinerario', 'PaquetesTuristicosController@guardarItinerario');
 Route::post('/ficheros', 'PaquetesTuristicosController@dropzoneStore');
+Route::post('/estado', 'PaquetesTuristicosController@estado');
+Route::resource('/hoteles', 'HotelesController');

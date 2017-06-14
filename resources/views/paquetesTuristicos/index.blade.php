@@ -27,7 +27,7 @@
 
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Paquetes Turisticos</li>
+        <li class="active">Paquetes Turísticos</li>
     </ol>
 </section>
 
@@ -62,48 +62,47 @@
                 </tr>
                 </tfoot>
                 <tbody>
-
-                <tr>
-
-                    <td>Paquete Turístico</td>
-                    <td>Título Paquete Turístico</td>
-
-                    <td><span class="label label-warning">Inactivo</span></td>
-                    <td><div class="button_action" style="text-align:right"><a class="btn btn-xs btn-success" title="Set Active" href="#"><i class="fa fa-check"></i> Activar</a>&nbsp;
-
-                            <a class="btn btn-xs btn-primary" title="Detail Data" href="#"><i class="fa fa-eye"></i></a>
-
-
-                            <a class="btn btn-xs btn-success" title="Edit Data" href="#"><i class="fa fa-pencil"></i></a>
-
-                            <a class="btn btn-xs btn-warning" title="Delete" href="javascript:;" onclick="swal({
-        title: &quot;Are you sure ?&quot;,
-        text: &quot;You will not be able to recover this record data!&quot;,
-        type: &quot;warning&quot;,
-        showCancelButton: true,
-        confirmButtonColor: &quot;#DD6B55&quot;,
-        confirmButtonText: &quot;Yes!&quot;,
-        closeOnConfirm: false },
-        function(){  location.href=&quot;https://crudbooster.com/demoo/public/admin/products/delete/1250&quot; });"><i class="fa fa-trash"></i></a>
-
-                        </div></td>
-                </tr>
-
                 @foreach($paquete_turistico as $k)
                 <tr>
                     <td><a href="#" class="small-box-footer">{{$k->id_paquete_tur}}<i class="fa fa-arrow-circle-right"></i></a></td>
                     <td>{{$k->titulo}}</td>
-                    <td><span class="label label-success">Activo</span></td>
+                    <td>
+                        @if($k->estado==1)
+                        <span class="label label-success">Activo</span>
+                        @else
+                        <span class="label label-warning">Inactivo</span>
+                        @endif
+                    </td>
                     <td>
                         <div class='button_action' style='text-align:right'>
-                            <a class='btn btn-xs btn-danger' title='Set Unactive' href='#'>
-                                <i class='fa fa-ban'></i> Desactivar
-                            </a>&nbsp;
-                            <a class='btn btn-xs btn-primary' title='Detail Data' href='{{url('/paquetesTuristicos')}}'>
+
+                            <div style='float: left; margin-left: 3px'>
+                                @if($k->estado==1)
+                                    {{ Form::open(['method' => 'POST', 'url' => ['estado']]) }}
+                                    <input type="hidden" name="idpt" value="{{$k->id_paquete_tur}}">
+                                    <fieldset class="buttons">
+                                        <button class="btn btn-xs btn-danger">
+                                            <i class='fa fa-ban'></i>Desactivar
+                                        </button>
+                                    </fieldset>
+                                    {{ Form::close() }}
+                                @elseif($k->estado==0)
+                                    {{ Form::open(['method' => 'POST', 'url' => ['estado']]) }}
+                                    <input type="hidden" name="idpt" value="{{$k->id_paquete_tur}}">
+                                    <fieldset class="buttons">
+                                        <button class="btn btn-xs btn-success">
+                                            <i class='fa fa-check'></i>Activar
+                                        </button>
+                                    </fieldset>
+                                    {{ Form::close() }}
+                                @endif
+                            </div>
+
+                            <a class='btn btn-xs btn-primary' title='Detalles' href='{{url('/paquetesTuristicos')}}'>
                                 <i class='fa fa-eye'></i>
                             </a>
 
-                            <a class='btn btn-xs btn-success' title='Edit Data' href='{{url('/paquetesTuristicos/'.$k->id_paquete_tur.'/edit')}}'>
+                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('/paquetesTuristicos/'.$k->id_paquete_tur.'/edit')}}'>
                                 <i class='fa fa-pencil'></i>
                             </a>
 
@@ -116,6 +115,7 @@
                                 </fieldset>
                                 {{ Form::close() }}
                             </div>
+
                         </div></td>
                     </tr>
                     @endforeach

@@ -30,15 +30,24 @@
             <div class="panel-heading">
                 <strong><i class="fa fa-glass"></i> Editar Paquete</strong>
             </div>
+
             <link href="{{ asset('/css/dropzone.css') }}" rel="stylesheet">
             <script src="{{ asset('/js/dropzone.js') }}"></script>
             <div class="col-lg-12">
-                <h1>Upload Multiple Images using dropzone.js and Laravel</h1>
                 <form method="POST" action="/ficheros" accept-charset="UTF-8" enctype="multipart/form-data" class="dropzone" id="image-upload">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div>
-                        <h3></h3>
+                    <div class="dz-message">
+
                     </div>
+
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+
+                    <div class="dropzone-previews" id="dropzonePreview"></div>
+
+                    <h4 style="text-align: center;color:#428bca;">Mueve las imágenes a esta área<span class="glyphicon glyphicon-hand-down"></span></h4>
+
                 </form>
                 <script type="text/javascript">
                     Dropzone.options.imageUpload = {
@@ -47,6 +56,7 @@
                     };
                 </script>
             </div>
+
 
             <div class="panel-body" style="padding:20px 0px 0px 0px">
 
@@ -100,27 +110,20 @@
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
                             </div>
-                        </div>								<div class="form-group header-group-0 " id="form-group-status" style="">
+                        </div>
+                        <div class="form-group header-group-0 " id="form-group-status" style="">
                             <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
 
                                 <label class="radio-inline">
-<<<<<<< HEAD
                                     <input type="radio" name="estado" required="" value="Activo" @if($item->estado==1)checked @endif> Activo
-=======
-                                    <input type="radio" name="status" required="" value="Activo" @if($item->status==1)checked @endif> Activo
->>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
 
                                 </label>
 
 
                                 <label class="radio-inline">
-<<<<<<< HEAD
                                     <input type="radio" name="estado" value="Inactivo" @if($item->estado==0)checked @endif> Inactivo
-=======
-                                    <input type="radio" name="status" value="Inactivo" @if($item->status==0)checked @endif> Inactivo
->>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
                                 </label>
 
 
@@ -160,13 +163,8 @@
                                         </div>
                                     </div>
                                     <div class="box-body" id="itinerarios">
-<<<<<<< HEAD
                                         @include('layouts.scriptsPaquetesTuristicos')
                                         @include('paquetesTuristicos.itinerarioLista', ['item'=>$item, 'itinerario'=>$itinerario])
-=======
-                                        @include('layouts.scripts')
-                                        @include('paquetesTuristicos.itinerarioLista')
->>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
                                     </div>
 
                                     <!-- /.box-body -->
@@ -226,12 +224,7 @@
 
                                 <a href="/paquetesTuristicos" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
 
-
-<<<<<<< HEAD
                                 <button type="submit" id="submitform" class="btn btn-success" onclick="validar();">Guardar</button>
-=======
-                                <input type="submit" name="submit" value="Guardar" class="btn btn-success" >
->>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
 
                             </div>
                         </div>
@@ -261,8 +254,6 @@
     </div><!--END AUTO MARGIN-->
 
 </section><!-- /.content -->
-<<<<<<< HEAD
-=======
 
 <script language="javascript">
     function agregarItinerario() {
@@ -337,5 +328,4 @@
         }
     }
 </script>
->>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
 @endsection
