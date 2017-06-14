@@ -40,14 +40,14 @@ class PaquetesTuristicosController extends Controller
        dd($paq);
         */
         $paquete_turistico = paqueteturistico::get();
-       return view('paquetesTuristicos/index', compact('paquete_turistico'));
-   }
+        return view('paquetesTuristicos/index', compact('paquete_turistico'));
+    }
 
-   /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $itinerario = new itinerarios();

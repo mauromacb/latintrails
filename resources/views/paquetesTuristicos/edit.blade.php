@@ -106,13 +106,21 @@
                             <div class="col-sm-10">
 
                                 <label class="radio-inline">
+<<<<<<< HEAD
                                     <input type="radio" name="estado" required="" value="Activo" @if($item->estado==1)checked @endif> Activo
+=======
+                                    <input type="radio" name="status" required="" value="Activo" @if($item->status==1)checked @endif> Activo
+>>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
 
                                 </label>
 
 
                                 <label class="radio-inline">
+<<<<<<< HEAD
                                     <input type="radio" name="estado" value="Inactivo" @if($item->estado==0)checked @endif> Inactivo
+=======
+                                    <input type="radio" name="status" value="Inactivo" @if($item->status==0)checked @endif> Inactivo
+>>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
                                 </label>
 
 
@@ -152,8 +160,13 @@
                                         </div>
                                     </div>
                                     <div class="box-body" id="itinerarios">
+<<<<<<< HEAD
                                         @include('layouts.scriptsPaquetesTuristicos')
                                         @include('paquetesTuristicos.itinerarioLista', ['item'=>$item, 'itinerario'=>$itinerario])
+=======
+                                        @include('layouts.scripts')
+                                        @include('paquetesTuristicos.itinerarioLista')
+>>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
                                     </div>
 
                                     <!-- /.box-body -->
@@ -214,7 +227,11 @@
                                 <a href="/paquetesTuristicos" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
 
 
+<<<<<<< HEAD
                                 <button type="submit" id="submitform" class="btn btn-success" onclick="validar();">Guardar</button>
+=======
+                                <input type="submit" name="submit" value="Guardar" class="btn btn-success" >
+>>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
 
                             </div>
                         </div>
@@ -244,4 +261,81 @@
     </div><!--END AUTO MARGIN-->
 
 </section><!-- /.content -->
+<<<<<<< HEAD
+=======
+
+<script language="javascript">
+    function agregarItinerario() {
+        $("#form1").submit(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/nuevoItinerario',
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#resultado').html('<div class="alert alert-success" align="center"><strong>Itinerario Agregado Exitosamente!</strong></div>');
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        });
+    }
+    function agregar() {
+        $('#resultado').html('<form name="form1" id="form1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required>        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">            </textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="agregarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
+    }
+    function editarItinerario(pqtr,itinerario) {
+            $.ajax({
+                type: 'GET',
+                url: '/editarItinerario',
+                data: 'idpt=' + pqtr + '&idit=' + itinerario,
+                success: function (data) {
+                    $('#resultado').html('<form name="forms1" id="forms1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="hidden" name="idit" id="idit" value="'+data.id_itinerario+'"> <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required value="'+data.dia+'">        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">'+data.descripcion+'</textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="guardarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
+                }
+            })
+            return false;
+
+    }
+    function guardarItinerario(pqtr,itinerario) {
+        $("#forms1").submit(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/guardarItinerario',
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#resultado').html('<div class="alert alert-success" align="center"><strong>Itinerario Actualizado Exitosamente!</strong></div>');
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        });
+    }
+    function eliminarItinerario(pqtr,itinerario) {
+        if (confirm('¿Está seguro que desea eliminar el registro?')){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/destroyItinerario',
+                data: 'idpt='+pqtr+'&idit='+itinerario,
+                success: function (data) {
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        }
+    }
+</script>
+>>>>>>> ae040a6e1509be93a7dc3744f2d184cafaef4ccf
 @endsection
