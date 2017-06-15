@@ -14,7 +14,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3>
-                            <i class="fa fa-archive"></i>  Hoteles &nbsp;&nbsp;
+                            <i class="fa fa-archive"></i>  Preguntas Comment Card &nbsp;&nbsp;
                             <!--START BUTTON -->
                             <a href="<?php echo $_SERVER['REQUEST_URI'];?>" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos
@@ -37,14 +37,14 @@
                         <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <td>Nombre</td>
+                                <td>Pregunta</td>
                                 <td>Acción</td>
 
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <td>Nombre</td>
+                                <td>Pregunta</td>
                                 <td>Acción</td>
 
                             </tr>
@@ -52,13 +52,12 @@
                             <tbody>
                             @foreach($items as $k)
                                 <tr>
-                                    <td><a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}/edit" class="small-box-footer">{{$k->nombre}} <i class="fa fa-arrow-circle-right"></i></a></td>
-                                    <td>
-                                        <div class='' style='text-align:right'>
+                                    <td><a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_categoria}}" class="small-box-footer">{{$k->pregunta}} <i class="fa fa-arrow-circle-right"></i></a></td>
+                                    <td><div class='' style='text-align:right'>
                                             <a class='btn btn-xs btn-primary' title='Ver' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}'> <i class='fa fa-eye'></i></a>
                                             <a class='btn btn-xs btn-success' title='Editar' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}/edit'><i class='fa fa-pencil'></i></a>
                                             <div style='float: right; margin-left: 3px'>
-                                            {{ Form::open(['method' => 'DELETE', 'route' => ['hoteles.destroy', $k->id]]) }}
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['commentcard.destroy', $k->id]]) }}
                                                 <fieldset class="buttons">
                                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                                         <span class="fa fa-trash"></span>
@@ -66,12 +65,29 @@
                                                 </fieldset>
                                             {{ Form::close() }}
                                             </div>
-                                        </div>
-                                    </td>
+                                        </div></td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        <?php
+                        /*echo "Aqui SOAP";
+
+                        $servicio="http://app.segurosequinoccial.info/WebServiceSybase/Service.asmx?WSDL"; //url del servicio
+                        $parametros=array(); //parametros de la llamada
+                        $parametros['string']="es";
+                        $parametros['double']=0;
+                        $client = new SoapClient($servicio, array());
+                        $params=new stdClass();
+                        $params->nro_doc='es';
+                        $params->PrimaNeta=(double) 1985.33;
+
+                        $result=$client->CalcularDeudaSSC($params);
+                        var_dump($result->CalcularDeudaSSCResult);
+
+                        //$result = $client->getSoap($parametros);//llamamos al método que nos interesa con los parámetros
+                            */
+                        ?>
                     </div>
                     <!-- /.box-body -->
                 </div>

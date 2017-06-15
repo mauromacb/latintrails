@@ -14,7 +14,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3>
-                            <i class="fa fa-archive"></i>  Hoteles &nbsp;&nbsp;
+                            <i class="fa fa-archive"></i>  Página Web &nbsp;&nbsp;
                             <!--START BUTTON -->
                             <a href="<?php echo $_SERVER['REQUEST_URI'];?>" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos

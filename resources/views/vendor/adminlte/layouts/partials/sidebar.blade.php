@@ -34,17 +34,20 @@
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li class="active"><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
-            <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
-            <li><a href="{{ url('hoteles') }}"><i class='fa fa-link'></i> <span>Hoteles</span></a></li>
+            <li class=""><a href="{{ url('dashboard') }}"><i class='fa fa-link'></i> <span>Gestión de usuarios</span></a></li>
+            <li class=""><a href="{{ url('pagina') }}"><i class='fa fa-link'></i> <span>Gestión de la web</span></a></li>
+            <li class=""><a href="{{ url('commentcard') }}"><i class='fa fa-link'></i> <span>Comment Card</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>Parametros</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-link'></i> <span>Sistema Turístico</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="{{ url('comonosencontro') }}"><span>{{ trans('adminlte_lang::message.comonosencontro') }}</span></a></li>
+                    <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
+                    <li class=""><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
+                    <li class=""><a href="{{ url('zonasturisticas') }}"><i class='fa fa-link'></i> <span>Zonas Turísticas</span></a></li>
+                    <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Mapas Turísticos</span></a></li>
+                    <li><a href="{{ url('hoteles') }}"><i class='fa fa-link'></i> <span>Hoteles</span></a></li>
                 </ul>
             </li>
+            <li><a href="{{ url('comonosencontro') }}"><span>{{ trans('adminlte_lang::message.comonosencontro') }}</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

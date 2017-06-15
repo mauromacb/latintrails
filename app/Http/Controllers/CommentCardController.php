@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentCard;
 use Illuminate\Http\Request;
-use App\Hoteles as hoteles;
+use App\CommentCard as formulario;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\Validator;
 use Input;
-class HotelesController extends Controller
+
+class CommentCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +19,8 @@ class HotelesController extends Controller
      */
     public function index()
     {
-        $items=hoteles::all();
-        return view('hoteles/index', compact('items'));
+        $items=formulario::all();
+        return view('commentcard/index', compact('items'));
     }
 
     /**
@@ -28,8 +30,8 @@ class HotelesController extends Controller
      */
     public function create()
     {
-        $item = new hoteles();
-        return view('hoteles.create', ['item' => $item ]);
+        $item= new formulario();
+        return view('commentcard.create', ['item' => $item]);
     }
 
     /**
@@ -41,8 +43,7 @@ class HotelesController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'nombre'  => 'required',
-            'descripcion'  => 'required'
+            'pregunta'  => 'required'
         );
         // proceso de validacion
         $messages = [
@@ -51,18 +52,17 @@ class HotelesController extends Controller
 
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
-            return Redirect::to('hoteles/create')
+            return Redirect::to('commentcard/create')
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
-            $item = new hoteles();
-            $item->nombre=$request->nombre;
-            $item->descripcion=$request->descripcion;
-            $item->estado=$request->estado;
+            $item = new formulario();
+            $item->pregunta=$request->pregunta;
+            $item->estado=1;
             $item->save();
             // redirecciona
-            Session::flash('message', 'Solicitud procesada exitosamente');
-            return Redirect::to('hoteles');
+            Session::flash('message', 'Solicitud procesada exitosamente!');
+            return Redirect::to('commentcard');
         }
     }
 
@@ -85,8 +85,9 @@ class HotelesController extends Controller
      */
     public function edit($id)
     {
-        $item=hoteles::find($id);
-        return view('hoteles/edit', compact('item'));
+        $item=formulario::find($id);
+
+        return view('commentcard/edit', compact('item'));
     }
 
     /**
@@ -98,30 +99,12 @@ class HotelesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'nombre'  => 'required',
-            'descripcion'  => 'required'
-        );
-        // proceso de validacion
-        $messages = [
-            'required' => ':attribute es requerido.',
-        ];
-
-        $validator = Validator::make(Input::all(), $rules, $messages);
-        if ($validator->fails()) {
-            return Redirect::to('hoteles/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
-        } else {
-            $item = hoteles::find($id);
-            $item->nombre = $request->nombre;
-            $item->descripcion = $request->descripcion;
-            $item->estado = $request->estado;
-            $item->save();
-            // redirecciona
-            Session::flash('message', 'Solicitud procesada exitosamente');
-            return Redirect::to('hoteles');
-        }
+        $item = formulario::find($id);
+        $item->pregunta = $request->pregunta;
+        $item->save();
+        // redirecciona
+        Session::flash('message', 'Solicitud procesada exitosamente');
+        return Redirect::to('commentcard');
     }
 
     /**
@@ -132,9 +115,10 @@ class HotelesController extends Controller
      */
     public function destroy($id)
     {
-        $item=hoteles::find($id);
-        $item->delete();
-        Session::flash('message', 'Solicitud procesada exitosamente');
-        return Redirect::to('hoteles');
+        $item= formulario::find($id);
+        $item->delete($id);
+
+        Session::flash('message', 'Eliminado satisfactoriamente');
+        return Redirect::to('commentcard');
     }
 }

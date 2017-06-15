@@ -35,3 +35,5 @@ Route::post('/guardarItinerario', 'PaquetesTuristicosController@guardarItinerari
 Route::post('/ficheros', 'PaquetesTuristicosController@dropzoneStore');
 Route::post('/estado', 'PaquetesTuristicosController@estado');
 Route::resource('/hoteles', 'HotelesController');
+Route::resource('/pagina', 'PaginaController');
+Route::resource('/commentcard', 'CommentCardController');
