@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-06-15 19:42:31
+Date: 2017-06-16 00:44:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -240,14 +240,18 @@ CREATE TABLE `mapas` (
   `id_paquete_tur` int(11) DEFAULT NULL,
   `descripcion` text,
   `nombre_mapa` varchar(255) DEFAULT NULL,
+  `imagen` varchar(200) DEFAULT NULL,
+  `thumbnail` varchar(200) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id_mapa`),
   KEY `fk_paquete_turistico_con_mapas` (`id_paquete_tur`),
   CONSTRAINT `fk_paquete_turistico_con_mapas` FOREIGN KEY (`id_paquete_tur`) REFERENCES `paquete_turistico` (`id_paquete_tur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of mapas
 -- ----------------------------
+INSERT INTO `mapas` VALUES ('1', '1', '<p>Descripcion del mapa turistico</p>', 'Mapa uno', 'preview-image.jpg', 'thumb_preview-image.jpg', '1');
 
 -- ----------------------------
 -- Table structure for notificaciones
