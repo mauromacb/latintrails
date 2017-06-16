@@ -80,7 +80,9 @@ class MapasController extends Controller
             $item = new mapas();
             $item->id_paquete_tur=$request->id_paquete_tur;
             $item->descripcion=$request->descripcion;
-            $item->nombre_mapa=$file->getClientOriginalName();
+            $item->nombre_mapa=$request->nombre_mapa;
+            $item->imagen=$file->getClientOriginalName();
+            $item->thumbnail='thumb_'.$file->getClientOriginalName();
             $item->estado=$request->estado;
             $item->save();
             // redirecciona

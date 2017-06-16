@@ -52,7 +52,15 @@
                             <tbody>
                             @foreach($items as $k)
                                 <tr>
-                                    <td><a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}/edit" class="small-box-footer">{{$k->nombre_mapa}} <i class="fa fa-arrow-circle-right"></i></a></td>
+                                    <td>
+                                        <a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_mapa}}/edit" class="small-box-footer">
+                                            <i class="fa fa-arrow-circle-right"></i> {{$k->nombre_mapa}}
+                                            <img src="thumbnails/thumb_{{$k->imagen}}" alt="{{$k->nombre_mapa}}">
+                                            <div class="caption">
+                                                <h3>{{$k->nombre_mapa}}</h3>
+                                            </div>
+                                        </a>
+                                    </td>
                                     <td>
                                         <div class='' style='text-align:right'>
                                             <a class='btn btn-xs btn-primary' title='Ver' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_mapa}}'> <i class='fa fa-eye'></i></a>
