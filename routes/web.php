@@ -37,3 +37,4 @@ Route::post('/estado', 'PaquetesTuristicosController@estado');
 Route::resource('/hoteles', 'HotelesController');
 Route::resource('/pagina', 'PaginaController');
 Route::resource('/commentcard', 'CommentCardController');
+Route::resource('/mapas', 'MapasController');

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-06-13 22:21:07
+Date: 2017-06-15 19:42:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -79,7 +79,7 @@ CREATE TABLE `categorias` (
 -- ----------------------------
 -- Records of categorias
 -- ----------------------------
-INSERT INTO `categorias` VALUES ('1', 'Categoria 1');
+INSERT INTO `categorias` VALUES ('1', 'Categoria 2');
 INSERT INTO `categorias` VALUES ('2', 'Categoria 2');
 
 -- ----------------------------
@@ -95,6 +95,25 @@ CREATE TABLE `categoria_itinerarios` (
 -- ----------------------------
 -- Records of categoria_itinerarios
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for commentcard
+-- ----------------------------
+DROP TABLE IF EXISTS `commentcard`;
+CREATE TABLE `commentcard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pregunta` varchar(255) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `indice_comment_card` (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of commentcard
+-- ----------------------------
+INSERT INTO `commentcard` VALUES ('1', 'Pregunta 1 ?', '1');
+INSERT INTO `commentcard` VALUES ('2', 'Pregunta 2', '1');
+INSERT INTO `commentcard` VALUES ('3', 'Pregunta 3 ?', '1');
 
 -- ----------------------------
 -- Table structure for como_nos_encontro
@@ -157,6 +176,24 @@ CREATE TABLE `formulario` (
 -- ----------------------------
 -- Records of formulario
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for hoteles
+-- ----------------------------
+DROP TABLE IF EXISTS `hoteles`;
+CREATE TABLE `hoteles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) DEFAULT NULL,
+  `descripcion` text,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `indice_hoteles` (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of hoteles
+-- ----------------------------
+INSERT INTO `hoteles` VALUES ('1', 'Nombre del hotel', '<p>Descripci&oacute;n del hotel............</p>', '1');
 
 -- ----------------------------
 -- Table structure for imagenes
@@ -249,14 +286,18 @@ CREATE TABLE `notificaciones_con_usuarios` (
 -- ----------------------------
 DROP TABLE IF EXISTS `pagina`;
 CREATE TABLE `pagina` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) DEFAULT NULL,
   `pie` varchar(255) DEFAULT NULL,
-  `links_interes` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `links_interes` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `indice_pagina` (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pagina
 -- ----------------------------
+INSERT INTO `pagina` VALUES ('1', 'LatinTrais', '<p><strong>Copyright &copy; 2017 <a href=\"http://latintrails.com\">Latintrails.com</a>.</strong> Creado por <a href=\"http://ups.edu.ec\">Universidad Polit&eacute;cnica Salesiana</a>.</p>', '<p><a href=\"http://www.latintrails.com\">http://www.latintrails.com</a></p>');
 
 -- ----------------------------
 -- Table structure for paquetes_con_imagenes
@@ -533,7 +574,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Mauricio Alfredo Cóndor Bayas.', 'mauricio.macb@hotmail.com', '$2y$10$nYCQ28/9PbAlZQEgFF5mj.xixLDdWs2CnGra3pXefIZvtn4cxhJlO', 'obqaH4MXeM6WaZ9L7hDJWarm3QpQAqE7SDJKyPnxRUIEgmuvNQelMuHRT3tx', '2017-01-22 13:45:16', '2017-03-14 17:33:16');
+INSERT INTO `users` VALUES ('1', 'Mauricio Alfredo Cóndor Bayas.', 'mauricio.macb@hotmail.com', '$2y$10$nYCQ28/9PbAlZQEgFF5mj.xixLDdWs2CnGra3pXefIZvtn4cxhJlO', '9PvUuWKfjFlPGyqXMJXJXMMQTgVLLgEczhnYtsOwSpQrdn0aaTN7vbyvBTen', '2017-01-22 13:45:16', '2017-03-14 17:33:16');
 INSERT INTO `users` VALUES ('2', 'Mauricio Alfredo Cóndor Bayas', 'mac_bayas@hotmail.com', '$2y$10$Pcy4wk6anj85TEw5cayZWuDAdO5uZYnnXLaAteFza/LeHQUdoBRX6', '6zSBd1ve1MYMeGe5Y4UPqGfO8WSNlwdoJi9w0na0PnMnZM1g4TlbDBVNDZiD', '2017-02-13 20:12:26', '2017-02-20 21:33:42');
 INSERT INTO `users` VALUES ('3', 'Mauricio Alfredo Cóndor Bayas', 'mauricio.macb1@gmail.com', '$2y$10$OJtcy2gIZCrjDTLc7r64FO3PvW35BQXo7PUXJtJGVJ2zIlnfMMUl.', null, '2017-02-20 21:34:05', '2017-02-20 21:34:05');
 

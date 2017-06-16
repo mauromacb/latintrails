@@ -189,6 +189,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -247,6 +248,8 @@ return [
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
 
         'Input' => Illuminate\Support\Facades\Input::class,
+
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
