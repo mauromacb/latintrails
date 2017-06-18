@@ -61,95 +61,113 @@
             <div class="panel-body" style="padding:20px 0px 0px 0px">
 
                 {{ Form::model($item, array('route'=>array('paquetesTuristicos.update',$item->id_paquete_tur),'method' => 'put','class'=>'form-horizontal')) }}
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <style>
-                            .select2-container--default .select2-selection--single {border-radius: 0px !important}
-                            .select2-container .select2-selection--single {height: 35px}
-                        </style>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <style>
+                        .select2-container--default .select2-selection--single {border-radius: 0px !important}
+                        .select2-container .select2-selection--single {height: 35px}
+                    </style>
 
-                        <div class="form-group header-group-0 " id="form-group-name" style="">
-                            <label class="control-label col-sm-2">Nombre <span class="text-danger" title="This field is required">*</span></label>
+                    <div class="form-group header-group-0 " id="form-group-name" style="">
+                        <label class="control-label col-sm-2">Nombre <span class="text-danger" title="This field is required">*</span></label>
 
-                            <div class="col-sm-10">
-                                <input type="text" title="nombre" required="" placeholder="" maxlength="70" class="form-control" name="titulo" id="titulo" value="{{$item->titulo}}">
+                        <div class="col-sm-10">
+                            <input type="text" title="nombre" required="" placeholder="" maxlength="70" class="form-control" name="titulo" id="titulo" value="{{$item->titulo}}">
 
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-
-                            </div>
-                        </div>
-                        <div class="form-group header-group-0 " id="form-group-description" style="">
-                            <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
-                            <div class="col-sm-10">
-                                <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
-
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-
-                            <label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
-                            <div class="col-sm-10">
-                                <p><a class="fancybox" href="#"><img style="max-width:160px" title="" src="{{url('images/1.jpg')}}"></a></p>
-                                <p><a class="fancybox" href="#"><img style="max-width:160px" title="" src="{{url('images/2.jpg')}}"></a></p>
-                                <p><a class="fancybox" href="#"><img style="max-width:160px" title="" src="{{url('images/3.jpg')}}"></a></p>
-								<p><a class="btn btn-danger btn-delete btn-sm" onclick="if(!confirm('Esta seguro ?')) return false" href="#"><i class="fa fa-ban"></i> Delete </a></p>
-
-                                <p class="text-muted"><em>* If you want to upload other file, please first delete the file.</em></p>
-                                <div class="text-danger"></div>
-
-                            </div>
+                            <div class="text-danger"></div>
+                            <p class="help-block"></p>
 
                         </div>
-                        <div class="form-group header-group-0 " id="form-group-price" style="">
-                            <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
-
-
-                            <div class="col-sm-10">
-                                <input type="text" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="${{$item->precio}}">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
+                    </div>
+                    <div class="form-group header-group-0 " id="form-group-description" style="">
+                        <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
+                        <div class="col-sm-10">
+                            <textarea>{{$item->descripcion}}</textarea>
+                            <script type="text/javascript" language="javascript">
+                                $(document).on("click","div.fichero",function(){
+                                    item_url = $(this).data("src");
+                                    var args = top.tinymce.activeEditor.windowManager.getParams();
+                                    win = (args.window);
+                                    input = (args.input);
+                                    win.document.getElementById(input).value = item_url;
+                                    top.tinymce.activeEditor.windowManager.close();
+                                });
+                            </script>
+                            <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
                         </div>
-                        <div class="form-group header-group-0 " id="form-group-status" style="">
-                            <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
+                    </div>
 
-                            <div class="col-sm-10">
-
-                                <label class="radio-inline">
-                                    <input type="radio" name="estado" required="" value="Activo" @if($item->estado==1)checked @endif> Activo
-
-                                </label>
-
-
-                                <label class="radio-inline">
-                                    <input type="radio" name="estado" value="Inactivo" @if($item->estado==0)checked @endif> Inactivo
-                                </label>
-
-
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-
+                    <label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
+                    <div class="col-sm-10">
+                        <!-- Carousel items -->
+                        <div id="myCarousel" class="carousel slide">
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                                <li data-target="#myCarousel" data-slide-to="3"></li>
+                            </ol>
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                                <div class="active item"><img  src="{{url('images/1.jpg')}}" alt="banner1" /></div>
+                                <div class="item"><img  src="{{url('images/1.jpg')}}" alt="banner2" /></div>
+                                <div class="item"><img  src="{{url('images/2.jpg')}}" alt="banner3" /></div>
+                                <div class="item"><img  src="{{url('images/3.jpg')}}" alt="banner4" /></div>
                             </div>
+                            <!-- Carousel nav -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                $('.myCarousel').carousel()
+                            });
+                        </script>
 
-                        <div class="form-group header-group-0 " id="form-group-category_id" style="">
-                            <label class="control-label col-sm-2">Categoria <span class="text-danger" title="This field is required">*</span></label>
+                        <p><a class="btn btn-danger btn-delete btn-sm" onclick="if(!confirm('Esta seguro ?')) return false" href="#"><i class="fa fa-ban"></i> Delete </a></p>
 
-                            <div class="col-sm-10">
-                                <select style="width:100%" class="form-control " id="id_categoria" required="" name="id_categoria" tabindex="-1" aria-hidden="true">
-                                    <option value="SELECCIONE UNO">SELECCIONE UNO</option>
-                                    <option value="{{$cats->id_categoria}}" selected="">{{$cats->titulo_categoria}}</option>
-                                    @foreach($categorias as $k)
-                                    <option value="{{$k->id_categoria}}" >{{$k->titulo_categoria}}</option>
-                                    @endforeach
-                                </select>
+                        <p class="text-muted"><em>* If you want to upload other file, please first delete the file.</em></p>
+                        <div class="text-danger"></div>
 
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
+                    </div>
 
-                            </div>
+                    <div class="form-group header-group-0 " id="form-group-price" style="">
+                        <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
+
+
+                        <div class="col-sm-10">
+                            <input type="text" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="${{$item->precio}}">
+                            <div class="text-danger"></div>
+                            <p class="help-block"></p>
                         </div>
+                    </div>
+                    <div class="form-group header-group-0 " id="form-group-status" style="">
+                        <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="estado" required="" value="Activo" @if($item->estado==1)checked @endif> Activo
+
+                            </label>
+
+                            <label class="radio-inline">
+                                <input type="radio" name="estado" value="Inactivo" @if($item->estado==0)checked @endif> Inactivo
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                        <label class="control-label col-sm-2">Categoria <span class="text-danger" title="This field is required">*</span></label>
+
+                        <div class="col-sm-10">
+                            <select style="width:100%" class="form-control " id="id_categoria" required="" name="id_categoria" tabindex="-1" aria-hidden="true">
+                                <option value="SELECCIONE UNO">SELECCIONE UNO</option>
+                                <option value="{{$cats->id_categoria}}" selected="">{{$cats->titulo_categoria}}</option>
+                                @foreach($categorias as $k)
+                                <option value="{{$k->id_categoria}}" >{{$k->titulo_categoria}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group header-group-0 " id="form-group-stock">
 
                             <label class="control-label col-sm-2">Itinerario</label>
@@ -213,7 +231,7 @@
 
 
                             </div>
-                        </div>
+                    </div>
                     <!-- /.box-body -->
 
                     <div class="box-footer" style="background: #F5F5F5">

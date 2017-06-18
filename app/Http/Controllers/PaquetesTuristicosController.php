@@ -51,7 +51,7 @@ class PaquetesTuristicosController extends Controller
     public function create()
     {
         $itinerario = new itinerarios();
-        $categorias=categorias::get();
+        $categorias=categorias::where('estado','!=',2)->get();
         return view('paquetesTuristicos/create' ,compact('categorias'));
     }
 
@@ -85,6 +85,7 @@ class PaquetesTuristicosController extends Controller
         $paquete->precio = $request->precio;
         $paquete->fecha_creacion = date('Y-m-d h:m:s');
         $paquete->id_categoria = $request->id_categoria;
+        $paquete->estado = 1;
         $paquete->save();
 
         return redirect()->action('PaquetesTuristicosController@index');

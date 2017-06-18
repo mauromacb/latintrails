@@ -15,6 +15,40 @@
 
     <![endif]-->
 
+    <script src="{{ asset('vendors/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea",
+            height: 500,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste imagetools"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            // imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
+            /*content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css'
+            ],*/
+            file_browser_callback :
+                function(field_name, url, type, win){
+                    var filebrowser = "/filebrowser.php";
+                    filebrowser += (filebrowser.indexOf("?") < 0) ? "?type=" + type : "&type=" + type;
+                    tinymce.activeEditor.windowManager.open({
+                        title : "Insertar fichero",
+                        width : 520,
+                        height : 400,
+                        url : filebrowser
+                    }, {
+                        window : win,
+                        input : field_name
+                    });
+                    return false;
+                }
+        });
+    </script>
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),

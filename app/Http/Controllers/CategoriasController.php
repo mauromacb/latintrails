@@ -14,7 +14,7 @@ class CategoriasController extends Controller
 
     public function index()
     {
-        $items=categorias::all();
+        $items=categorias::where('estado','!=',2)->get();
         return view('categorias/index', compact('items'));
         //return "index";
     }
@@ -49,6 +49,7 @@ class CategoriasController extends Controller
         } else {
             $categoria = new categorias();
             $categoria->titulo_categoria=$request->nombre;
+            $categoria->estado=1;
             $categoria->save();
             // redirecciona
             Session::flash('message', 'Categoria Creada Satistactoriamente!');
@@ -121,7 +122,8 @@ class CategoriasController extends Controller
     public function destroy($id)
     {
         $categoria = categorias::find($id);
-        $categoria->delete($id);
+        $categoria->estado = 2;
+        $categoria->save();
 
         Session::flash('message', 'Eliminado satisfactoriamente');
         return Redirect::to('categorias');
