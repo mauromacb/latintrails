@@ -9,16 +9,11 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-glass"></i>  Agregar &nbsp;&nbsp;
-
-            <!--START BUTTON -->
-            <!--ADD ACTIon-->
-            <!-- END BUTTON -->
+            <i class="fa fa-glass"></i>  Agregar Paquete Turístico
         </h1>
 
-
         <ol class="breadcrumb">
-            <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="{{url('home')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li class="active">Paquetes Turisticos</li>
         </ol>
     </section>
@@ -28,7 +23,7 @@
     <section id="content_section" class="content">
         <!-- Your Page Content Here -->
         <div>
-            <p><a title="Return" href="/home"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+            <p><a title="Return" href="{{url('paquetesTuristicos')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong><i class="fa fa-glass"></i> Agregar Paquete</strong>
@@ -118,25 +113,17 @@
                         </div>
 
                         <div class="box-footer" style="background: #F5F5F5">
-
                             <div class="form-group">
                                 <label class="control-label col-sm-2"></label>
                                 <div class="col-sm-10">
-                                    <a href="/paquetesTuristicos" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                    <a href="{{url('paquetesTuristicos')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
                                     <button type="submit" id="submitform" class="btn btn-success" onclick="validar();">Guardar</button>
                                 </div>
                             </div>
-
-
-
                         </div><!-- /.box-footer-->
                     {!! Form::close() !!}
-
                 </div>
             </div>
         </div><!--END AUTO MARGIN-->
-
     </section><!-- /.content -->
-
-
 @endsection

@@ -8,17 +8,22 @@
 @section('main-content')
 <section class="content-header">
     <h1>
-        <i class="fa fa-glass"></i>  Editar &nbsp;&nbsp;
+        <i class="fa fa-glass"></i>  Edit Product Data &nbsp;&nbsp;
 
         <!--START BUTTON -->
+
+
+
+
+
         <!--ADD ACTIon-->
         <!-- END BUTTON -->
     </h1>
 
 
     <ol class="breadcrumb">
-        <li><a href="/home"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Paquetes Turisticos</li>
+        <li><a href="https://crudbooster.com/demoo/public/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Product Data</li>
     </ol>
 </section>
 
@@ -39,12 +44,12 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong><i class="fa fa-glass"></i> Editar Paquete</strong>
+                <strong><i class="fa fa-glass"></i> Edit Product Data</strong>
             </div>
 
             <div class="panel-body" style="padding:20px 0px 0px 0px">
                 <form class="form-horizontal" method="post" id="form" enctype="multipart/form-data" action="https://crudbooster.com/demoo/public/admin/products/edit-save/1246">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="tETMEOy7BSABYEQOhKzrXjLVQdGIC2e7JgGbetTg">
                     <input type="hidden" name="return_url" value="https://crudbooster.com/demoo/public/admin/products?m=13">
                     <input type="hidden" name="ref_mainpath" value="https://crudbooster.com/demoo/public/admin/products">
                     <input type="hidden" name="ref_parameter" value="return_url=https://crudbooster.com/demoo/public/admin/products?m=13&amp;parent_id=&amp;parent_field=">
@@ -58,31 +63,28 @@
                         </style>
 
                         <div class="form-group header-group-0 " id="form-group-name" style="">
-                            <label class="control-label col-sm-2">Nombre <span class="text-danger" title="This field is required">*</span></label>
+                            <label class="control-label col-sm-2">Name <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <input type="text" title="nombre" required="" placeholder="You can only enter the letter only" maxlength="70" class="form-control" name="name" id="name" value="Andes & Amazon Tour 14 days - 13 nights">
+                                <input type="text" title="Name" required="" placeholder="You can only enter the letter only" maxlength="70" class="form-control" name="name" id="name" value="Ut explicabo maiores aliquid.">
 
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
 
                             </div>
                         </div>								<div class="form-group header-group-0 " id="form-group-description" style="">
-                            <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
+                            <label class="control-label col-sm-2">Description <span class="text-danger" title="This field is required">*</span></label>
                             <div class="col-sm-10">
-                                <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">The best of the Andes region in Ecuador, and the magic of the Amazon in one tour. Visit the snow-capped volcanoes, taste the traditional cuisine, perceive the aromas of the Andean culture, travel in of the most difficult train of the world. And, of course, visit two of the most beautiful colonial cities in the country, Cuenca and Quito
-                                </textarea>
+                                <textarea name="description" id="description" required="" maxlength="5000" class="form-control" rows="5">Let me see--how IS it to make herself useful, and looking at everything that Alice had learnt several things of this was the Rabbit actually TOOK A WATCH OUT OF ITS WAISTCOAT-POCKET, and looked into its face in some alarm. This time there were TWO little shrieks, and more sounds of broken glass. 'What a funny watch!' she remarked. 'There isn't any,'.</textarea>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
                             </div>
                         </div>								<div class="form-group header-group-0 " id="form-group-photo" style="">
-                            <label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
+                            <label class="col-sm-2 control-label">Photo <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <p><a class="fancybox" href="#"><img style="max-width:160px" title="" src="{{url('images/1.jpg')}}"></a></p>
-                                <p><a class="fancybox" href="#"><img style="max-width:160px" title="" src="{{url('images/2.jpg')}}"></a></p>
-                                <p><a class="fancybox" href="#"><img style="max-width:160px" title="" src="{{url('images/3.jpg')}}"></a></p>
-								<p><a class="btn btn-danger btn-delete btn-sm" onclick="if(!confirm('Esta seguro ?')) return false" href="#"><i class="fa fa-ban"></i> Delete </a></p>
+                                <p><a class="fancybox" href="https://crudbooster.com/demoo/public/uploads/2017-02/asus.jpg"><img style="max-width:160px" title="Image For Photo" src="https://crudbooster.com/demoo/public/uploads/2017-02/asus.jpg"></a></p>
+                                <input type="hidden" name="_photo" value="uploads/2017-02/asus.jpg">								<p><a class="btn btn-danger btn-delete btn-sm" onclick="if(!confirm('Are you sure ?')) return false" href="https://crudbooster.com/demoo/public/admin/products/delete-image?image=uploads/2017-02/asus.jpg&amp;id=1246&amp;column=photo&amp;temporary=0"><i class="fa fa-ban"></i> Delete </a></p>
 
                                 <p class="text-muted"><em>* If you want to upload other file, please first delete the file.</em></p>
                                 <div class="text-danger"></div>
@@ -91,10 +93,10 @@
 
                         </div>
                         <div class="form-group header-group-0 " id="form-group-price" style="">
-                            <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
+                            <label class="control-label col-sm-2">Price <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <input type="text" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="$1500">
+                                <input type="text" title="Price" required="" class="form-control inputMoney" name="price" id="price" value="906422">
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
                             </div>
@@ -180,30 +182,24 @@
 
 
                         <div class="form-group header-group-0 " id="form-group-category_id" style="">
-                            <label class="control-label col-sm-2">Categoria <span class="text-danger" title="This field is required">*</span></label>
+                            <label class="control-label col-sm-2">Category <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <select style="width:100%" class="form-control " id="categoria_id" required="" name="categoria_id" tabindex="-1" aria-hidden="true">
-                                    <option value="1" selected="">Amazons</option>
-                                    <option value="2" >Galapagos</option>
-                                    <option value="3" >Pacific Coast</option>
-                                    <option value="4" >The Andes</option>
-                                </select>
-
+                                <select style="width:100%" class="form-control select2-hidden-accessible" id="category_id" required="" name="category_id" tabindex="-1" aria-hidden="true"><option value="6" selected="">Woman</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-category_id-container"><span class="select2-selection__rendered" id="select2-category_id-container" title="Woman"><span class="select2-selection__clear">×</span>Woman</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
 
                             </div>
                         </div>								<div class="form-group header-group-0 " id="form-group-stock">
 
-                            <label class="control-label col-sm-2">Itinerario</label>
+                            <label class="control-label col-sm-2">Stock</label>
                             <div class="col-sm-10">
 
                                 <div class="box box-default" style="box-shadow:0px 0px 5px #ccc">
                                     <div class="box-header">
-                                        <h1 class="box-title">Itinerario</h1>
+                                        <h1 class="box-title">Stock</h1>
                                         <div class="box-tools">
-                                            <a class="btn btn-primary btn-sm btn-add" href="javascript:void(0)"><i class="fa fa-plus"></i> Agregar</a>
+                                            <a class="btn btn-primary btn-sm btn-add" href="javascript:void(0)"><i class="fa fa-plus"></i> Add Data</a>
                                         </div>
                                     </div>
                                     <div class="box-body">
@@ -211,10 +207,9 @@
                                         <input type="hidden" name="subtable[stock][fk]" value="products_id">
                                         <input type="hidden" name="subtable[stock][table]" value="stock">
 
-                                        <div id="table-stock_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="table-stock_length"><label>Ver <select name="table-stock_length" aria-controls="table-stock" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> resultados</label></div></div><div class="col-sm-6"><div id="table-stock_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="table-stock"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="table-stock" class="table table-striped dataTable no-footer" role="grid" aria-describedby="table-stock_info">
+                                        <div id="table-stock_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="table-stock_length"><label>Show <select name="table-stock_length" aria-controls="table-stock" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="table-stock_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="table-stock"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="table-stock" class="table table-striped dataTable no-footer" role="grid" aria-describedby="table-stock_info">
                                                         <thead>
-                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Description: activate to sort column descending" style="width: 254px;">Descripcion</th><th class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Stock In: activate to sort column ascending" style="width: 175px;">Dia</th>
-                                                            <th width="90px" class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 90px;">Action</th></tr>
+                                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Description: activate to sort column descending" style="width: 254px;">Description</th><th class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Stock In: activate to sort column ascending" style="width: 175px;">Stock In</th><th class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Stock Out: activate to sort column ascending" style="width: 201px;">Stock Out</th><th width="90px" class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 90px;">Action</th></tr>
                                                         </thead>
                                                         <tbody>
 
@@ -222,39 +217,39 @@
 
                                                         <tr role="row" class="odd">
 
-                                                            <td class="sorting_1">Bienvenida.</td>
+                                                            <td class="sorting_1">Alice, 'we learned.</td>
 
-                                                            <td>1</td>
+                                                            <td>9</td>
 
-
+                                                            <td>6</td>
                                                             <td>
                                                                 <a href="javascript:void(0)" data-id="3740" class="btn btn-sm btn-success btn-edit"><i class="fa fa-pencil"></i></a>
                                                                 <a href="javascript:void(0)" data-id="3740" class="btn btn-sm btn-warning btn-delete"><i class="fa fa-trash"></i></a>
                                                             </td>
                                                         </tr><tr role="row" class="even">
 
-                                                            <td class="sorting_1">Initerario 1.</td>
+                                                            <td class="sorting_1">Alice, as she.</td>
 
                                                             <td>5</td>
 
-
+                                                            <td>6</td>
                                                             <td>
                                                                 <a href="javascript:void(0)" data-id="3741" class="btn btn-sm btn-success btn-edit"><i class="fa fa-pencil"></i></a>
                                                                 <a href="javascript:void(0)" data-id="3741" class="btn btn-sm btn-warning btn-delete"><i class="fa fa-trash"></i></a>
                                                             </td>
                                                         </tr><tr role="row" class="odd">
 
-                                                            <td class="sorting_1">Itinerario 2.</td>
+                                                            <td class="sorting_1">Duchess by this.</td>
 
                                                             <td>4</td>
 
-
+                                                            <td>2</td>
                                                             <td>
                                                                 <a href="javascript:void(0)" data-id="3739" class="btn btn-sm btn-success btn-edit"><i class="fa fa-pencil"></i></a>
                                                                 <a href="javascript:void(0)" data-id="3739" class="btn btn-sm btn-warning btn-delete"><i class="fa fa-trash"></i></a>
                                                             </td>
                                                         </tr></tbody>
-                                                    </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="table-stock_info" role="status" aria-live="polite">Viendo 1 a 3 de 3 resultados</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="table-stock_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="table-stock_previous"><a href="#" aria-controls="table-stock" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="table-stock" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button next disabled" id="table-stock_next"><a href="#" aria-controls="table-stock" data-dt-idx="2" tabindex="0">Next</a></li></ul></div></div></div></div>
+                                                    </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="table-stock_info" role="status" aria-live="polite">Showing 1 to 3 of 3 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="table-stock_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="table-stock_previous"><a href="#" aria-controls="table-stock" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="table-stock" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button next disabled" id="table-stock_next"><a href="#" aria-controls="table-stock" data-dt-idx="2" tabindex="0">Next</a></li></ul></div></div></div></div>
                                     </div>
                                     <!-- /.box-body -->
                                 </div>
@@ -265,15 +260,15 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                <h4 class="modal-title">Agregar</h4>
+                                                <h4 class="modal-title">Add Data</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_token" value="tETMEOy7BSABYEQOhKzrXjLVQdGIC2e7JgGbetTg">
                                                 <div class="form-content"></div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                <button type="button" class="btn btn-primary btn-save">Guardar cambios</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary btn-save">Save changes</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -284,17 +279,17 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                <h4 class="modal-title">Editar</h4>
+                                                <h4 class="modal-title">Edit Data</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_token" value="tETMEOy7BSABYEQOhKzrXjLVQdGIC2e7JgGbetTg">
                                                 <div class="form-content">
 
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                <button type="button" data-url="" class="btn btn-primary btn-save">Guardar Cambios</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" data-url="" class="btn btn-primary btn-save">Save changes</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -439,10 +434,10 @@
                             <label class="control-label col-sm-2"></label>
                             <div class="col-sm-10">
 
-                                <a href="/paquetesTuristicos" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                <a href="https://crudbooster.com/demoo/public/admin/products?m=13" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Back</a>
 
 
-                                <input type="submit" name="submit" value="Guardar" class="btn btn-success">
+                                <input type="submit" name="submit" value="Save" class="btn btn-success">
 
                             </div>
                         </div>

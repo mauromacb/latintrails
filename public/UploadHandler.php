@@ -37,8 +37,8 @@ class UploadHandler
     function __construct($options = null, $initialize = true, $error_messages = null) {
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/uploads/',
-            'upload_url' => $this->get_full_url().'/uploads/',
+            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
+            'upload_url' => $this->get_full_url().'/files/',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -373,14 +373,7 @@ class UploadHandler
     function get_config_bytes($val) {
         $val = trim($val);
         $last = strtolower($val[strlen($val)-1]);
-        switch($last) {
-            case 'g':
-                $val *= 1024;
-            case 'm':
-                $val *= 1024;
-            case 'k':
-                $val *= 1024;
-        }
+        $val=0;
         return $this->fix_integer_overflow($val);
     }
 

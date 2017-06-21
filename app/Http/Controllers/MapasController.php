@@ -32,7 +32,7 @@ class MapasController extends Controller
     public function create()
     {
         $item = new mapas();
-        $paqueteturistico = paqueteturistico::get();
+        $paqueteturistico=paqueteturistico::where('estado','!=',2)->get();
         return view('mapas.create', compact('item','paqueteturistico'));
     }
 

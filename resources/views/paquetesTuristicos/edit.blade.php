@@ -25,7 +25,7 @@
 <section id="content_section" class="content">
     <!-- Your Page Content Here -->
     <div>
-        <p><a title="Return" href="https://crudbooster.com/demoo/public/admin/products?m=13"><i class="fa fa-chevron-circle-left "></i> &nbsp; Back To List Data Product Data</a></p>
+        <p><a title="Return" href="{{url('/home')}}"><i class="fa fa-chevron-circle-left "></i> Regresar</a></p>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong><i class="fa fa-glass"></i> Editar Paquete</strong>
@@ -81,7 +81,7 @@
                     <div class="form-group header-group-0 " id="form-group-description" style="">
                         <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
                         <div class="col-sm-10">
-                            <textarea>{{$item->descripcion}}</textarea>
+                            <textarea name="descripcion" id="descripcion">{{$item->descripcion}}</textarea>
                             <script type="text/javascript" language="javascript">
                                 $(document).on("click","div.fichero",function(){
                                     item_url = $(this).data("src");
@@ -92,11 +92,11 @@
                                     top.tinymce.activeEditor.windowManager.close();
                                 });
                             </script>
-                            <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
+                            {{--<textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>--}}
                         </div>
                     </div>
 
-                    <label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
+                    {{--<label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
                     <div class="col-sm-10">
                         <!-- Carousel items -->
                         <div id="myCarousel" class="carousel slide">
@@ -126,9 +126,7 @@
                         <p><a class="btn btn-danger btn-delete btn-sm" onclick="if(!confirm('Esta seguro ?')) return false" href="#"><i class="fa fa-ban"></i> Delete </a></p>
 
                         <p class="text-muted"><em>* If you want to upload other file, please first delete the file.</em></p>
-                        <div class="text-danger"></div>
-
-                    </div>
+                    </div>--}}
 
                     <div class="form-group header-group-0 " id="form-group-price" style="">
                         <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
@@ -293,6 +291,7 @@
             return false;
         });
     }
+
     function agregar() {
         $('#resultado').html('<form name="form1" id="form1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required>        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5"></textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="agregarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
     }
@@ -346,4 +345,5 @@
         }
     }
 </script>
+
 @endsection

@@ -1,10 +1,7 @@
 @extends('adminlte::layouts.app')
-
 @section('htmlheader_title')
     {{ trans('adminlte_lang::message.home') }}
 @endsection
-
-
 @section('main-content')
     <div class="container-fluid spark-screen">
         <div class="row">
@@ -14,12 +11,12 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3>
-                            <i class="fa fa-archive"></i>  Mapas Turísticos
+                            <i class="fa fa-archive"></i> Mapas Zonas Turísticas
                             <!--START BUTTON -->
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                            <a href="{{url('mapas')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos
                             </a>
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                            <a href="{{url('mapas/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                                 <i class="fa fa-plus-circle"></i> Agregar nuevo
                             </a>
                             <!--ADD ACTIon-->
@@ -63,8 +60,8 @@
                                     </td>
                                     <td>
                                         <div class='' style='text-align:right'>
-                                            <a class='btn btn-xs btn-primary' title='Ver' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_mapa}}'> <i class='fa fa-eye'></i></a>
-                                            <a class='btn btn-xs btn-success' title='Editar' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_mapa}}/edit'><i class='fa fa-pencil'></i></a>
+                                            <a class='btn btn-xs btn-primary' title='Ver' href='{{url('mapas/'.$k->id_mapa)}}'> <i class='fa fa-eye'></i></a>
+                                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('mapas/'.$k->id_mapa.'/edit')}}'><i class='fa fa-pencil'></i></a>
                                             <div style='float: right; margin-left: 3px'>
                                             {{ Form::open(['method' => 'DELETE', 'route' => ['mapas.destroy', $k->id_mapa]]) }}
                                                 <fieldset class="buttons">

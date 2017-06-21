@@ -100,7 +100,12 @@ class PaquetesTuristicosController extends Controller
      */
     public function show($id)
     {
-        //
+        $item=paqueteturistico::find($id);
+        $categorias=categorias::where('estado','!=',2)->get();
+        $cats=categorias::find($item->id_categoria);
+        $itinerario=itinerarios::where('id_paquete_tur',$item->id_paquete_tur)->get();
+        //dd($itinerario);
+        return view('paquetesTuristicos/show', compact('item','categorias','cats','itinerario'));
     }
 
     /**
@@ -112,7 +117,7 @@ class PaquetesTuristicosController extends Controller
     public function edit($id)
     {
         $item=paqueteturistico::find($id);
-        $categorias=categorias::get();
+        $categorias=categorias::where('estado','!=',2)->get();
         $cats=categorias::find($item->id_categoria);
         $itinerario=itinerarios::where('id_paquete_tur',$item->id_paquete_tur)->get();
         //dd($itinerario);
@@ -145,7 +150,6 @@ class PaquetesTuristicosController extends Controller
      */
     public function destroy($id)
     {
-
         $paquete=paqueteturistico::find($id);
         $paquete->estado =2;
         $paquete->save();
@@ -211,5 +215,4 @@ class PaquetesTuristicosController extends Controller
         $image->move(public_path('uploads'),$imageName);
         return response()->json(['success'=>$imageName]);
     }
-
 }

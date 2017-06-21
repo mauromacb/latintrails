@@ -18,6 +18,7 @@
     <script src="{{ asset('vendors/tinymce/js/tinymce/tinymce.min.js') }}"></script>
     <script>
         tinymce.init({
+            language : "es",
             selector: "textarea",
             height: 500,
             plugins: [

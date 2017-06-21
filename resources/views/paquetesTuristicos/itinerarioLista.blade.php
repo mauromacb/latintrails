@@ -3,16 +3,7 @@
         $("#example").DataTable();
     });
 </script>
-
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-    <thead>
-    <tr role="row">
-        <th class="sorting_asc" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Description: activate to sort column descending" style="width: 254px;">Día</th>
-        <th class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Stock In: activate to sort column ascending" style="width: 175px;">Descripción</th>
-        <th width="90px" class="sorting" tabindex="0" aria-controls="table-stock" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 90px;">Action</th></tr>
-    </thead>
-    <tbody>
-
+<div class="panel-group" id="accordion">
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -22,38 +13,22 @@
             </ul>
         </div>
     @endif
-@if(isset($itinerario))
+    @if(isset($itinerario))
+        <?php $i=1;?>
     @foreach($itinerario as $k)
-        <tr role="row" class="odd">
-            <td>{{$k->dia}}</td>
-            <td class="sorting_1">{{$k->descripcion}}</td>
-            <td>
-                <div style='float: left; margin-left: 3px'>
-                    <div id="eliminarItinerario">
-                        <fieldset class="buttons">
-                            <input type="hidden" id="itinerario_id" value="{{$k->id_itinerario}}">
-                            <div class="btn btn-sm btn-success btn-edit" data-toggle="modal" data-target="#myModal" style='float: left; margin-left: 3px' onclick="editarItinerario({{$item->id_paquete_tur}},{{$k->id_itinerario}})">
-                                <i class="fa fa-pencil"></i>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-                <div style='float: left; margin-left: 3px'>
-                    <div id="eliminarItinerario">
-                    <fieldset class="buttons">
-                        <input type="hidden" id="itinerario_id" value="{{$k->id_itinerario}}">
-                        <div class="btn btn-sm btn-warning btn-delete" onclick="eliminarItinerario({{$item->id_paquete_tur}},{{$k->id_itinerario}});">
-                            <span class="fa fa-trash"></span>
-                        </div>
-                    </fieldset>
-                    </div>
-                </div>
-            </td>
-        </tr>
+    <div class="panel panel-info">
+        <div class="panel panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}">{{$k->dia}}</a>
+            </h4>
+        </div>
+        <div id="collapse{{$i}}" class="panel-collapse collapse">
+            <div class="panel-body"><?php echo $k->descripcion; $i++?></div>
+        </div>
+    </div>
     @endforeach
-@endif
-    </tbody>
-</table>
+    @endif
+</div>
 <?php
 /*echo "Aqui SOAP";
 

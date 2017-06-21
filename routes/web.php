@@ -27,6 +27,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::resource('/paquetesTuristicos', 'PaquetesTuristicosController');
 Route::resource('/categorias', 'CategoriasController');
+
 Route::resource('/comonosencontro', 'ComoNosEncontroController');
 Route::post('/nuevoItinerario', 'PaquetesTuristicosController@nuevoItinerario');
 Route::get('/destroyItinerario', 'PaquetesTuristicosController@destroyItinerario');
@@ -38,3 +39,7 @@ Route::resource('/hoteles', 'HotelesController');
 Route::resource('/pagina', 'PaginaController');
 Route::resource('/commentcard', 'CommentCardController');
 Route::resource('/mapas', 'MapasController');
+
+
+Route::resource('/itinerario', 'ItinerarioController');
+Route::get('/verItinerario/{id}', 'ItinerarioController@ver');

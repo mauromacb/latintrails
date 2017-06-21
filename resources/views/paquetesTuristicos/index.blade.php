@@ -47,7 +47,6 @@
             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Título</th>
                     <th>Status</th>
                     <th>Acción</th>
@@ -55,7 +54,6 @@
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Id</th>
                     <th>Título</th>
                     <th>Status</th>
                     <th>Acción</th>
@@ -64,13 +62,14 @@
                 <tbody>
                 @foreach($paquete_turistico as $k)
                 <tr>
-                    <td><a href="#" class="small-box-footer">{{$k->id_paquete_tur}}<i class="fa fa-arrow-circle-right"></i></a></td>
-                    <td>{{$k->titulo}}</td>
+                    <td><a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong></a></td>
                     <td>
+                        <div class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-list"></span> <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff"><strong>  Ver Itinerario</strong></a></div>
+                        ||
                         @if($k->estado==1)
-                        <span class="label label-success">Activo</span>
+                            <span class="btn btn-xs btn-success">Activo</span>
                         @else
-                        <span class="label label-warning">Inactivo</span>
+                            <span class="btn btn-xs btn-warning">Inactivo</span>
                         @endif
                     </td>
                     <td>
@@ -82,7 +81,7 @@
                                     <input type="hidden" name="idpt" value="{{$k->id_paquete_tur}}">
                                     <fieldset class="buttons">
                                         <button class="btn btn-xs btn-danger">
-                                            <i class='fa fa-ban'></i>Desactivar
+                                            <i class='fa fa-ban'></i> Desactivar
                                         </button>
                                     </fieldset>
                                     {{ Form::close() }}

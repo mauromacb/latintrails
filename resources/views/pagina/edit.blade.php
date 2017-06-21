@@ -14,7 +14,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3>
-                            <i class="fa fa-archive"></i>  Página Web
+                            <i class="fa fa-archive"></i>  Gestión de la página Web
                         </h3>
 
                         <div class="box-tools pull-right">
@@ -43,17 +43,11 @@
                                     </div>
                                     <label class="control-label col-sm-2">Pie de página: <span class="text-danger" title="This field is required">*</span></label>
                                     <div class="col-sm-10">
-                                        <textarea class="ckeditor" name="pie" id="pie" rows="2" cols="80">{{$item->pie}}</textarea>
-
-                                        <div class="text-danger"></div>
-                                        <p class="help-block"></p>
+                                        <textarea name="pie" id="pie" rows="2" cols="80">{{$item->pie}}</textarea>
                                     </div>
                                     <label class="control-label col-sm-2">Links de interes: <span class="text-danger" title="This field is required">*</span></label>
                                     <div class="col-sm-10">
-                                        <textarea class="ckeditor" name="links_interes" id="links_interes" rows="2" cols="80">{{$item->links_interes}}</textarea>
-
-                                        <div class="text-danger"></div>
-                                        <p class="help-block"></p>
+                                        <textarea name="links_interes" id="links_interes" rows="2" cols="80">{{$item->links_interes}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +55,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"></label>
                                     <div class="col-sm-10">
-                                        <a href="javascript:history.back(1)" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                        <a href="{{url('home    ')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
                                         <input type="submit" name="submit" value="Guardar" class="btn btn-success">
                                     </div>
                                 </div>
