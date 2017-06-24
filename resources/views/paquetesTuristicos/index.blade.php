@@ -62,15 +62,15 @@
                 <tbody>
                 @foreach($paquete_turistico as $k)
                 <tr>
-                    <td><a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong></a></td>
-                    <td>
-                        <div class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-list"></span> <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff"><strong>  Ver Itinerario</strong></a></div>
-                        ||
-                        @if($k->estado==1)
+                    <td>@if($k->estado==1)
                             <span class="btn btn-xs btn-success">Activo</span>
                         @else
                             <span class="btn btn-xs btn-warning">Inactivo</span>
                         @endif
+                        <a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong></a></td>
+                    <td>
+                        <div class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-list"></span> <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff"><strong>  Ver Itinerario</strong></a></div>
+                        || <div class="btn btn-xs btn-success"><span class="glyphicon glyphicon-map-marker"></span> <a href="{{url('mapas/')}}" style="color: #fff"><strong>  Ver Mapas</strong></a></div>
                     </td>
                     <td>
                         <div class='button_action' style='text-align:right'>
@@ -97,7 +97,7 @@
                                 @endif
                             </div>
 
-                            <a class='btn btn-xs btn-primary' title='Detalles' href='{{url('/paquetesTuristicos')}}'>
+                            <a class='btn btn-xs btn-primary' title='Detalles' href='{{url('/paquetesTuristicos/'.$k->id_paquete_tur)}}'>
                                 <i class='fa fa-eye'></i>
                             </a>
 

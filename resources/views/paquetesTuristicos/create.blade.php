@@ -1,5 +1,4 @@
 @extends('adminlte::layouts.app')
-
 @section('htmlheader_title')
     {{ trans('Paquetes Turísticos') }}
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -54,7 +53,7 @@
                     <div class="form-group header-group-0 " id="form-group-description" style="">
                             <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
                             <div class="col-sm-10">
-                                <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
+                                <textarea name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
 
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
@@ -69,14 +68,12 @@
                     </div>
                         <div class="form-group header-group-0 " id="form-group-price" style="">
                             <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
-
-
                             <div class="col-sm-10">
-                                <input type="text" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="">
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
+                                <input type="number" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="">
                             </div>
-                        </div>								<div class="form-group header-group-0 " id="form-group-status" style="">
+                        </div>
+
+                    <div class="form-group header-group-0 " id="form-group-status" style="">
                             <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">

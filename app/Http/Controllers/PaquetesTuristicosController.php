@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\PaqueteTuristico as paqueteturistico;
 use App\categoria as categorias;
 use App\Itinerario as itinerarios;
+use App\Mapas as mapa;
 use Illuminate\Support\Facades\Validator;
 
 class PaquetesTuristicosController extends Controller
@@ -40,6 +41,7 @@ class PaquetesTuristicosController extends Controller
        dd($paq);
         */
         $paquete_turistico = paqueteturistico::where('estado','!=',2)->get();
+
         return view('paquetesTuristicos/index', compact('paquete_turistico'));
     }
 

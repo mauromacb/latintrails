@@ -67,14 +67,14 @@
 <div class="container">
     <!-- Button to select & upload files -->
     <span class="btn btn-success fileinput-button">
-    <span>Select files...</span>
+    <span>Seleccione un archivo:</span>
         <!-- The file input field used as target for the file upload widget -->
     <input id="fileupload" type="file" name="files[]" multiple>
   </span>
 
 
     <!-- The global progress bar -->
-    <p>Upload progress</p>
+    <p>Progreso de carga</p>
     <div id="progress" class="progress progress-success progress-striped">
         <div class="bar"></div>
     </div>
@@ -82,7 +82,7 @@
 
 
     <!-- The list of files uploaded -->
-    <p>Files uploaded:</p>
+    <p>Archivos cargados:</p>
     <ul id="files"></ul>
 
 
@@ -112,8 +112,8 @@
                 done: function (e, data) {
                     // Add each uploaded file name to the #files list
                     $.each(data.result.files, function (index, file) {
-                        $('<li id="'+file.thumbnail_url+'"/>').text(file.name).appendTo('#files');
-                        $('<div data-src="'+file.thumbnail_url+'"/>').text(file.thumbnail_url).appendTo(document.body);
+                        $('<div data-src="/files/thumbnail/'+file.name+'"/>').text(file.name).appendTo('#files');
+                        $('<div data-src=""/>').text(file.thumbnail_url).appendTo(document.body);
 
                     });
                 },
@@ -145,7 +145,7 @@
     $directorio = opendir($carpeta_ficheros_thumb); // Obre la carpeta
     while ($fichero = readdir($directorio)) { // Llegeix cada un dels fitxers
         if (!is_dir($fichero)){ // Omite las carpetas
-            echo '<li><div class="fichero" data-src="/'.$carpeta_ficheros.$fichero.'" onclick="copia_url(\'/'.$carpeta_ficheros.$fichero.'\')" >
+            echo '<li style="cursor: pointer"><div class="fichero" data-src="/'.$carpeta_ficheros.$fichero.'" onclick="copia_url(\'/'.$carpeta_ficheros.$fichero.'\')" >
             <img src="/'.$carpeta_ficheros_thumb.$fichero.'" alt="" width="" height=""><br>
             '.$fichero.
                 '</div></li>

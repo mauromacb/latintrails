@@ -25,7 +25,7 @@
 <section id="content_section" class="content">
     <!-- Your Page Content Here -->
     <div>
-        <p><a title="Return" href="{{url('/home')}}"><i class="fa fa-chevron-circle-left "></i> Regresar</a></p>
+        <p><a title="Return" href="{{url('/paquetesTuristicos')}}"><i class="fa fa-chevron-circle-left "></i> Regresar</a></p>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong><i class="fa fa-glass"></i> Editar Paquete</strong>
@@ -175,7 +175,8 @@
                                     <div class="box-header">
                                         <h1 class="box-title">Itinerario</h1>
                                         <div class="box-tools">
-                                            <a class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#myModal" onclick="agregar()"><i class="fa fa-plus"></i> Agregar</a>
+                                            {{--<a class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#myModal" onclick="agregar()"><i class="fa fa-plus"></i> Agregar</a>--}}
+                                            <a class="btn btn-primary btn-sm btn-add" href="{{url('itinerario/'.$item->id_paquete_tur)}}"><i class="fa fa-plus"></i> Agregar</a>
                                         </div>
                                     </div>
                                     <div class="box-body" id="itinerarios">

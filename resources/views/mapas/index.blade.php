@@ -50,8 +50,7 @@
                             @foreach($items as $k)
                                 <tr>
                                     <td>
-                                        <a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id_mapa}}/edit" class="small-box-footer">
-                                            <i class="fa fa-arrow-circle-right"></i> {{$k->nombre_mapa}}
+                                        <a href="{{url('mapas/'.$k->id_mapa)}}" class="small-box-footer">
                                             <img src="thumbnails/thumb_{{$k->imagen}}" alt="{{$k->nombre_mapa}}">
                                             <div class="caption">
                                                 <h3>{{$k->nombre_mapa}}</h3>

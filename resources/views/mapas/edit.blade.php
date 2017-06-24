@@ -17,12 +17,12 @@
                             <i class="fa fa-archive"></i>  Mapas Turísticos
                             <!--START BUTTON -->
 
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                            <a href="{{url('mapas')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos
                             </a>
 
 
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                            <a href="{{url('mapas/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                                 <i class="fa fa-plus-circle"></i> Agregar nuevo
                             </a>
                             <!--ADD ACTIon-->
@@ -54,7 +54,7 @@
                                     </div>
                                     <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
                                     <div class="col-sm-10">
-                                        <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
+                                        <textarea name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
 
                                         <div class="text-danger"></div>
                                         <p class="help-block"></p>
@@ -86,7 +86,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"></label>
                                     <div class="col-sm-10">
-                                        <a href="javascript:history.back(1)" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                        <a href="{{url('mapas')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
                                         <input type="submit" name="submit" value="Guardar" class="btn btn-success">
                                     </div>
                                 </div>

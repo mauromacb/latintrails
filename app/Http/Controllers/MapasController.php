@@ -61,7 +61,6 @@ class MapasController extends Controller
                 ->withInput(Input::except('password'));
         } else {
 
-
             $file = Input::file('file');
             //Creamos una instancia de la libreria instalada
             $image = \Image::make(\Input::file('file'));
@@ -99,7 +98,8 @@ class MapasController extends Controller
      */
     public function show($id)
     {
-        //
+        $item=mapas::find($id);
+        return view('mapas/show', compact('item'));
     }
 
     /**

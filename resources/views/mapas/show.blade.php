@@ -14,15 +14,15 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3>
-                            <i class="fa fa-archive"></i>  Categorías &nbsp;&nbsp;
+                            <i class="fa fa-archive"></i>  Mapas Turísticos
                             <!--START BUTTON -->
 
-                            <a href="/categorias" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                            <a href="{{url('mapas')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos
                             </a>
 
 
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                            <a href="{{url('mapas/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                                 <i class="fa fa-plus-circle"></i> Agregar nuevo
                             </a>
                             <!--ADD ACTIon-->
@@ -32,29 +32,55 @@
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fa fa-minus"></i></button>
-                            
+
                         </div>
                     </div>
                     <div class="box-body">
-                        <div>
+                        @if(count($errors) > 0)
+                            <div class="alert alert-danger">
+                                {{ Html::ul($errors->all()) }}
+                            </div>
+                        @endif
 
-                            <p><a title="Return" href="javascript:history.back(1)"><i class="fa fa-chevron-circle-left "></i> &nbsp; Regresar</a></p>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong><i class="fa fa-archive"></i> Detalle</strong>
+                        <div class="box-body">
+                            <div class="form-group header-group-0 " id="form-group-name">
+                                <label class="control-label col-sm-1"></label>
+                                <div class="col-sm-11">
+                                    {{$item->nombre_mapa}}
                                 </div>
-                                <div class="panel-body" style="padding:20px 0px 0px 0px">
-                                        <div class="box-body">
-                                            <div class="table-responsive">
-                                                <table id="table-detail" class="table table-striped">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{$item->titulo_categoria}}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                <label class="control-label col-sm-1"></label>
+                                <div class="col-sm-11">
+                                    <hr>
+                                    <?php echo $item->descripcion;?>
+                                    <hr>
+                                </div>
+                                <label class="control-label col-sm-1"></label>
+                                <div class="col-sm-11">
+                                <div class="container">
+                                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <img src="/thumbnails/{{$item->imagen}}" alt="{{$item->nombre_mapa}}">
                                             </div>
-                                        </div><!-- /.box-body -->
+                                        </div>
+
+                                        <!-- Left and right controls -->
+                                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

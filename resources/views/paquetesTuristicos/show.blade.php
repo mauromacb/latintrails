@@ -6,7 +6,7 @@
 @section('main-content')
 <section class="content-header">
     <h1>
-        <i class="fa fa-glass"></i>  Mostrar &nbsp;&nbsp;
+        <i class="fa fa-glass"></i>  Editar &nbsp;&nbsp;
 
         <!--START BUTTON -->
         <!--ADD ACTIon-->
@@ -28,7 +28,7 @@
         <p><a title="Return" href="{{url('/paquetesTuristicos')}}"><i class="fa fa-chevron-circle-left "></i> Regresar</a></p>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong><i class="fa fa-glass"></i> Ver Paquete Turístico</strong>
+                <strong><i class="fa fa-glass"></i> Editar Paquete</strong>
             </div>
 
             <link href="{{ asset('/css/dropzone.css') }}" rel="stylesheet">
@@ -58,7 +58,9 @@
             </div>
 
 
-            <div class="panel-body form-horizontal" style="padding:20px 0px 0px 0px">
+            <div class="panel-body" style="padding:20px 0px 0px 0px">
+
+                {{ Form::model($item, array('route'=>array('paquetesTuristicos.update',$item->id_paquete_tur),'method' => 'put','class'=>'form-horizontal')) }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <style>
                         .select2-container--default .select2-selection--single {border-radius: 0px !important}
@@ -68,40 +70,37 @@
                     <div class="form-group header-group-0 " id="form-group-name" style="">
                         <label class="control-label col-sm-1"></label>
                         <div class="col-sm-10">
-                            <h3>{{$item->titulo}}</h3>
+                            <h1 align="center">{{$item->titulo}}</h1>
                         </div>
                     </div>
                     <div class="form-group header-group-0 " id="form-group-description" style="">
                         <label class="control-label col-sm-1"></label>
                         <div class="col-sm-10">
-                            <label style="border: 1px dashed #9e9e9e; padding: 10px;"><?php echo $item->descripcion;?></label>
+                            <?php echo $item->descripcion;?>
                         </div>
                     </div>
 
                     <div class="form-group header-group-0 " id="form-group-price" style="">
-                        <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
+                        <label class="control-label col-sm-1"></label>
                         <div class="col-sm-10">
-                            ${{$item->precio}}
+                            <strong>Precio:</strong> {{$item->precio}}
                         </div>
                     </div>
-                    <div class="form-group header-group-0 " id="form-group-category_id" style="">
-                        <label class="control-label col-sm-2">Categoria <span class="text-danger" title="This field is required">*</span></label>
 
+                    <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                        <label class="control-label col-sm-1"></label>
                         <div class="col-sm-10">
-                            <strong>{{$cats->titulo_categoria}}</strong>
+                            <stron>Categoria:</stron> {{$cats->titulo_categoria}}
                         </div>
                     </div>
                     <div class="form-group header-group-0 " id="form-group-stock">
 
-                            <label class="control-label col-sm-1"></label>
+                        <label class="control-label col-sm-1"></label>
                             <div class="col-sm-10">
-
                                 <div class="box box-default" style="box-shadow:0px 0px 5px #ccc">
                                     <div class="box-header">
                                         <h1 class="box-title">Itinerario</h1>
-                                        <div class="box-tools">
-                                            {{--<a class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#myModal" onclick="agregar()"><i class="fa fa-plus"></i> Ver Itinerarios</a>--}}
-                                        </div>
+
                                     </div>
                                     <div class="box-body" id="itinerarios">
                                         @include('layouts.scriptsPaquetesTuristicos')
@@ -110,51 +109,122 @@
 
                                     <!-- /.box-body -->
                                 </div>
-
-
-                                <div id="modal_add_stock" class="modal" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                <h4 class="modal-title">Agregar</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="form-content"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                <button type="button" class="btn btn-primary btn-save">Guardar cambios</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-
-                                <div id="modal_edit_stock" class="modal" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                <h4 class="modal-title">Editar</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="form-content">
-
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                <button type="button" data-url="" class="btn btn-primary btn-save">Guardar Cambios</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
                             </div>
                     </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer" style="background: #F5F5F5">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+
+                                <a href="/paquetesTuristicos" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+
+                                <button type="submit" id="submitform" class="btn btn-success" onclick="validar();">Guardar</button>
+
+                            </div>
+                        </div>
+
+
+
+                    </div><!-- /.box-footer-->
+
+                {!! Form::close() !!}
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Itinerarios</h4>
+                        </div>
+
+                        <div class="modal-body" id="resultado"></div>
+
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div><!--END AUTO MARGIN-->
+
 </section><!-- /.content -->
+
+<script language="javascript">
+    function agregarItinerario() {
+        $("#form1").submit(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/nuevoItinerario',
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#resultado').html('<div class="alert alert-success" align="center"><strong>Itinerario Agregado Exitosamente!</strong></div>');
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        });
+    }
+
+    function agregar() {
+        $('#resultado').html('<form name="form1" id="form1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required>        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5"></textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="agregarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
+    }
+    function editarItinerario(pqtr,itinerario) {
+            $.ajax({
+                type: 'GET',
+                url: '/editarItinerario',
+                data: 'idpt=' + pqtr + '&idit=' + itinerario,
+                success: function (data) {
+                    $('#resultado').html('<form name="forms1" id="forms1">                {{ csrf_field() }}            <div class="box-body">            <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Dia: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <input type="hidden" name="idpaquetetur" id="idpaquetetur" value="{{$item->id_paquete_tur}}">            <input type="hidden" name="idit" id="idit" value="'+data.id_itinerario+'"> <input type="text" maxlength="70" class="form-control" name="dia" id="dia" required value="'+data.dia+'">        </div>        </div>        <div class="form-group header-group-0 " id="form-group-name" style="">            <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>            <div class="col-sm-10">            <textarea name="descripcion" id="descripcion" required="" maxlength="5000" class="form-control" rows="5">'+data.descripcion+'</textarea>            </div>            </div>            </div>            <div class="modal-footer" style="background: #F5F5F5">            <div class="form-group">            <div class="col-sm-10">            <button type="submit" name="submit" class="btn btn-primary" onclick="guardarItinerario()">Guardar</button>            <button type="submit" data-dismiss="modal" class="btn btn-danger">Cerrar</button>            </div>            </div>            </div><!-- /.box-footer-->            </form>');
+                }
+            })
+            return false;
+
+    }
+    function guardarItinerario(pqtr,itinerario) {
+        $("#forms1").submit(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/guardarItinerario',
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#resultado').html('<div class="alert alert-success" align="center"><strong>Itinerario Actualizado Exitosamente!</strong></div>');
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        });
+    }
+    function eliminarItinerario(pqtr,itinerario) {
+        if (confirm('¿Está seguro que desea eliminar el registro?')){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/destroyItinerario',
+                data: 'idpt='+pqtr+'&idit='+itinerario,
+                success: function (data) {
+                    $('#itinerarios').html(data);
+                }
+            })
+            return false;
+        }
+    }
+</script>
+
 @endsection
