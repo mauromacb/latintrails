@@ -1,3 +1,5 @@
+<?php use App\categoria as categorias;?>
+<?php use App\Itinerario as itinerario;?>
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -96,48 +98,7 @@
                         </div>
                     </div>
 
-                    {{--<label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
-                    <div class="col-sm-10">
-                        <!-- Carousel items -->
-                        <div id="myCarousel" class="carousel slide">
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                                <li data-target="#myCarousel" data-slide-to="3"></li>
-                            </ol>
-                            <!-- Carousel items -->
-                            <div class="carousel-inner">
-                                <div class="active item"><img  src="{{url('images/1.jpg')}}" alt="banner1" /></div>
-                                <div class="item"><img  src="{{url('images/1.jpg')}}" alt="banner2" /></div>
-                                <div class="item"><img  src="{{url('images/2.jpg')}}" alt="banner3" /></div>
-                                <div class="item"><img  src="{{url('images/3.jpg')}}" alt="banner4" /></div>
-                            </div>
-                            <!-- Carousel nav -->
-                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-                        </div>
-                        <script>
-                            $(document).ready(function(){
-                                $('.myCarousel').carousel()
-                            });
-                        </script>
 
-                        <p><a class="btn btn-danger btn-delete btn-sm" onclick="if(!confirm('Esta seguro ?')) return false" href="#"><i class="fa fa-ban"></i> Delete </a></p>
-
-                        <p class="text-muted"><em>* If you want to upload other file, please first delete the file.</em></p>
-                    </div>--}}
-
-                    <div class="form-group header-group-0 " id="form-group-price" style="">
-                        <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
-
-
-                        <div class="col-sm-10">
-                            <input type="text" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="${{$item->precio}}">
-                            <div class="text-danger"></div>
-                            <p class="help-block"></p>
-                        </div>
-                    </div>
                     <div class="form-group header-group-0 " id="form-group-status" style="">
                         <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
                         <div class="col-sm-10">
@@ -159,7 +120,9 @@
                         <div class="col-sm-10">
                             <select style="width:100%" class="form-control " id="id_categoria" required="" name="id_categoria" tabindex="-1" aria-hidden="true">
                                 <option value="SELECCIONE UNO">SELECCIONE UNO</option>
-                                <option value="{{$cats->id_categoria}}" selected="">{{$cats->titulo_categoria}}</option>
+                                @if(isset(categorias::where('id_categoria',$cats->id_categoria)->where('estado','!=',2)->first()->titulo_categoria))
+                                    <option value="{{$cats->id_categoria}}" selected="">{{$cats->titulo_categoria}}</option>
+                                @endif
                                 @foreach($categorias as $k)
                                 <option value="{{$k->id_categoria}}" >{{$k->titulo_categoria}}</option>
                                 @endforeach
@@ -170,22 +133,28 @@
 
                             <label class="control-label col-sm-2">Itinerario</label>
                             <div class="col-sm-10">
+                                <select style="width:100%" class="form-control " id="id_itinerario" required="" name="id_itinerario" tabindex="-1" aria-hidden="true">
+                                    <option value="SELECCIONE UNO">SELECCIONE UNO</option>
+                                    @foreach($itinerario as $k)
+                                        <option value="{{$k->id_itinerario}}" >{{$k->titulo}}</option>
+                                    @endforeach
+                                </select>
 
-                                <div class="box box-default" style="box-shadow:0px 0px 5px #ccc">
-                                    <div class="box-header">
-                                        <h1 class="box-title">Itinerario</h1>
-                                        <div class="box-tools">
+                                {{--<div class="box box-default" style="box-shadow:0px 0px 5px #ccc">--}}
+                                    {{--<div class="box-header">--}}
+                                        {{--<h1 class="box-title">Itinerario</h1>--}}
+                                        {{--<div class="box-tools">--}}
                                             {{--<a class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#myModal" onclick="agregar()"><i class="fa fa-plus"></i> Agregar</a>--}}
-                                            <a class="btn btn-primary btn-sm btn-add" href="{{url('itinerario/'.$item->id_paquete_tur)}}"><i class="fa fa-plus"></i> Agregar</a>
-                                        </div>
-                                    </div>
-                                    <div class="box-body" id="itinerarios">
-                                        @include('layouts.scriptsPaquetesTuristicos')
-                                        @include('paquetesTuristicos.itinerarioLista', ['item'=>$item, 'itinerario'=>$itinerario])
-                                    </div>
+                                            {{--<a class="btn btn-primary btn-sm btn-add" href="{{url('itinerario/'.$item->id_paquete_tur)}}"><i class="fa fa-plus"></i> Agregar</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="box-body" id="itinerarios">--}}
+                                        {{--@include('layouts.scriptsPaquetesTuristicos')--}}
+                                        {{--@include('paquetesTuristicos.itinerarioLista', ['item'=>$item, 'itinerario'=>$itinerario])--}}
+                                    {{--</div>--}}
 
-                                    <!-- /.box-body -->
-                                </div>
+                                    {{--<!-- /.box-body -->--}}
+                                {{--</div>--}}
 
 
                                 <div id="modal_add_stock" class="modal" tabindex="-1" role="dialog">

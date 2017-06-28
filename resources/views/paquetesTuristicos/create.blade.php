@@ -17,7 +17,6 @@
         </ol>
     </section>
 
-
     <!-- Main content -->
     <section id="content_section" class="content">
         <!-- Your Page Content Here -->
@@ -39,17 +38,20 @@
                             .select2-container .select2-selection--single {height: 35px}
                         </style>
 
-                        <div class="form-group header-group-0 " id="form-group-name" style="">
-                            <label class="control-label col-sm-2">Nombre <span class="text-danger" title="This field is required">*</span></label>
-
-                            <div class="col-sm-10">
-                                <input type="text" title="nombre" name="titulo" id="titulo" required="" placeholder="" maxlength="70" class="form-control" name="name" id="name" value="">
-
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-
-                            </div>
+                    <div class="form-group header-group-0 " id="form-group-name">
+                        <label class="control-label col-sm-2">Título <span class="text-danger" title="This field is required">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" title="nombre" name="titulo" id="titulo" required placeholder="" maxlength="70" class="form-control" value="">
                         </div>
+                    </div>
+
+                    <div class="form-group header-group-0 " id="form-group-name">
+                        <label class="control-label col-sm-2">Subtítulo <span class="text-danger" title="This field is required">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" title="nombre" name="subtitulo" id="subtitulo" required="" placeholder="" maxlength="70" class="form-control" value="">
+                        </div>
+                    </div>
+
                     <div class="form-group header-group-0 " id="form-group-description" style="">
                             <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
                             <div class="col-sm-10">
@@ -57,19 +59,6 @@
 
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
-                            </div>
-                        </div>
-
-                    <div class="form-group header-group-0 " id="form-group-photo" style="">
-                    <label class="col-sm-2 control-label">Foto <span class="text-danger" title="This field is required">*</span></label>
-
-                    <div class="col-sm-10">
-                    </div>
-                    </div>
-                        <div class="form-group header-group-0 " id="form-group-price" style="">
-                            <label class="control-label col-sm-2">Precio <span class="text-danger" title="This field is required">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="number" title="Precio" required="" class="form-control inputMoney" name="precio" id="precio" value="">
                             </div>
                         </div>
 

@@ -1,84 +1,87 @@
 @extends('adminlte::layouts.app')
+
 @section('htmlheader_title')
     {{ trans('adminlte_lang::message.home') }}
 @endsection
 
+
 @section('main-content')
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-archive"></i> <strong>{{$item->titulo}}</strong> || Día Itinerario
+            <!--START BUTTON -->
+            <a href="{{url('dia')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                <i class="fa fa-table"></i> Ver todos
+            </a>
+            <a href="{{url('dia/createItinerario/'.$item->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                <i class="fa fa-plus-circle"></i> Agregar nuevo
+            </a>
+            <!-- END BUTTON -->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Día Itinerario</li>
+        </ol>
+    </section>
+
+
     <div class="container-fluid spark-screen">
+        <p><a title="Return" href="{{url('showItinerario/'.$item->id_itinerario)}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
-
                 <!-- Default box -->
                 <div class="box">
-                    <div class="box-header with-border">
-                        <h3>
-                            <i class="fa fa-archive"></i>  Tipo de Itinerario
-                            <!--START BUTTON -->
-                            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
-                                <i class="fa fa-table"></i> Ver todos
-                            </a>
-                            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
-                                <i class="fa fa-plus-circle"></i> Agregar nuevo
-                            </a>
-                            <!--ADD ACTIon-->
-                            <!-- END BUTTON -->
-                        </h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fa fa-minus"></i></button>
-                            
-                        </div>
-                    </div>
                     <div class="box-body">
                         @if(count($errors) > 0)
-                        <div class="alert alert-danger">
-                            {{ Html::ul($errors->all()) }}
-                        </div>
+                            <div class="alert alert-danger">
+                                {{ Html::ul($errors->all()) }}
+                            </div>
                         @endif
-
-                        {{ Form::model($item, array('route' => array('tipoItinerario.update', $item->id_tipo_itinerario), 'method' => 'PUT')) }}
-                            <div class="box-body">
-                                <div class="form-group header-group-0 " id="form-group-name">
-                                    <label class="control-label col-sm-2">Nombre: <span class="text-danger" title="Este campo es requerido">*</span></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" maxlength="70" class="form-control" name="descripcion" id="descripcion" value="{{$item->descripcion}}" required>
-                                    </div>
-                                </div>
-                                <div class="form-group header-group-0 " id="form-group-name">
-                                    <label class="control-label col-sm-2">Fecha Fija <span class="text-danger" title="This field is required">*</span></label>
-
-                                    <div class="col-sm-10">
-                                        <label class="radio-inline">
-                                            @if($item->fecha_fija==1)
-                                                <label class="radio-inline">
-                                                <input type="radio" name="fecha_fija" required value="1" checked> Con fecha fija
-                                                </label>
-                                                <label class="radio-inline">
-                                                <input type="radio" name="fecha_fija" required value="0"> Sin fecha fija
-                                                </label>
-                                            @else
-                                                <label class="radio-inline">
-                                                <input type="radio" name="fecha_fija" required value="1" > Con fecha fija
-                                                </label>
-                                                <label class="radio-inline">
-                                                <input type="radio" name="fecha_fija" required value="0" checked> Sin fecha fija
-                                                </label>
-                                            @endif
-                                        </label>
-                                    </div>
+                        {{ Form::model($item, array('route' => array('dia.update', $item->id_dia), 'method' => 'PUT','class' => 'form-horizontal')) }}
+                            <input type="hidden" name="conitinerario" value="1">
+                        <div class="box-body">
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" maxlength="70" class="form-control" name="titulo" id="titulo" value="{{$item->titulo}}" required>
                                 </div>
                             </div>
-                            <div class="box-footer" style="background: #F5F5F5">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2"></label>
-                                    <div class="col-sm-10">
-                                        <a href="{{url('tipoItinerario')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
-                                        <input type="submit" name="submit" value="Guardar" class="btn btn-success">
-                                    </div>
+                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                                <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
+
+                                <div class="col-sm-10">
+                                    <select style="width:100%" class="form-control " id="id_itinerario" name="id_itinerario">
+                                        <option value="SELECCIONE UNO">SELECCIONE UNO</option>
+                                        @foreach($itinerarioLista as $k)
+                                            @if($item->id_itinerario==$k->id_itinerario)
+                                                <option value="{{$k->id_itinerario}}" selected>{{$k->titulo}}</option>
+                                            @else
+                                                <option value="{{$k->id_itinerario}}">{{$k->titulo}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </div><!-- /.box-footer-->
-                        {{ Form::close() }}
+                            </div>
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <div class="col-sm-10">
+                                    <textarea placeholder="Ingrese la descripción" name="descripcion" id="descripcion" required>{{$item->descripcion}}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="box-footer" style="background: #F5F5F5">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"></label>
+                                <div class="col-sm-10">
+                                    <a href="{{url('dia')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                    <input type="submit" name="submit" value="Guardar" class="btn btn-success">
+                                </div>
+                            </div>
+                        </div><!-- /.box-footer-->
+
+                        {!! Form::close() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>

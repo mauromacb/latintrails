@@ -8,12 +8,12 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Día Itinerario
+            <i class="fa fa-archive"></i> <strong>{{$itinerario->titulo}}</strong> || Día Itinerario
             <!--START BUTTON -->
-            <a href="{{url('dia')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
-                <i class="fa fa-table"></i> Ver todos
+            <a href="{{url('itinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                <i class="fa fa-table"></i> Ver Itinerarios
             </a>
-            <a href="{{url('dia/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('dia/createItinerario/'.$itinerario->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
@@ -48,12 +48,14 @@
                             <tbody>
                             @foreach($items as $k)
                                 <tr>
-                                    <td><a href="{{url('dia/'.$k->id_dia)}}" class="small-box-footer">{{$k->dia}} <i class="fa fa-arrow-circle-right"></i></a></td>
+                                    <td><a href="{{url('dia/verDia/'.$k->id_dia)}}" class="small-box-footer">{{$k->dia}} <i class="fa fa-arrow-circle-right"></i> {{$k->titulo}}</a></td>
                                     <td><div class='' style='text-align:right'>
-                                            <a class='btn btn-xs btn-primary' title='Ver' href='{{url('dia/'.$k->id_dia)}}'> <i class='fa fa-eye'></i></a>
-                                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('dia/'.$k->id_dia.'/edit')}}'><i class='fa fa-pencil'></i></a>
+                                            <a class='btn btn-xs btn-primary' title='Ver' href='{{url('dia/verDia/'.$k->id_dia)}}'> <i class='fa fa-eye'></i></a>
+                                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('dia/'.$k->id_dia.'/editItinerario')}}'><i class='fa fa-pencil'></i></a>
                                             <div style='float: right; margin-left: 3px'>
-                                            {{ Form::open(['method' => 'DELETE', 'route' => ['tipoItinerario.destroy', $k->id_dia]]) }}
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['dia.destroy', $k->id_dia]]) }}
+                                                <input type="hidden" name="conitinerario" value="1">
+                                                <input type="hidden" name="id_itinerario" value="{{$itinerario->id_itinerario}}">
                                                 <fieldset class="buttons">
                                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                                         <span class="fa fa-trash"></span>

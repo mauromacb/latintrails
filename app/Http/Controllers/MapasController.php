@@ -77,12 +77,11 @@ class MapasController extends Controller
             //Guardamos nombre y nombreOriginal en la BD
 
             $item = new mapas();
-            $item->id_paquete_tur=$request->id_paquete_tur;
+            //$item->id_paquete_tur=$request->id_paquete_tur;
             $item->descripcion=$request->descripcion;
             $item->nombre_mapa=$request->nombre_mapa;
             $item->imagen=$file->getClientOriginalName();
             $item->thumbnail='thumb_'.$file->getClientOriginalName();
-            $item->estado=$request->estado;
             $item->save();
             // redirecciona
             Session::flash('message', 'Solicitud procesada exitosamente');

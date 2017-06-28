@@ -8,12 +8,12 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Tipo de Itinerario
+            <i class="fa fa-archive"></i>  Días
             <!--START BUTTON -->
-            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('showItinerario/'.$itinerario->id_itinerario)}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
-            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('dia/createItinerario/'.$itinerario->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
@@ -26,7 +26,7 @@
 
 
     <div class="container-fluid spark-screen">
-        <p><a title="Return" href="{{url('tipoItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+        <p><a title="Return" href="{{url('showItinerario/'.$itinerario->id_itinerario)}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <!-- Default box -->
@@ -37,12 +37,13 @@
                                 {{ Html::ul($errors->all()) }}
                             </div>
                         @endif
-                        {!! Form::model($item, ['action' => 'TipoItinerarioController@store']) !!}
+                        {!! Form::open(array('route' => 'dia.store','method'=>'POST', 'class' => 'form-horizontal')) !!}
+                            <input type="hidden" name="conitinerario" value="1">
                         <div class="box-body">
                             <div class="form-group header-group-0 " id="form-group-name" style="">
                                 <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" placeholder="Ingrese el día" maxlength="70" class="form-control" name="dia" id="dia" required>
+                                    <input type="text" placeholder="Ingrese el día" maxlength="70" class="form-control" name="titulo" id="titulo" required>
                                 </div>
                             </div>
                             <div class="form-group header-group-0 " id="form-group-category_id" style="">
@@ -50,9 +51,13 @@
 
                                 <div class="col-sm-10">
                                     <select style="width:100%" class="form-control " id="id_itinerario" name="id_itinerario">
-                                        <option value="SELECCIONE UNO" selected>SELECCIONE UNO</option>
+                                        <option value="SELECCIONE UNO">SELECCIONE UNO</option>
                                         @foreach($itinerarioLista as $k)
-                                            <option value="{{$k->id_itinerario}}" >{{$k->titulo}}</option>
+                                            @if($itinerario->id_itinerario==$k->id_itinerario)
+                                                <option value="{{$k->id_itinerario}}" selected>{{$k->titulo}}</option>
+                                            @else
+                                            <option value="{{$k->id_itinerario}}">{{$k->titulo}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -60,7 +65,7 @@
                             <div class="form-group header-group-0 " id="form-group-name" style="">
                                 <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>
                                 <div class="col-sm-10">
-                                    <textarea placeholder="Ingrese la descripción" name="descripcion" id="descripcion" required></textarea>
+                                    <textarea name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
                                 </div>
                             </div>
 
@@ -70,7 +75,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2"></label>
                                 <div class="col-sm-10">
-                                    <a href="{{url('tipoItinerario')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                    <a href="{{url('dia')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
                                     <input type="submit" name="submit" value="Guardar" class="btn btn-success">
                                 </div>
                             </div>

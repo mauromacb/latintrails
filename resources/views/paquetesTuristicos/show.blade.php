@@ -1,3 +1,4 @@
+<?php use App\categoria as categorias;?>
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -80,17 +81,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group header-group-0 " id="form-group-price" style="">
-                        <label class="control-label col-sm-1"></label>
-                        <div class="col-sm-10">
-                            <strong>Precio:</strong> {{$item->precio}}
-                        </div>
-                    </div>
-
                     <div class="form-group header-group-0 " id="form-group-category_id" style="">
                         <label class="control-label col-sm-1"></label>
                         <div class="col-sm-10">
-                            <stron>Categoria:</stron> {{$cats->titulo_categoria}}
+                            <strong>Categoría:</strong>
+                            @if(isset(categorias::where('id_categoria',$cats->id_categoria)->where('estado','!=',2)->first()->titulo_categoria))
+                                {{$cats->titulo_categoria}}
+                            @else
+                                Sin categoría asignada
+                            @endif
                         </div>
                     </div>
                     <div class="form-group header-group-0 " id="form-group-stock">
@@ -100,7 +99,6 @@
                                 <div class="box box-default" style="box-shadow:0px 0px 5px #ccc">
                                     <div class="box-header">
                                         <h1 class="box-title">Itinerario</h1>
-
                                     </div>
                                     <div class="box-body" id="itinerarios">
                                         @include('layouts.scriptsPaquetesTuristicos')

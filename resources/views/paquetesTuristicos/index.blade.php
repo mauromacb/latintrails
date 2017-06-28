@@ -1,3 +1,4 @@
+<?php use App\categoria as categorias;?>
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -44,10 +45,11 @@
                     $('#example').DataTable();
                 } );
             </script>
-            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>Título</th>
+                    <th>Categoría</th>
                     <th>Status</th>
                     <th>Acción</th>
                 </tr>
@@ -55,6 +57,7 @@
                 <tfoot>
                 <tr>
                     <th>Título</th>
+                    <th>Categoría</th>
                     <th>Status</th>
                     <th>Acción</th>
                 </tr>
@@ -67,10 +70,34 @@
                         @else
                             <span class="btn btn-xs btn-warning">Inactivo</span>
                         @endif
-                        <a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong></a></td>
+                        <a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong></a>
+                    </td>
                     <td>
-                        <div class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-list"></span> <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff"><strong>  Ver Itinerario</strong></a></div>
-                        || <div class="btn btn-xs btn-success"><span class="glyphicon glyphicon-map-marker"></span> <a href="{{url('mapas/')}}" style="color: #fff"><strong>  Ver Mapas</strong></a></div>
+                        <strong>
+                            @if(isset(categorias::where('id_categoria',$k->id_categoria)->where('estado','!=',2)->first()->titulo_categoria))
+                                <a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer">
+                                {{categorias::where('id_categoria',$k->id_categoria)->where('estado','!=',2)->first()->titulo_categoria}}
+                                </a>
+                            @else
+                                Sin categoría asignada
+                            @endif
+                        </strong>
+                    </td>
+                    <td>
+
+                        <div class="btn btn-xs btn-primary">
+                            <span class="glyphicon glyphicon-list"></span>
+                            <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff">
+                                <strong>  Asignar/Ver Itinerarios</strong>
+                            </a>
+                        </div>
+                        ||
+                        <div class="btn btn-xs btn-success">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            <a href="{{url('mapas/')}}" style="color: #fff">
+                                <strong> Asginar/Ver Mapas</strong>
+                            </a>
+                        </div>
                     </td>
                     <td>
                         <div class='button_action' style='text-align:right'>

@@ -1,3 +1,4 @@
+<?php use App\TipoItinerario as tipoItinerario;?>
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -8,12 +9,12 @@
 @section('main-content')
 <section class="content-header">
     <h1>
-        <i class="fa fa-glass"></i><a href="{{url('paquetesTuristicos')}}">{{$paquete_turistico[0]->titulo}}</a> > Itinerario
+        <i class="fa fa-glass"></i> Itinerarios
         <!--START BUTTON -->
         <a href="{{url('/itinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Show Data">
             <i class="fa fa-table"></i> Ver
         </a>
-        <a href="{{url('/itinerario/create?id='.$paquete_turistico[0]->id_paquete_tur)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Add Data">
+        <a href="{{url('/itinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Add Data">
             <i class="fa fa-plus-circle"></i> Agregar itinerario
         </a>
         <!-- END BUTTON -->
@@ -37,26 +38,52 @@
                     $('#example').DataTable();
                 } );
             </script>
-            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Día</th>
+                    <th>Tipo de Itinerario</th>
+                    <th>Itinerario</th>
+                    <th>Días</th>
                     <th>Acción</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Día</th>
+                    <th>Tipo de Itinerario</th>
+                    <th>Itinerario</th>
+                    <th>Días</th>
                     <th>Acción</th>
                 </tr>
                 </tfoot>
-                <tbody>
-                @foreach($itinerario as $k)
+                <tbody class="{{$i=0}}">
+
+                @foreach($itinerarios as $k)
                 <tr>
-                    <td><a href="{{url('itinerario/'.$k->id_itinerario)}}" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i> <strong>{{$k->dia}}</strong></a></td>
+                    <td class="{{$tipoItinerario=tipoItinerario::where('id_tipo_itinerario',$k->id_tipo_itinerario)->first()}}">
+                        @if($tipoItinerario->fecha_fija==1)
+                            <span class="btn btn-xs btn-success">Con fecha fija</span>
+                            <strong>{{$tipoItinerario->descripcion}}</strong>
+                        @else
+                            <span class="btn btn-xs btn-warning">Sin fecha fija</span>
+                            <strong>{{$tipoItinerario->descripcion}}</strong>
+                        @endif
+                    </td>
                     <td>
-                        <div class='button_action' style='text-align:right'>
-                            <a class='btn btn-xs btn-primary' title='Detalles' href='{{url('/verItinerario/'.$k->id_itinerario)}}'>
+                        <a href="{{url('itinerario/'.$k->id_itinerario)}}" class="small-box-footer">
+                            <i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="btn btn-xs btn-primary">
+                            <span class="glyphicon glyphicon-list"></span>
+                            <a href="{{url('showItinerario/'.$k->id_itinerario)}}" style="color: #fff">
+                                <strong>  Asignar/Ver Días</strong>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class='button_action' style='text-align:right' id="{{$i++}}">
+                            <a class='btn btn-xs btn-primary' title='Detalles' href='{{url('/itinerario/'.$k->id_itinerario)}}'>
                                 <i class='fa fa-eye'></i>
                             </a>
                             <a class='btn btn-xs btn-success' title='Editar' href='{{url('/itinerario/'.$k->id_itinerario.'/edit')}}'>
@@ -64,7 +91,6 @@
                             </a>
                             <div style='float: right; margin-left: 3px'>
                                 {{ Form::open(['method' => 'DELETE', 'route' => ['itinerario.destroy', $k->id_itinerario]]) }}
-                                <input type="hidden" name="idpt" value="{{$idpt}}">
                                 <fieldset class="buttons">
                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                         <span class="fa fa-trash"></span>
@@ -75,6 +101,7 @@
                         </div>
                     </td>
                     </tr>
+
                     @endforeach
                 </tbody>
             </table>

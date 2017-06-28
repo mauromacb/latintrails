@@ -6,97 +6,105 @@
 
 
 @section('main-content')
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-archive"></i>  Hoteles
+            <!--START BUTTON -->
+            <a href="{{url('hoteles')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                <i class="fa fa-table"></i> Ver todos
+            </a>
+            <a href="{{url('hoteles/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                <i class="fa fa-plus-circle"></i> Agregar nuevo
+            </a>
+            <!-- END BUTTON -->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Hoteles</li>
+        </ol>
+    </section>
+
+
     <div class="container-fluid spark-screen">
-        <div class="row">
-            <div class="col-md-12 col-md-offset-0">
+        <p><a title="Return" href="{{url('hoteles')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+        <div class="col-md-12 col-md-offset-0">
 
-                <!-- Default box -->
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3>
-                            <i class="fa fa-archive"></i>  Hoteles &nbsp;&nbsp;
-                            <!--START BUTTON -->
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border">
 
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
-                                <i class="fa fa-table"></i> Ver todos
-                            </a>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i></button>
 
-
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
-                                <i class="fa fa-plus-circle"></i> Agregar nuevo
-                            </a>
-                            <!--ADD ACTIon-->
-                            <!-- END BUTTON -->
-                        </h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fa fa-minus"></i></button>
-                            
-                        </div>
                     </div>
-                    <div class="box-body">
-                        @if(count($errors) > 0)
+                </div>
+                <div class="box-body">
+                    @if(count($errors) > 0)
                         <div class="alert alert-danger">
                             {{ Html::ul($errors->all()) }}
                         </div>
-                        @endif
+                    @endif
+                    {{ Form::model($item, array('route' => array('hoteles.update', $item->id_hotel), 'method' => 'PUT','class'=>'form-horizontal')) }}
+                    <div class="box-body">
+                        <div class="form-group header-group-0 " id="form-group-name" style="">
+                            <label class="control-label col-sm-2">Nombre: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Ingrese el nombre" maxlength="70" class="form-control" name="nombre" id="nombre" required value="{{$item->nombre}}">
+                                <div class="text-danger"></div>
+                                <p class="help-block"></p>
+                            </div>
+                            <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
 
-                        {{ Form::model($item, array('route' => array('hoteles.update', $item->id), 'method' => 'PUT')) }}
-                            <div class="box-body">
-                                <div class="form-group header-group-0 " id="form-group-name">
-                                    <label class="control-label col-sm-2">Nombre: <span class="text-danger" title="Este campo es requerido">*</span></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" maxlength="70" class="form-control" name="nombre" id="nombre" value="{{$item->nombre}}" required>
-                                        <div class="text-danger"></div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
-                                    <div class="col-sm-10">
-                                        <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80">{{$item->descripcion}}</textarea>
+                                <div class="text-danger"></div>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="form-group header-group-0 " id="form-group-status" style="">
+                                <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
 
-                                        <div class="text-danger"></div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <div class="form-group header-group-0 " id="form-group-status" style="">
-                                        <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
+                                <div class="col-sm-10">
+                                    @if($item->estado==1)
+                                        <label class="radio-inline">
+                                            <input type="radio" name="estado" required="" value="1" checked> Activo
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="estado" value="0"> Inactivo
+                                        </label>
+                                    @elseif($item->estado==0)
+                                        <label class="radio-inline">
+                                            <input type="radio" name="estado" required="" value="1"> Activo
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="estado" value="0" checked> Inactivo
+                                        </label>
+                                    @endif
 
-                                        <div class="col-sm-10">
-
-                                            <label class="radio-inline">
-                                                <input type="radio" name="estado" required="" value="1" @if($item->estado==1)checked @endif> Activo
-
-                                            </label>
-
-
-                                            <label class="radio-inline">
-                                                <input type="radio" name="estado" value="0" @if($item->estado==0)checked @endif> Inactivo
-                                            </label>
-
-
-                                            <div class="text-danger"></div>
-                                            <p class="help-block"></p>
-
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="box-footer" style="background: #F5F5F5">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2"></label>
-                                    <div class="col-sm-10">
-                                        <a href="javascript:history.back(1)" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
-                                        <input type="submit" name="submit" value="Guardar" class="btn btn-success">
-                                    </div>
-                                </div>
-                            </div><!-- /.box-footer-->
-                        {{ Form::close() }}
+                        </div>
                     </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
 
+                    <div class="box-footer" style="background: #F5F5F5">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-10">
+
+                                <a href="{{url('hoteles')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+
+                                <input type="submit" name="submit" value="Guardar" class="btn btn-success">
+
+                            </div>
+                        </div>
+                    </div><!-- /.box-footer-->
+
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.box-body -->
             </div>
+            <!-- /.box -->
+
         </div>
     </div>
 @endsection

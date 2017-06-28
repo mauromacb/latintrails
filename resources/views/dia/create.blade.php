@@ -8,7 +8,7 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Tipo de Itinerario
+            <i class="fa fa-archive"></i>  Días
             <!--START BUTTON -->
             <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
@@ -37,33 +37,40 @@
                                 {{ Html::ul($errors->all()) }}
                             </div>
                         @endif
-                        {!! Form::model($item, ['action' => 'TipoItinerarioController@store']) !!}
+                        {!! Form::model($item, ['action' => 'DiaItinerarioController@store']) !!}
                         <div class="box-body">
                             <div class="form-group header-group-0 " id="form-group-name" style="">
-                                <label class="control-label col-sm-2">Nombre: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" placeholder="Ingrese el nombre" maxlength="70" class="form-control" name="descripcion" id="descripcion" required>
+                                    <input type="text" placeholder="Ingrese el día" maxlength="70" class="form-control" name="dia" id="dia" required>
                                 </div>
                             </div>
-                            <div class="form-group header-group-0 " id="form-group-name">
-                                <label class="control-label col-sm-2">Fecha Fija <span class="text-danger" title="This field is required">*</span></label>
+                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                                <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
 
                                 <div class="col-sm-10">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="fecha_fija" required="" value="1" checked> Con fecha fija
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="fecha_fija" value="0"> Sin fecha fija
-                                    </label>
+                                    <select style="width:100%" class="form-control " id="id_itinerario" name="id_itinerario">
+                                        <option value="SELECCIONE UNO" selected>SELECCIONE UNO</option>
+                                        @foreach($itinerarioLista as $k)
+                                            <option value="{{$k->id_itinerario}}" >{{$k->titulo}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <div class="col-sm-10">
+                                    <textarea placeholder="Ingrese la descripción" name="descripcion" id="descripcion" required></textarea>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="box-footer" style="background: #F5F5F5">
                             <div class="form-group">
                                 <label class="control-label col-sm-2"></label>
                                 <div class="col-sm-10">
-                                    <a href="{{url('tipoItinerario')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                    <a href="{{url('dia')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
                                     <input type="submit" name="submit" value="Guardar" class="btn btn-success">
                                 </div>
                             </div>

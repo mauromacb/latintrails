@@ -8,19 +8,19 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Tipo de Itinerario
+            <i class="fa fa-archive"></i>  Día Itinerario
             <!--START BUTTON -->
-            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('dia')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
-            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('dia/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
         </h1>
         <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Tipo Itinerario</li>
+            <li class="active">Día Itinerario</li>
         </ol>
     </section>
 <br>
@@ -35,33 +35,25 @@
                         <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <td>Nombre</td>
-                                <td>Fecha fija</td>
+                                <td>Día</td>
                                 <td>Acción</td>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <td>Nombre</td>
-                                <td>Fecha fija</td>
+                                <td>Día</td>
                                 <td>Acción</td>
                             </tr>
                             </tfoot>
                             <tbody>
                             @foreach($items as $k)
                                 <tr>
-                                    <td><a href="{{url('tipoItinerario/'.$k->id_tipo_itinerario)}}" class="small-box-footer">{{$k->descripcion}} <i class="fa fa-arrow-circle-right"></i></a></td>
-                                    <td>@if($k->fecha_fija==1)
-                                            <span class="btn btn-xs btn-success">Con fecha fija</span>
-                                        @else
-                                            <span class="btn btn-xs btn-warning">Sin fecha fija</span>
-                                        @endif
-                                    </td>
+                                    <td><a href="{{url('dia/'.$k->id_dia)}}" class="small-box-footer">{{$k->dia}} <i class="fa fa-arrow-circle-right"></i></a></td>
                                     <td><div class='' style='text-align:right'>
-                                            <a class='btn btn-xs btn-primary' title='Ver' href='{{url('tipoItinerario/'.$k->id_tipo_itinerario)}}'> <i class='fa fa-eye'></i></a>
-                                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('tipoItinerario/'.$k->id_tipo_itinerario.'/edit')}}'><i class='fa fa-pencil'></i></a>
+                                            <a class='btn btn-xs btn-primary' title='Ver' href='{{url('dia/'.$k->id_dia)}}'> <i class='fa fa-eye'></i></a>
+                                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('dia/'.$k->id_dia.'/edit')}}'><i class='fa fa-pencil'></i></a>
                                             <div style='float: right; margin-left: 3px'>
-                                            {{ Form::open(['method' => 'DELETE', 'route' => ['tipoItinerario.destroy', $k->id_tipo_itinerario]]) }}
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['tipoItinerario.destroy', $k->id_dia]]) }}
                                                 <fieldset class="buttons">
                                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                                         <span class="fa fa-trash"></span>

@@ -6,39 +6,33 @@
 
 
 @section('main-content')
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-archive"></i>  Tipo de Itinerario
+            <!--START BUTTON -->
+            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                <i class="fa fa-table"></i> Ver todos
+            </a>
+            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                <i class="fa fa-plus-circle"></i> Agregar nuevo
+            </a>
+            <!-- END BUTTON -->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Tipo Itinerario</li>
+        </ol>
+    </section>
+
+
     <div class="container-fluid spark-screen">
+        <p><a title="Return" href="{{url('tipoItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
-
                 <!-- Default box -->
                 <div class="box">
-                    <div class="box-header with-border">
-                        <h3>
-                            <i class="fa fa-archive"></i>  Categorías &nbsp;&nbsp;
-                            <!--START BUTTON -->
-
-                            <a href="/categorias" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
-                                <i class="fa fa-table"></i> Ver todos
-                            </a>
-
-
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
-                                <i class="fa fa-plus-circle"></i> Agregar nuevo
-                            </a>
-                            <!--ADD ACTIon-->
-                            <!-- END BUTTON -->
-                        </h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fa fa-minus"></i></button>
-                            
-                        </div>
-                    </div>
                     <div class="box-body">
                         <div>
-
-                            <p><a title="Return" href="javascript:history.back(1)"><i class="fa fa-chevron-circle-left "></i> &nbsp; Regresar</a></p>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <strong><i class="fa fa-archive"></i> Detalle</strong>
@@ -49,8 +43,18 @@
                                                 <table id="table-detail" class="table table-striped">
                                                     <tbody>
                                                         <tr>
-                                                            <td>{{$item->titulo_categoria}}</td>
+                                                            <td><h3>{{$item->descripcion}}</h3></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td>
+                                                                @if($item->fecha_fija==1)
+                                                                    <span class="btn btn-xs btn-success">Con fecha fija</span>
+                                                                @else
+                                                                    <span class="btn btn-xs btn-warning">Sin fecha fija</span>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -62,7 +66,6 @@
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
-
             </div>
         </div>
     </div>

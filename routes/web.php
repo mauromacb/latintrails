@@ -43,3 +43,9 @@ Route::resource('/mapas', 'MapasController');
 
 Route::resource('/itinerario', 'ItinerarioController');
 Route::get('/verItinerario/{id}', 'ItinerarioController@ver');
+Route::resource('/tipoItinerario', 'TipoItinerarioController');
+Route::resource('/dia', 'DiaItinerarioController');
+Route::get('/showItinerario/{id}', 'DiaItinerarioController@showItinerario');
+Route::get('dia/{id}/editItinerario', 'DiaItinerarioController@editItinerario');
+Route::get('dia/verDia/{id}', 'DiaItinerarioController@verDia');
+Route::get('dia/createItinerario/{id}', 'DiaItinerarioController@createItinerario');

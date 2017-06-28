@@ -52,13 +52,13 @@
                             <tbody>
                             @foreach($items as $k)
                                 <tr>
-                                    <td><a href="<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}/edit" class="small-box-footer">{{$k->nombre}} <i class="fa fa-arrow-circle-right"></i></a></td>
+                                    <td><a href="{{url('hoteles/'.$k->id_hotel)}}" class="small-box-footer">{{$k->nombre}} <i class="fa fa-arrow-circle-right"></i></a></td>
                                     <td>
                                         <div class='' style='text-align:right'>
-                                            <a class='btn btn-xs btn-primary' title='Ver' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}'> <i class='fa fa-eye'></i></a>
-                                            <a class='btn btn-xs btn-success' title='Editar' href='<?php echo $_SERVER['REQUEST_URI'];?>/{{$k->id}}/edit'><i class='fa fa-pencil'></i></a>
+                                            <a class='btn btn-xs btn-primary' title='Ver' href='{{url('hoteles/'.$k->id_hotel)}}'> <i class='fa fa-eye'></i></a>
+                                            <a class='btn btn-xs btn-success' title='Editar' href='{{url('hoteles/'.$k->id_hotel.'/edit')}}'><i class='fa fa-pencil'></i></a>
                                             <div style='float: right; margin-left: 3px'>
-                                            {{ Form::open(['method' => 'DELETE', 'route' => ['hoteles.destroy', $k->id]]) }}
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['hoteles.destroy', $k->id_hotel]]) }}
                                                 <fieldset class="buttons">
                                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                                         <span class="fa fa-trash"></span>

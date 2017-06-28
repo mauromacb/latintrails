@@ -6,28 +6,32 @@
 
 
 @section('main-content')
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-archive"></i>  Hoteles
+            <!--START BUTTON -->
+            <a href="{{url('hoteles')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                <i class="fa fa-table"></i> Ver todos
+            </a>
+            <a href="{{url('hoteles/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                <i class="fa fa-plus-circle"></i> Agregar nuevo
+            </a>
+            <!-- END BUTTON -->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Hoteles</li>
+        </ol>
+    </section>
+
+
     <div class="container-fluid spark-screen">
-        <div class="row">
+        <p><a title="Return" href="{{url('hoteles')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
             <div class="col-md-12 col-md-offset-0">
 
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3>
-                            <i class="fa fa-archive"></i>  Hoteles &nbsp;&nbsp;
-                            <!--START BUTTON -->
-
-                            <a href="/categorias" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
-                                <i class="fa fa-table"></i> Ver todos
-                            </a>
-
-
-                            <a href="<?php echo $_SERVER['REQUEST_URI'];?>/create" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
-                                <i class="fa fa-plus-circle"></i> Agregar nuevo
-                            </a>
-                            <!--ADD ACTIon-->
-                            <!-- END BUTTON -->
-                        </h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -52,7 +56,7 @@
                                 </div>
                                 <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
                                 <div class="col-sm-10">
-                                    <textarea class="ckeditor" name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
+                                    <textarea name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
 
                                     <div class="text-danger"></div>
                                     <p class="help-block"></p>
@@ -78,7 +82,7 @@
                                 <label class="control-label col-sm-2"></label>
                                 <div class="col-sm-10">
 
-                                    <a href="javascript:history.back(1)" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                    <a href="{{url('hoteles')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
 
                                     <input type="submit" name="submit" value="Guardar" class="btn btn-success">
 
@@ -93,6 +97,5 @@
                 <!-- /.box -->
 
             </div>
-        </div>
     </div>
 @endsection

@@ -84,13 +84,3 @@
         }
     }
 </script>
-<script>
-    function validar(){
-        if ($(document.getElementById('id_categoria')).val() == "SELECCIONE UNO") {
-            alert("Seleccione un categoría");
-            document.getElementById("id_categoria").focus();
-            event.returnValue = false;
-            return false;
-        }else{ event.returnValue = true;}
-    }
-</script>

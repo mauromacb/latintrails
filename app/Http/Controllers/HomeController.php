@@ -29,8 +29,6 @@ class HomeController extends Controller
     {
         $paq=PaqueteTuristico::get();
         $cat=Categoria::get();
-        $catit=App\CategoriaItinerario::get();
-        $paquete=App\ComoNosEncontro::get();
 
         /*$paquete = new App\ComoNosEncontro();
         //$paquete->id_paquete_tur=1;

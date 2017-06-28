@@ -6,11 +6,11 @@
 
 @section('content')
 
-<body class="hold-transition register-page">
+<body class="hold-transition register-page"style="background-image:url('images/fondo.jpg');">
     <div id="app" v-cloak>
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}"><b>Latin</b>Trails</a>
             </div>
 
             @if (count($errors) > 0)
@@ -28,9 +28,6 @@
                 <p class="login-box-msg">{{ trans('adminlte_lang::message.registermember') }}</p>
 
                 <register-form></register-form>
-
-                @include('adminlte::auth.partials.social_login')
-
                 <a href="{{ url('/login') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
             </div><!-- /.form-box -->
         </div><!-- /.register-box -->

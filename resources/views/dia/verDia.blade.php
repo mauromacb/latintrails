@@ -8,64 +8,72 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Tipo de Itinerario
+            <i class="fa fa-archive"></i> <strong>{{$item->titulo}}</strong> || Día Itinerario
             <!--START BUTTON -->
-            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('dia')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
-            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('dia/createItinerario/'.$item->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
         </h1>
         <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Tipo Itinerario</li>
+            <li class="active">Día Itinerario</li>
         </ol>
     </section>
 
 
     <div class="container-fluid spark-screen">
-        <p><a title="Return" href="{{url('tipoItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+        <p><a title="Return" href="{{url('showItinerario/'.$item->id_itinerario)}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-body">
-                        <div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong><i class="fa fa-archive"></i> Detalle</strong>
-                                </div>
-                                <div class="panel-body" style="padding:20px 0px 0px 0px">
-                                        <div class="box-body">
-                                            <div class="table-responsive">
-                                                <table id="table-detail" class="table table-striped">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><h3>{{$item->descripcion}}</h3></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                @if($item->fecha_fija==1)
-                                                                    <span class="btn btn-xs btn-success">Con fecha fija</span>
-                                                                @else
-                                                                    <span class="btn btn-xs btn-warning">Sin fecha fija</span>
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div><!-- /.box-body -->
+                        @if(count($errors) > 0)
+                            <div class="alert alert-danger">
+                                {{ Html::ul($errors->all()) }}
+                            </div>
+                        @endif
+                        <div class="form-horizontal">
+                            <div class="box-body">
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" maxlength="70" class="form-control" name="titulo" id="titulo" value="{{$item->titulo}}" required disabled>
                                 </div>
                             </div>
+                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                                <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
+
+                                <div class="col-sm-10">
+                                    <select style="width:100%" class="form-control " id="id_itinerario" name="id_itinerario" disabled>
+                                        <option value="SELECCIONE UNO">SELECCIONE UNO</option>
+                                        @foreach($itinerarioLista as $k)
+                                            @if($item->id_itinerario==$k->id_itinerario)
+                                                <option value="{{$k->id_itinerario}}" selected>{{$k->titulo}}</option>
+                                            @else
+                                                <option value="{{$k->id_itinerario}}">{{$k->titulo}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <div class="col-sm-10">
+                                    <?php echo $item->descripcion;?>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
+
             </div>
         </div>
     </div>

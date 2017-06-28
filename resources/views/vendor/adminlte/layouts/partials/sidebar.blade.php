@@ -40,13 +40,14 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Sistema Turístico</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
-                    <li class=""><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
+                    <li><a href="{{ url('tipoItinerario') }}"><i class='fa fa-link'></i> <span>Tipo Itinerarios</span></a></li>
+                    <li><a href="{{ url('itinerario') }}"><i class='fa fa-link'></i> <span>Itinerarios</span></a></li>
                     <li><a href="{{ url('hoteles') }}"><i class='fa fa-link'></i> <span>Hoteles</span></a></li>
                     <li><a href="{{ url('mapas') }}"><i class='fa fa-link'></i> <span>Mapas Zonas Turísticas</span></a></li>
+                    <li class=""><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
+                    <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
                 </ul>
             </li>
-            {{--<li><a href="{{ url('comonosencontro') }}"><span>{{ trans('adminlte_lang::message.comonosencontro') }}</span></a></li>--}}
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

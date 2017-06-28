@@ -27,21 +27,10 @@ class PaquetesTuristicosController extends Controller
 
     public function index()
     {
-
-        /*$paquete = new PaqueteTuristico();
-       //$paquete->id_paquete_tur=1;
-       $paquete->id=4;
-       $paquete->id_categoria=1;
-       $paquete->titulo='Titulo';
-       $paquete->descripcion='Descripcion' ;
-       $paquete->fecha_creacion=date("Y-m-d h:m:s");
-       $paquete->precio="22";
-       $paquete->save();
-       dd($paquete);
-       dd($paq);
-        */
         $paquete_turistico = paqueteturistico::where('estado','!=',2)->get();
-
+        if(!isset($paquete_turistico)){
+            $paquete_turistico = new categorias();
+        }
         return view('paquetesTuristicos/index', compact('paquete_turistico'));
     }
 
@@ -65,26 +54,24 @@ class PaquetesTuristicosController extends Controller
      */
     public function store(Request $request)
     {
-        //$paquete = new paqueteturistico();
-        //$paquete->create($request->all());
-        //paqueteturistico::created($request->all());
-        //dd($request->all());
         $validator = Validator::make(
             array(
                 'titulo' => $request->titulo,
+                'subtitulo' => $request->subtitulo,
                 'descripcion' => $request->descripcion,
                 'id_categoria' => $request->categoria_id
             ),
             array(
                 'titulo' => 'required',
+                'subtitulo' => 'required',
                 'descripcion' => 'required',
                 'id_categoria' => 'required'
             )
         );
         $paquete = new paqueteturistico();
         $paquete->titulo = $request->titulo;
+        $paquete->subtitulo = $request->subtitulo;
         $paquete->descripcion = $request->descripcion;
-        $paquete->precio = $request->precio;
         $paquete->fecha_creacion = date('Y-m-d h:m:s');
         $paquete->id_categoria = $request->id_categoria;
         $paquete->estado = 1;
@@ -106,7 +93,9 @@ class PaquetesTuristicosController extends Controller
         $categorias=categorias::where('estado','!=',2)->get();
         $cats=categorias::find($item->id_categoria);
         $itinerario=itinerarios::where('id_paquete_tur',$item->id_paquete_tur)->get();
-        //dd($itinerario);
+        if(!isset($itinerario)){
+            $itinerario= new itinerarios();
+        }
         return view('paquetesTuristicos/show', compact('item','categorias','cats','itinerario'));
     }
 
@@ -121,7 +110,7 @@ class PaquetesTuristicosController extends Controller
         $item=paqueteturistico::find($id);
         $categorias=categorias::where('estado','!=',2)->get();
         $cats=categorias::find($item->id_categoria);
-        $itinerario=itinerarios::where('id_paquete_tur',$item->id_paquete_tur)->get();
+        $itinerario=itinerarios::all();
         //dd($itinerario);
         return view('paquetesTuristicos/edit', compact('item','categorias','cats','itinerario'));
     }
@@ -138,7 +127,6 @@ class PaquetesTuristicosController extends Controller
         $paquete=paqueteturistico::find($id);
         $paquete->titulo = $request->titulo;
         $paquete->descripcion = $request->descripcion;
-        $paquete->precio = $request->precio;
         $paquete->id_categoria = $request->id_categoria;
         $paquete->save();
         return redirect()->action('PaquetesTuristicosController@index');
