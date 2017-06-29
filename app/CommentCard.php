@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CommentCard extends Model
 {
-    protected $table = 'commentcard';
+    protected $table = 'comment_card';
     public $timestamps = false;
 }

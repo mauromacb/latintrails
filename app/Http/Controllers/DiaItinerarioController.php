@@ -73,10 +73,17 @@ class DiaItinerarioController extends Controller
 
     public function store(Request $request)
     {
+        if($request->b=='on'){$b=1;}else{$b=0;}
+        if($request->l=='on'){$l=1;}else{$l=0;}
+        if($request->d=='on'){$d=1;}else{$d=0;}
+
         $item = new dia();
         $item->id_itinerario=$request->id_itinerario;
         $item->titulo=$request->titulo;
         $item->descripcion=$request->descripcion;
+        $item->b=$b;
+        $item->l=$l;
+        $item->d=$d;
         $item->save();
         Session::flash('message', 'Solicitud procesada exitosamente');
         if (isset($request->conitinerario)){return Redirect::to('showItinerario/'.$request->id_itinerario);}

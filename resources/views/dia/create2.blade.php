@@ -8,12 +8,12 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Días
+            <i class="fa fa-archive"></i>  Tipo de Itinerario
             <!--START BUTTON -->
-            <a href="{{url('showItinerario/'.$itinerario->id_itinerario)}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
-            <a href="{{url('dia/createItinerario/'.$itinerario->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
@@ -26,7 +26,7 @@
 
 
     <div class="container-fluid spark-screen">
-        <p><a title="Return" href="{{url('showItinerario/'.$itinerario->id_itinerario)}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+        <p><a title="Return" href="{{url('tipoItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <!-- Default box -->
@@ -69,6 +69,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Incluye: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                            <div class="checkbox checkbox-primary">
+                                <label class="control-label col-sm-1"><input id="checkbox" name="b" type="checkbox" checked="">B</label>
+                                <label class="control-label col-sm-1"><input id="checkbox" name="l" type="checkbox" checked="">L</label>
+                                <label class="control-label col-sm-1"><input id="checkbox" name="d" type="checkbox" checked="">D</label>
+                            </div>
+                            </div>
                         </div>
 
                         <div class="box-footer" style="background: #F5F5F5">

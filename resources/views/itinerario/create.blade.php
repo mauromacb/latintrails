@@ -74,7 +74,6 @@
 
 
                         <div class="box-footer" style="background: #F5F5F5">
-
                             <div class="form-group">
                                 <label class="control-label col-sm-2"></label>
                                 <div class="col-sm-10">
@@ -82,9 +81,6 @@
                                     <button type="submit" id="submitform" class="btn btn-success" onclick="validar();">Guardar</button>
                                 </div>
                             </div>
-
-
-
                         </div><!-- /.box-footer-->
                     {!! Form::close() !!}
 
