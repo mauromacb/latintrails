@@ -84,7 +84,6 @@
                         </strong>
                     </td>
                     <td>
-
                         <div class="btn btn-xs btn-primary">
                             <span class="glyphicon glyphicon-list"></span>
                             <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff">
@@ -101,7 +100,6 @@
                     </td>
                     <td>
                         <div class='button_action' style='text-align:right'>
-
                             <div style='float: left; margin-left: 3px'>
                                 @if($k->estado==1)
                                     {{ Form::open(['method' => 'POST', 'url' => ['estado']]) }}

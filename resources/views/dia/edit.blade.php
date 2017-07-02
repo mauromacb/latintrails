@@ -14,10 +14,10 @@
                         <h3>
                             <i class="fa fa-archive"></i>  Tipo de Itinerario
                             <!--START BUTTON -->
-                            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                            <a href="{{url('categoriaItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                                 <i class="fa fa-table"></i> Ver todos
                             </a>
-                            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                            <a href="{{url('categoriaItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                                 <i class="fa fa-plus-circle"></i> Agregar nuevo
                             </a>
                             <!--ADD ACTIon-->
@@ -37,7 +37,7 @@
                         </div>
                         @endif
 
-                        {{ Form::model($item, array('route' => array('tipoItinerario.update', $item->id_tipo_itinerario), 'method' => 'PUT')) }}
+                        {{ Form::model($item, array('route' => array('categoriaItinerario.update', $item->id_tipo_itinerario), 'method' => 'PUT')) }}
                             <div class="box-body">
                                 <div class="form-group header-group-0 " id="form-group-name">
                                     <label class="control-label col-sm-2">Nombre: <span class="text-danger" title="Este campo es requerido">*</span></label>
@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"></label>
                                     <div class="col-sm-10">
-                                        <a href="{{url('tipoItinerario')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
+                                        <a href="{{url('categoriaItinerario')}}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Atras</a>
                                         <input type="submit" name="submit" value="Guardar" class="btn btn-success">
                                     </div>
                                 </div>

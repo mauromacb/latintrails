@@ -25,7 +25,6 @@
         </ol>
     </section>
 
-
     <div class="container-fluid spark-screen">
         <p><a title="Return" href="{{url('itinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="panel panel-default form-horizontal">

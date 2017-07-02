@@ -53,7 +53,7 @@
                                             <a class='btn btn-xs btn-primary' title='Ver' href='{{url('dia/'.$k->id_dia)}}'> <i class='fa fa-eye'></i></a>
                                             <a class='btn btn-xs btn-success' title='Editar' href='{{url('dia/'.$k->id_dia.'/edit')}}'><i class='fa fa-pencil'></i></a>
                                             <div style='float: right; margin-left: 3px'>
-                                            {{ Form::open(['method' => 'DELETE', 'route' => ['tipoItinerario.destroy', $k->id_dia]]) }}
+                                            {{ Form::open(['method' => 'DELETE', 'route' => ['categoriaItinerario.destroy', $k->id_dia]]) }}
                                                 <fieldset class="buttons">
                                                     <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
                                                         <span class="fa fa-trash"></span>

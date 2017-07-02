@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\PaqueteTuristico as paqueteturistico;
 use App\categoria as categorias;
 use App\Itinerario as itinerarios;
+use App\TipoItinerario as categoriaItinerario;
 use App\Mapas as mapa;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,9 +42,9 @@ class PaquetesTuristicosController extends Controller
      */
     public function create()
     {
-        $itinerario = new itinerarios();
-        $categorias=categorias::where('estado','!=',2)->get();
-        return view('paquetesTuristicos/create' ,compact('categorias'));
+        $itinerarios = itinerarios::all();
+        $categoriasItinerarios=categoriaItinerario::all();
+        return view('paquetesTuristicos/create' ,compact('categoriasItinerarios','itinerarios'));
     }
 
     /**

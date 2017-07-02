@@ -4,16 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Itinerario as itinerarios;
-use App\TipoItinerario as tipoItinerario;
+use App\categoriaItinerario as categoriaItinerario;
 use App\DiaItinerario as dia;
 
 class ItinerarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,19 +20,19 @@ class ItinerarioController extends Controller
         if(!isset($itinerarios)){
             $itinerarios = new itinerarios();
         }
-        $tipoItinerario=tipoItinerario::all();
+        $categoriaItinerario=categoriaItinerario::all();
         if(!isset($itinerarios)){
-            $tipoItinerario= new tipoItinerario();
+            $categoriaItinerario= new categoriaItinerario();
         }
-        return view('itinerario/index', compact('itinerarios','tipoItinerario'));
+        return view('itinerario/index', compact('itinerarios','categoriaItinerario'));
     }
 
     public function create()
     {
         $itinerarios = new itinerarios;
-        $items=tipoItinerario::all();
+        $items=categoriaItinerario::where('estado','!=',2)->get();
         if(!isset($items)){
-            $items = new tipoItinerario();
+            $items = new categoriaItinerario();
         }
         return view('itinerario/create', compact('itinerarios','items'));
     }
@@ -45,9 +40,10 @@ class ItinerarioController extends Controller
     public function store(Request $request)
     {
         $itinerario=new itinerarios();
-        $itinerario->id_tipo_itinerario=$request->id_tipo_itinerario;
+        $itinerario->id_categoria_itinerario=$request->id_categoria_itinerario;
         $itinerario->titulo=$request->titulo;
         $itinerario->subtitulo=$request->subtitulo;
+        $itinerario->subtitulo2=$request->subtitulo2;
         $itinerario->descripcion=$request->descripcion;
         $itinerario->save();
         return redirect()->action('ItinerarioController@index');
@@ -66,10 +62,8 @@ class ItinerarioController extends Controller
     public function ver($id)
     {
         $itinerario = itinerarios::where('id_itinerario',$id)->first();
-
         $paquete_turistico = paqueteturistico::where('estado','!=',2)->
         where('id_paquete_tur',$itinerario->id_paquete_tur)->get();
-
         $idpt=$paquete_turistico[0]->id_paquete_tur;
         return view('itinerario/show', compact('itinerario','paquete_turistico','idpt'));
     }
@@ -77,9 +71,9 @@ class ItinerarioController extends Controller
     public function edit($id)
     {
         $itinerario=itinerarios::where('id_itinerario',$id)->first();
-        $items=tipoItinerario::all();
+        $items=categoriaItinerario::all();
         if(!isset($items)){
-            $items = new tipoItinerario();
+            $items = new categoriaItinerario();
         }
         return view('itinerario/edit', compact('itinerario','items'));
     }
@@ -87,9 +81,10 @@ class ItinerarioController extends Controller
     public function update(Request $request, $id)
     {
         $itinerario = itinerarios::find($id);
-        $itinerario->id_tipo_itinerario=$request->id_tipo_itinerario;
+        $itinerario->id_categoria_itinerario=$request->id_categoria_itinerario;
         $itinerario->titulo=$request->titulo;
         $itinerario->subtitulo=$request->subtitulo;
+        $itinerario->subtitulo2=$request->subtitulo2;
         $itinerario->descripcion=$request->descripcion;
         $itinerario->save();
         return redirect()->action('ItinerarioController@index');

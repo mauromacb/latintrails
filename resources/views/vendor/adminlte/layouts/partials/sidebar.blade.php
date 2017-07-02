@@ -36,18 +36,18 @@
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li class=""><a href="{{ url('dashboard') }}"><i class='fa fa-link'></i> <span>Gestión de usuarios</span></a></li>
             <li class=""><a href="{{ url('pagina') }}"><i class='fa fa-link'></i> <span>Gestión de la web</span></a></li>
-            <li class=""><a href="{{ url('commentcard') }}"><i class='fa fa-link'></i> <span>Comment Card</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Sistema Turístico</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('tipoItinerario') }}"><i class='fa fa-link'></i> <span>Tipo Itinerarios</span></a></li>
+                    <li><a href="{{ url('categoriaItinerario') }}"><i class='fa fa-link'></i> <span>Categoría de Itinerarios</span></a></li>
                     <li><a href="{{ url('itinerario') }}"><i class='fa fa-link'></i> <span>Itinerarios</span></a></li>
                     <li><a href="{{ url('hoteles') }}"><i class='fa fa-link'></i> <span>Hoteles</span></a></li>
+                    <li><a href="{{ url('guias') }}"><i class='fa fa-link'></i> <span>Guías Turísticos</span></a></li>
                     <li><a href="{{ url('mapas') }}"><i class='fa fa-link'></i> <span>Mapas Zonas Turísticas</span></a></li>
-                    <li class=""><a href="{{ url('categorias') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.categorias') }}</span></a></li>
-                    <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
+                    <li class=""><a href="{{ url('commentcard') }}"><i class='fa fa-link'></i> <span>Comment Card</span></a></li>
                 </ul>
             </li>
+            <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

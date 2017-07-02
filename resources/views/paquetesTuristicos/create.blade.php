@@ -53,14 +53,13 @@
                     </div>
 
                     <div class="form-group header-group-0 " id="form-group-description" style="">
-                            <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
-                            <div class="col-sm-10">
-                                <textarea name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
-
-                                <div class="text-danger"></div>
-                                <p class="help-block"></p>
-                            </div>
+                        <label class="control-label col-sm-2">Descripcion <span class="text-danger" title="This field is required">*</span></label>
+                        <div class="col-sm-10">
+                            <textarea name="descripcion" id="descripcion" rows="10" cols="80"></textarea>
+                            <div class="text-danger"></div>
+                            <p class="help-block"></p>
                         </div>
+                    </div>
 
                     <div class="form-group header-group-0 " id="form-group-status" style="">
                             <label class="control-label col-sm-2">Status <span class="text-danger" title="This field is required">*</span></label>
@@ -82,19 +81,32 @@
                         </div>
 
                         <div class="form-group header-group-0 " id="form-group-category_id" style="">
-                            <label class="control-label col-sm-2">Categoria <span class="text-danger" title="This field is required">*</span></label>
+                            <label class="control-label col-sm-2">Categoría de Itinerario <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <select style="width:100%" class="form-control " id="id_categoria" name="id_categoria">
+                                <select style="width:100%" class="form-control " id="id_categoria_itinerario" name="id_categoria_itinerario">
                                     <option value="SELECCIONE UNO" selected>SELECCIONE UNO</option>
-                                    @foreach($categorias as $k)
-                                        <option value="{{$k->id_categoria}}" >{{$k->titulo_categoria}}</option>
+                                    @foreach($categoriasItinerarios as $k)
+                                        <option value="{{$k->id_tipocategoria}}" >{{$k->descripcion}}</option>
                                     @endforeach
                                 </select>
 
                                 <div class="text-danger"></div>
                                 <p class="help-block"></p>
 
+                            </div>
+                        </div>
+
+                        <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                            <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
+
+                            <div class="col-sm-10">
+                                <select style="width:100%" class="form-control " id="id_categoria" name="id_categoria" required>
+                                    <option value="" selected>SELECCIONE UNO</option>
+                                    @foreach($itinerarios as $k)
+                                    <option value="{{$k->id_categoria}}" >{{$k->titulo}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

@@ -1,4 +1,4 @@
-<?php use App\TipoItinerario as tipoItinerario;?>
+<?php use App\CategoriaItinerario as categoriaItinerario;?>
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -59,13 +59,13 @@
 
                 @foreach($itinerarios as $k)
                 <tr>
-                    <td class="{{$tipoItinerario=tipoItinerario::where('id_tipo_itinerario',$k->id_tipo_itinerario)->first()}}">
-                        @if($tipoItinerario->fecha_fija==1)
+                    <td class="{{$categoriaItinerario=categoriaItinerario::where('id_categoria_itinerario',$k->id_categoria_itinerario)->first()}}">
+                        @if($categoriaItinerario->fecha_fija==1)
                             <span class="btn btn-xs btn-success">Con fecha fija</span>
-                            <strong>{{$tipoItinerario->descripcion}}</strong>
+                            <strong>{{$categoriaItinerario->descripcion}}</strong>
                         @else
                             <span class="btn btn-xs btn-warning">Sin fecha fija</span>
-                            <strong>{{$tipoItinerario->descripcion}}</strong>
+                            <strong>{{$categoriaItinerario->descripcion}}</strong>
                         @endif
                     </td>
                     <td>

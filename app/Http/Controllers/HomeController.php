@@ -28,8 +28,6 @@ class HomeController extends Controller
     public function index()
     {
         $paq=PaqueteTuristico::get();
-        $cat=Categoria::get();
-
         /*$paquete = new App\ComoNosEncontro();
         //$paquete->id_paquete_tur=1;
         $paquete->titulo='Titulo 1';

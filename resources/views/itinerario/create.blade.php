@@ -52,14 +52,20 @@
                                 <input type="text" maxlength="70" class="form-control" name="subtitulo" id="subtitulo" required>
                             </div>
                         </div>
+                        <div class="form-group header-group-0 " id="form-group-name">
+                            <label class="control-label col-sm-2">Subtítulo 2<span class="text-danger" title="This field is required">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" maxlength="70" class="form-control" name="subtitulo2" id="subtitulo2" required>
+                            </div>
+                        </div>
                         <div class="form-group header-group-0 " id="form-group-category_id" style="">
                             <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
 
                             <div class="col-sm-10">
-                                <select style="width:100%" class="form-control " id="id_tipo_itinerario" name="id_tipo_itinerario">
+                                <select style="width:100%" class="form-control " id="id_categoria_itinerario" name="id_categoria_itinerario">
                                     <option value="SELECCIONE UNO" selected>SELECCIONE UNO</option>
                                     @foreach($items as $k)
-                                        <option value="{{$k->id_tipo_itinerario}}" >{{$k->descripcion}}</option>
+                                        <option value="{{$k->id_categoria_itinerario}}" >{{$k->descripcion}}</option>
                                     @endforeach
                                 </select>
                             </div>

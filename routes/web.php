@@ -40,10 +40,9 @@ Route::resource('/pagina', 'PaginaController');
 Route::resource('/commentcard', 'CommentCardController');
 Route::resource('/mapas', 'MapasController');
 
-
 Route::resource('/itinerario', 'ItinerarioController');
 Route::get('/verItinerario/{id}', 'ItinerarioController@ver');
-Route::resource('/tipoItinerario', 'TipoItinerarioController');
+Route::resource('/categoriaItinerario', 'CategoriaItinerarioController');
 Route::resource('/dia', 'DiaItinerarioController');
 Route::get('/showItinerario/{id}', 'DiaItinerarioController@showItinerario');
 Route::get('dia/{id}/editItinerario', 'DiaItinerarioController@editItinerario');

@@ -10,10 +10,10 @@
         <h1>
             <i class="fa fa-archive"></i>  Tipo de Itinerario
             <!--START BUTTON -->
-            <a href="{{url('tipoItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('categoriaItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
-            <a href="{{url('tipoItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('categoriaItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
@@ -26,7 +26,7 @@
 
 
     <div class="container-fluid spark-screen">
-        <p><a title="Return" href="{{url('tipoItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+        <p><a title="Return" href="{{url('categoriaItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <!-- Default box -->

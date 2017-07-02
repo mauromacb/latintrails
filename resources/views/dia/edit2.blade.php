@@ -69,26 +69,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group header-group-0 " id="form-group-name" style="">
-                                <label class="control-label col-sm-2">Incluye: <span class="text-danger" title="Este campo es requerido">*</span></label>
-                                <div class="checkbox checkbox-primary">
-                                    @if($item->b==1)
-                                        <label class="control-label col-sm-1"><input id="checkbox" name="b" type="checkbox" checked>B</label>
-                                    @else
-                                        <label class="control-label col-sm-1"><input id="checkbox" name="b" type="checkbox">B</label>
-                                    @endif
-                                        @if($item->l==1)
-                                            <label class="control-label col-sm-1"><input id="checkbox" name="l" type="checkbox" checked>L</label>
-                                        @else
-                                            <label class="control-label col-sm-1"><input id="checkbox" name="l" type="checkbox">L</label>
-                                        @endif
-                                        @if($item->d==1)
-                                            <label class="control-label col-sm-1"><input id="checkbox" name="d" type="checkbox" checked>D</label>
-                                        @else
-                                            <label class="control-label col-sm-1"><input id="checkbox" name="d" type="checkbox">D</label>
-                                        @endif
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="box-footer" style="background: #F5F5F5">
