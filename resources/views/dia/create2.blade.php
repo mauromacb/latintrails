@@ -8,12 +8,12 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i>  Tipo de Itinerario
+            <i class="fa fa-archive"></i>  Día de Itinerario
             <!--START BUTTON -->
-            <a href="{{url('categoriaItinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('showItinerario/'.$itinerario->id_itinerario)}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
-            <a href="{{url('categoriaItinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+            <a href="{{url('dia/createItinerario/'.$itinerario->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
                 <i class="fa fa-plus-circle"></i> Agregar nuevo
             </a>
             <!-- END BUTTON -->
@@ -26,7 +26,7 @@
 
 
     <div class="container-fluid spark-screen">
-        <p><a title="Return" href="{{url('categoriaItinerario')}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
+        <p><a title="Return" href="{{url('showItinerario/'.$itinerario->id_itinerario)}}"><i class="fa fa-chevron-circle-left "></i> Atrás</a></p>
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <!-- Default box -->
@@ -40,28 +40,29 @@
                         {!! Form::open(array('route' => 'dia.store','method'=>'POST', 'class' => 'form-horizontal')) !!}
                             <input type="hidden" name="conitinerario" value="1">
                         <div class="box-body">
+                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                                <label class="control-label col-sm-2">Categoría de Itinerario <span class="text-danger" title="This field is required">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="hidden" name="id_categoria_itinerario" value="{{$categoriaItinerario->id_categoria_itinerario}}"><strong>{{$categoriaItinerario->descripcion}}</strong>
+                                </div>
+                            </div>
+                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                                <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
+                                <div class="col-sm-10">
+                                        @foreach($itinerarioLista as $k)
+                                            @if($itinerario->id_itinerario==$k->id_itinerario)
+                                            <input type="hidden" name="id_itinerario" value="{{$k->id_itinerario}}" ><strong>{{$k->titulo}}</strong>
+                                            @endif
+                                        @endforeach
+                                </div>
+                            </div>
                             <div class="form-group header-group-0 " id="form-group-name" style="">
                                 <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" placeholder="Ingrese el día" maxlength="70" class="form-control" name="titulo" id="titulo" required>
                                 </div>
                             </div>
-                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
-                                <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
 
-                                <div class="col-sm-10">
-                                    <select style="width:100%" class="form-control " id="id_itinerario" name="id_itinerario">
-                                        <option value="SELECCIONE UNO">SELECCIONE UNO</option>
-                                        @foreach($itinerarioLista as $k)
-                                            @if($itinerario->id_itinerario==$k->id_itinerario)
-                                                <option value="{{$k->id_itinerario}}" selected>{{$k->titulo}}</option>
-                                            @else
-                                            <option value="{{$k->id_itinerario}}">{{$k->titulo}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                             <div class="form-group header-group-0 " id="form-group-name" style="">
                                 <label class="control-label col-sm-2">Descripción: <span class="text-danger" title="Este campo es requerido">*</span></label>
                                 <div class="col-sm-10">

@@ -8,9 +8,9 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i> <strong>{{$item->titulo}}</strong> || Día Itinerario
+            <i class="fa fa-archive"></i> <strong>{{$item->titulo}}</strong><br>
             <!--START BUTTON -->
-            <a href="{{url('dia')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+            <a href="{{url('showItinerario/'.$item->id_itinerario)}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver todos
             </a>
             <a href="{{url('dia/createItinerario/'.$item->id_itinerario)}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
@@ -40,26 +40,27 @@
                         {{ Form::model($item, array('route' => array('dia.update', $item->id_dia), 'method' => 'PUT','class' => 'form-horizontal')) }}
                             <input type="hidden" name="conitinerario" value="1">
                         <div class="box-body">
-                            <div class="form-group header-group-0 " id="form-group-name" style="">
-                                <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                            <div class="form-group header-group-0 " id="form-group-category_id" style="">
+                                <label class="control-label col-sm-2">Categoría de Itinerario <span class="text-danger" title="This field is required">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" maxlength="70" class="form-control" name="titulo" id="titulo" value="{{$item->titulo}}" required>
+                                    <input type="hidden" name="id_categoria_itinerario" value="{{$categoriaItinerario->id_categoria_itinerario}}"><strong>{{$categoriaItinerario->descripcion}}</strong>
                                 </div>
                             </div>
                             <div class="form-group header-group-0 " id="form-group-category_id" style="">
                                 <label class="control-label col-sm-2">Itinerario <span class="text-danger" title="This field is required">*</span></label>
 
                                 <div class="col-sm-10">
-                                    <select style="width:100%" class="form-control " id="id_itinerario" name="id_itinerario">
-                                        <option value="SELECCIONE UNO">SELECCIONE UNO</option>
-                                        @foreach($itinerarioLista as $k)
-                                            @if($item->id_itinerario==$k->id_itinerario)
-                                                <option value="{{$k->id_itinerario}}" selected>{{$k->titulo}}</option>
-                                            @else
-                                                <option value="{{$k->id_itinerario}}">{{$k->titulo}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    @foreach($itinerarioLista as $k)
+                                        @if($item->id_itinerario==$k->id_itinerario)
+                                            <input type="hidden" name="id_itinerario" value="{{$k->id_itinerario}}" ><strong>{{$k->titulo}}</strong>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group header-group-0 " id="form-group-name" style="">
+                                <label class="control-label col-sm-2">Día: <span class="text-danger" title="Este campo es requerido">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" maxlength="70" class="form-control" name="titulo" id="titulo" value="{{$item->titulo}}" required>
                                 </div>
                             </div>
                             <div class="form-group header-group-0 " id="form-group-name" style="">

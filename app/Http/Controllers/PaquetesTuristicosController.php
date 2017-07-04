@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\PaqueteTuristico as paqueteturistico;
 use App\categoria as categorias;
 use App\Itinerario as itinerarios;
-use App\TipoItinerario as categoriaItinerario;
+use App\CategoriaItinerario as categoriaItinerario;
 use App\Mapas as mapa;
 use Illuminate\Support\Facades\Validator;
 

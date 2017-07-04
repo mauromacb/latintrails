@@ -8,7 +8,7 @@
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-archive"></i> <strong>{{$itinerario->titulo}}</strong> || Día Itinerario
+            <i class="fa fa-archive"></i> <strong>{{$categoriaItinerario->descripcion}} || {{$itinerario->titulo}}</strong><br>
             <!--START BUTTON -->
             <a href="{{url('itinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
                 <i class="fa fa-table"></i> Ver Itinerarios
@@ -27,7 +27,6 @@
     <div class="container-fluid spark-screen">
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
-
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-body">

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\DiaItinerario as dia;
 use App\TipoItinerario as tipoItinerario;
 use App\Itinerario as itinerario;
+use App\CategoriaItinerario as categoriaItinerario;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,8 @@ class DiaItinerarioController extends Controller
         if(!isset($items)){
             $items = new dia();
         }
-        return view('dia/index2',compact('items','itinerario','itinerarioLista'));
+        $categoriaItinerario=categoriaItinerario::where('id_categoria_itinerario',$itinerario->id_categoria_itinerario)->first();
+        return view('dia/index2',compact('items','itinerario','itinerarioLista','categoriaItinerario'));
     }
 
     public function editItinerario($id)
@@ -36,14 +38,18 @@ class DiaItinerarioController extends Controller
 
         $itinerarioLista=itinerario::all();
         $item=dia::find($id);
-        return view('dia/edit2', compact('item','itinerarioLista'));
+        $itinerario=itinerario::find($item->id_itinerario);
+        $categoriaItinerario=categoriaItinerario::where('id_categoria_itinerario',$itinerario->id_categoria_itinerario)->first();
+        return view('dia/edit2', compact('item','itinerarioLista','categoriaItinerario'));
     }
 
     public function verDia($id)
     {
         $itinerarioLista=itinerario::all();
         $item=dia::find($id);
-        return view('dia/verDia', compact('item','itinerarioLista'));
+        $itinerario=itinerario::find($item->id_itinerario);
+        $categoriaItinerario=categoriaItinerario::where('id_categoria_itinerario',$itinerario->id_categoria_itinerario)->first();
+        return view('dia/verDia', compact('item','itinerarioLista','categoriaItinerario'));
     }
 
     public function createItinerario($id)
@@ -51,8 +57,8 @@ class DiaItinerarioController extends Controller
         $itinerario=itinerario::where('id_itinerario',$id)->first();
         $itinerarioLista=itinerario::all();
         $item= new dia();
-
-        return view('dia/create2',compact('item','itinerario','itinerarioLista'));
+        $categoriaItinerario=categoriaItinerario::where('id_categoria_itinerario',$itinerario->id_categoria_itinerario)->first();
+        return view('dia/create2',compact('item','itinerario','itinerarioLista','categoriaItinerario'));
     }
 
     public function index()

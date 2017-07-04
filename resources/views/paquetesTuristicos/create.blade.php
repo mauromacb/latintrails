@@ -87,7 +87,7 @@
                                 <select style="width:100%" class="form-control " id="id_categoria_itinerario" name="id_categoria_itinerario">
                                     <option value="SELECCIONE UNO" selected>SELECCIONE UNO</option>
                                     @foreach($categoriasItinerarios as $k)
-                                        <option value="{{$k->id_tipocategoria}}" >{{$k->descripcion}}</option>
+                                        <option value="{{$k->id_ti}}" >{{$k->titulo_categoria}}</option>
                                     @endforeach
                                 </select>
 

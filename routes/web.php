@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -38,7 +38,6 @@ Route::post('/estado', 'PaquetesTuristicosController@estado');
 Route::resource('/hoteles', 'HotelesController');
 Route::resource('/pagina', 'PaginaController');
 Route::resource('/commentcard', 'CommentCardController');
-Route::resource('/mapas', 'MapasController');
 
 Route::resource('/itinerario', 'ItinerarioController');
 Route::get('/verItinerario/{id}', 'ItinerarioController@ver');
@@ -48,3 +47,14 @@ Route::get('/showItinerario/{id}', 'DiaItinerarioController@showItinerario');
 Route::get('dia/{id}/editItinerario', 'DiaItinerarioController@editItinerario');
 Route::get('dia/verDia/{id}', 'DiaItinerarioController@verDia');
 Route::get('dia/createItinerario/{id}', 'DiaItinerarioController@createItinerario');
+
+Route::get('/mapas/{id}', 'MapasController@index');
+Route::get('/mapas/{id}/create', 'MapasController@create');
+Route::post('/mapas', 'MapasController@store');
+Route::get('/mapas/{mapa}/show', 'MapasController@show');
+Route::put('/mapas/{mapa}', ['as' => 'mapas.update', 'uses' => 'MapasController@update']);
+Route::get('/mapas/{mapa}/edit', 'MapasController@edit');
+Route::delete('/mapas/{id}/{mapa}', 'MapasController@destroy');
+
+Route::resource('/formulariocommentcard', 'FormularioCommentCardController');
+Route::resource('/guia', 'GuiaItinerarioController');

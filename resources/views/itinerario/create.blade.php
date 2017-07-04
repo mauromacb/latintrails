@@ -2,20 +2,26 @@
 
 @section('htmlheader_title')
     {{ trans('Paquetes Turísticos') }}
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 @endsection
 
 
 @section('main-content')
     <section class="content-header">
         <h1>
-            <i class="fa fa-glass"></i><a href="{{url('itinerario')}}"> Crear Itinerario
+            <i class="fa fa-archive"></i>  Itinerario
+            <!--START BUTTON -->
+            <a href="{{url('itinerario')}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+                <i class="fa fa-table"></i> Ver todos
+            </a>
+            <a href="{{url('itinerario/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+                <i class="fa fa-plus-circle"></i> Agregar nuevo
+            </a>
+            <!-- END BUTTON -->
         </h1>
-
-
         <ol class="breadcrumb">
-            <li><a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Itinerario</li>
+            <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Tipo Itinerario</li>
         </ol>
     </section>
 

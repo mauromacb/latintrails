@@ -41,17 +41,19 @@
             <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Tipo de Itinerario</th>
+                    <th>Categoría de Itinerario</th>
                     <th>Itinerario</th>
                     <th>Días</th>
+                    <th>Mapa</th>
                     <th>Acción</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Tipo de Itinerario</th>
+                    <th>Categoría de Itinerario</th>
                     <th>Itinerario</th>
                     <th>Días</th>
+                    <th>Mapa</th>
                     <th>Acción</th>
                 </tr>
                 </tfoot>
@@ -78,6 +80,14 @@
                             <span class="glyphicon glyphicon-list"></span>
                             <a href="{{url('showItinerario/'.$k->id_itinerario)}}" style="color: #fff">
                                 <strong>  Asignar/Ver Días</strong>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn btn-xs btn-warning">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            <a href="{{url('mapas/'.$k->id_itinerario)}}" style="color: #fff">
+                                <strong>  Mapa turísttico</strong>
                             </a>
                         </div>
                     </td>

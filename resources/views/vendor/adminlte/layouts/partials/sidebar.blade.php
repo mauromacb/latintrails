@@ -42,9 +42,8 @@
                     <li><a href="{{ url('categoriaItinerario') }}"><i class='fa fa-link'></i> <span>Categoría de Itinerarios</span></a></li>
                     <li><a href="{{ url('itinerario') }}"><i class='fa fa-link'></i> <span>Itinerarios</span></a></li>
                     <li><a href="{{ url('hoteles') }}"><i class='fa fa-link'></i> <span>Hoteles</span></a></li>
-                    <li><a href="{{ url('guias') }}"><i class='fa fa-link'></i> <span>Guías Turísticos</span></a></li>
-                    <li><a href="{{ url('mapas') }}"><i class='fa fa-link'></i> <span>Mapas Zonas Turísticas</span></a></li>
-                    <li class=""><a href="{{ url('commentcard') }}"><i class='fa fa-link'></i> <span>Comment Card</span></a></li>
+                    <li><a href="{{ url('guia') }}"><i class='fa fa-link'></i> <span>Guías Turísticos</span></a></li>
+                    <li class=""><a href="{{ url('formulariocommentcard') }}"><i class='fa fa-link'></i> <span>Comment Card</span></a></li>
                 </ul>
             </li>
             <li><a href="{{ url('paquetesTuristicos') }}"><i class='fa fa-link'></i> <span>Paquetes Turísticos</span></a></li>

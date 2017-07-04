@@ -1,10 +1,7 @@
 @extends('adminlte::layouts.app')
-
 @section('htmlheader_title')
 	{{ trans('adminlte_lang::message.home') }}
 @endsection
-
-
 @section('main-content')
 	<div class="container-fluid spark-screen">
 		<div class="row">
@@ -24,7 +21,7 @@
 					</div>
 					<div class="box-body">
 
-						<img src="images/fondo-productos.jpg" width="100%">
+						<img src="{{asset('images/fondo-productos.jpg')}}" width="100%">
 					</div>
 					<!-- /.box-body -->
 				</div>

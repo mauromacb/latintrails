@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mapas as mapas;
-use App\PaqueteTuristico as paqueteturistico;
+use App\Itinerario as itinerario;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -13,41 +13,25 @@ use App\Thumbnail;
 
 class MapasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($id)
     {
-        $items=mapas::all();
-        return view('mapas/index', compact('items'));
+        $items=mapas::where('id_itinerario',$id)->get();
+        $itinerario = itinerario::where('id_itinerario',$id)->first();
+        return view('mapas/index', compact('items','itinerario'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($id)
     {
         $item = new mapas();
-        $paqueteturistico=paqueteturistico::where('estado','!=',2)->get();
-        return view('mapas.create', compact('item','paqueteturistico'));
+        $itinerario = itinerario::where('id_itinerario',$id)->first();
+        return view('mapas.create', compact('item','itinerario'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = array(
             'nombre_mapa'  => 'required',
-            'descripcion'  => 'required',
-            'id_paquete_tur'  => 'required'
+            'id_itinerario'  => 'required',
         );
         // proceso de validacion
         $messages = [
@@ -56,7 +40,7 @@ class MapasController extends Controller
 
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
-            return Redirect::to('mapas/create')
+            return Redirect::to('mapas/'.$request->id_itinerario.'/create')
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
@@ -64,67 +48,56 @@ class MapasController extends Controller
             $file = Input::file('file');
             //Creamos una instancia de la libreria instalada
             $image = \Image::make(\Input::file('file'));
+            $extension= explode(".", $file->getClientOriginalName());
             //Ruta donde queremos guardar las imagenes
-            $path = public_path().'/thumbnails/';
+            $path = public_path() . '/uploads/thumbnails/'.$request->id_itinerario.'/';
+            $ipath = '/uploads/thumbnails/'.$request->id_itinerario.'/';
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $nombre_mapa=str_replace(' ', '_',$request->nombre_mapa);
+
+            $item = new mapas();
+            $item->nombre_mapa=$request->nombre_mapa;
+            $item->id_itinerario=$request->id_itinerario;
+            $item->imagen=$nombre_mapa.'.'.$extension[1];
+            $item->path=$ipath;
+            $item->descripcion=$request->descripcion;
+            $item->save();
 
             // Guardar Original
-            $image->save($path.$file->getClientOriginalName());
+            $image->save($path.$item->id_mapa.'_'.$nombre_mapa.'.'.$extension[1]);
             // Cambiar de tamaño
             $image->resize(240,200);
             // Guardar
-            $image->save($path.'thumb_'.$file->getClientOriginalName());
-
+            $image->save($path.'thumb_'.$item->id_mapa.'_'.$nombre_mapa.'.'.$extension[1]);
             //Guardamos nombre y nombreOriginal en la BD
 
-            $item = new mapas();
-            //$item->id_paquete_tur=$request->id_paquete_tur;
-            $item->descripcion=$request->descripcion;
-            $item->nombre_mapa=$request->nombre_mapa;
-            $item->imagen=$file->getClientOriginalName();
-            $item->thumbnail='thumb_'.$file->getClientOriginalName();
-            $item->save();
             // redirecciona
             Session::flash('message', 'Solicitud procesada exitosamente');
-            return Redirect::to('mapas');
+            return Redirect::to('mapas/'.$request->id_itinerario);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $item=mapas::find($id);
-        return view('mapas/show', compact('item'));
+        $item=mapas::where('id_mapa',$id)->first();
+        $itinerario = itinerario::where('id_itinerario',$item->id_itinerario)->first();
+        return view('mapas/show', compact('item','itinerario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $item=mapas::find($id);
-        return view('mapas/edit', compact('item'));
+        $item=mapas::where('id_mapa',$id)->first();
+        $itinerario = itinerario::where('id_itinerario',$item->id_itinerario)->first();
+        return view('mapas/edit', compact('item','itinerario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $rules = array(
-            'descripcion'  => 'required',
-            'nombre_mapa'  => 'required'
+            'nombre_mapa'  => 'required',
+            'id_itinerario'  => 'required',
         );
         // proceso de validacion
         $messages = [
@@ -133,27 +106,50 @@ class MapasController extends Controller
 
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
-            return Redirect::to('mapas/' . $id . '/edit')
+            return Redirect::to('mapas/'.$request->id_itinerario.'/create')
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
-            $item = mapas::find($id);
-            $item->id_categoria=$request->id_categoria;
-            $item->descripcion=$request->descripcion;
+            $file = Input::file('file');
+            //Creamos una instancia de la libreria instalada
+            try
+            {
+                $image = \Image::make(\Input::file('file'));
+            }
+            catch(NotReadableException $e)
+            {
+                return $e;
+            }
+
+            $extension= explode(".", $file->getClientOriginalName());
+            //Ruta donde queremos guardar las imagenes
+            $path = public_path() . '/uploads/thumbnails/'.$request->id_itinerario.'/';
+            $ipath = '/uploads/thumbnails/'.$request->id_itinerario.'/';
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            $nombre_mapa=str_replace(' ', '_',$request->nombre_mapa);
+            $item = mapas::where('id_mapa',$id)->first();
             $item->nombre_mapa=$request->nombre_mapa;
+            $item->imagen=$nombre_mapa.'.'.$extension[1];
+            $item->descripcion=$request->descripcion;
             $item->save();
+
+            // Guardar Original
+            $image->save($path.$item->id_mapa.'_'.$nombre_mapa.'.'.$extension[1]);
+            // Cambiar de tamaño
+            $image->resize(240,200);
+            // Guardar
+            $image->save($path.'thumb_'.$item->id_mapa.'_'.$nombre_mapa.'.'.$extension[1]);
+            //Guardamos nombre y nombreOriginal en la BD
+
             // redirecciona
             Session::flash('message', 'Solicitud procesada exitosamente');
-            return Redirect::to('mapas');
+            return Redirect::to('mapas/'.$request->id_itinerario);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $item=mapas::find($id);
