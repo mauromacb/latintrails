@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Itinerario as itinerarios;
-use App\categoriaItinerario as categoriaItinerario;
+use App\CategoriaItinerario as categoriaItinerario;
 use App\DiaItinerario as dia;
 
 class ItinerarioController extends Controller
@@ -45,6 +45,7 @@ class ItinerarioController extends Controller
         $itinerario->subtitulo=$request->subtitulo;
         $itinerario->subtitulo2=$request->subtitulo2;
         $itinerario->descripcion=$request->descripcion;
+        $itinerario->estado=1;
         $itinerario->save();
         return redirect()->action('ItinerarioController@index');
     }
@@ -86,6 +87,7 @@ class ItinerarioController extends Controller
         $itinerario->subtitulo=$request->subtitulo;
         $itinerario->subtitulo2=$request->subtitulo2;
         $itinerario->descripcion=$request->descripcion;
+        $itinerario->estado=1;
         $itinerario->save();
         return redirect()->action('ItinerarioController@index');
     }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -71,13 +72,12 @@ class ApiAuthController extends Controller
     }
 
     public function getHotels(Request $request){
+        $token=null;
+        $user=JWTAuth::toUser($token);
 
-        $username='get hoteles';
+        $paqueteTuristico=paqueteTuristtico::where('id_user',$user->id)->where('estado',1)->first();
 
 
-
-
-
-        return response()->json(compact('username'));
+        return response()->json(compact('paqueteTuristico','user'));
     }
 }

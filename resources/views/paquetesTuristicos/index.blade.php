@@ -1,4 +1,4 @@
-<?php use App\categoria as categorias;?>
+<?php use App\User as user;?>
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
@@ -49,7 +49,7 @@
                 <thead>
                 <tr>
                     <th>Título</th>
-                    <th>Categoría</th>
+                    <th>Usuario</th>
                     <th>Status</th>
                     <th>Acción</th>
                 </tr>
@@ -57,7 +57,7 @@
                 <tfoot>
                 <tr>
                     <th>Título</th>
-                    <th>Categoría</th>
+                    <th>Usuario</th>
                     <th>Status</th>
                     <th>Acción</th>
                 </tr>
@@ -74,10 +74,10 @@
                     </td>
                     <td>
                         <strong>
-                            @if(isset(categorias::where('id_categoria',$k->id_categoria)->where('estado','!=',2)->first()->titulo_categoria))
-                                <a href="{{url('paquetesTuristicos/'.$k->id_paquete_tur)}}" class="small-box-footer">
-                                {{categorias::where('id_categoria',$k->id_categoria)->where('estado','!=',2)->first()->titulo_categoria}}
-                                </a>
+                            @if(isset(user::where('id',$k->id_user)->where('estado','!=',2)->first()->name))
+
+                                    {{user::where('id',$k->id_user)->where('estado','!=',2)->first()->name}}
+
                             @else
                                 Sin categoría asignada
                             @endif
@@ -86,17 +86,11 @@
                     <td>
                         <div class="btn btn-xs btn-primary">
                             <span class="glyphicon glyphicon-list"></span>
-                            <a href="{{url('itinerario/'.$k->id_paquete_tur)}}" style="color: #fff">
+                            <a href="{{url('paquetesTuristicos/itinerarios/'.$k->id_paquete_tur)}}" style="color: #fff">
                                 <strong>  Asignar/Ver Itinerarios</strong>
                             </a>
                         </div>
-                        ||
-                        <div class="btn btn-xs btn-success">
-                            <span class="glyphicon glyphicon-map-marker"></span>
-                            <a href="{{url('mapas/')}}" style="color: #fff">
-                                <strong> Asginar/Ver Mapas</strong>
-                            </a>
-                        </div>
+                        
                     </td>
                     <td>
                         <div class='button_action' style='text-align:right'>

@@ -11,15 +11,13 @@ use App\categoria as categorias;
 use App\Itinerario as itinerarios;
 use App\CategoriaItinerario as categoriaItinerario;
 use App\Mapas as mapa;
+use App\CalendarioItinerario as calendarioItinerario;
+use App\ItinerarioPaqueteTuristico as itinerarioPaquete;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 class PaquetesTuristicosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function __construct()
     {
@@ -35,46 +33,36 @@ class PaquetesTuristicosController extends Controller
         return view('paquetesTuristicos/index', compact('paquete_turistico'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $itinerarios = itinerarios::all();
+
+        $usuarios =\App\User::all();
         $categoriasItinerarios=categoriaItinerario::all();
-        return view('paquetesTuristicos/create' ,compact('categoriasItinerarios','itinerarios'));
+        return view('paquetesTuristicos/create' ,compact('categoriasItinerarios','itinerarios','usuarios'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make(
             array(
                 'titulo' => $request->titulo,
-                'subtitulo' => $request->subtitulo,
                 'descripcion' => $request->descripcion,
                 'id_categoria' => $request->categoria_id
             ),
             array(
                 'titulo' => 'required',
-                'subtitulo' => 'required',
                 'descripcion' => 'required',
                 'id_categoria' => 'required'
             )
         );
         $paquete = new paqueteturistico();
+        $paquete->id_user = $request->id_user;
         $paquete->titulo = $request->titulo;
         $paquete->subtitulo = $request->subtitulo;
         $paquete->descripcion = $request->descripcion;
-        $paquete->fecha_creacion = date('Y-m-d h:m:s');
-        $paquete->id_categoria = $request->id_categoria;
+        //$paquete->fecha_creacion = date('Y-m-d h:m:s');
+        //$paquete->id_categoria = $request->id_categoria;
         $paquete->estado = 1;
         $paquete->save();
 
@@ -82,12 +70,6 @@ class PaquetesTuristicosController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $item=paqueteturistico::find($id);
@@ -100,29 +82,12 @@ class PaquetesTuristicosController extends Controller
         return view('paquetesTuristicos/show', compact('item','categorias','cats','itinerario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $item=paqueteturistico::find($id);
-        $categorias=categorias::where('estado','!=',2)->get();
-        $cats=categorias::find($item->id_categoria);
-        $itinerario=itinerarios::all();
-        //dd($itinerario);
-        return view('paquetesTuristicos/edit', compact('item','categorias','cats','itinerario'));
+        return view('paquetesTuristicos/edit', compact('item'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $paquete=paqueteturistico::find($id);
@@ -133,12 +98,6 @@ class PaquetesTuristicosController extends Controller
         return redirect()->action('PaquetesTuristicosController@index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $paquete=paqueteturistico::find($id);
@@ -155,29 +114,47 @@ class PaquetesTuristicosController extends Controller
         return redirect()->action('PaquetesTuristicosController@index');
     }
 
+    public function itinerarios($id)
+    {
+        $itinerario=itinerarioPaquete::where('id_paquete_tur',$id)->get();
+        $item=paqueteturistico::find($id)->first();
+        return view('paquetesTuristicos/itinerarioLista', compact('item','itinerario'));
+    }
+
+    public function crearItinerario($id)
+    {
+
+        $categoriasItinerarios = categoriaItinerario::where('estado','!=',2)->get();
+        $item=paqueteturistico::find($id)->first();
+        $itinerarios = itinerarios::all();
+        $calendarioItinerarios = calendarioItinerario::all();
+
+        return view('paquetesTuristicos/itinerarioCreate', compact('item','categoriasItinerarios','itinerarios','calendarioItinerarios'));
+    }
+
     public function nuevoItinerario(Request $request)
     {
-        $itinerario=new itinerarios();
-        $itinerario->id_paquete_tur=$request->idpaquetetur;
-        $itinerario->id_categoria_itinerario=1;
-        $itinerario->dia=$request->dia;
-        $itinerario->descripcion=$request->descripcion;
-        $itinerario->save();
 
-        $item=paqueteturistico::find($request->idpaquetetur);
-        $categorias=categorias::get();
-        //$cats=categorias::find($item->id_categoria);
-
-        //return view('paquetesTuristicos/edit', compact('item','categorias','cats','itinerario'));
-        $itinerario=itinerarios::where('id_paquete_tur',$request->idpaquetetur)->get();
-        return view('paquetesTuristicos/itinerarioLista', compact('item','itinerario'));
-        //return "Itinerario agregado correctamente";
+        try{
+        $errormsg='';
+        $itinerariopaquete=new itinerarioPaquete();
+        $itinerariopaquete->id_paquete_tur=$request->id_paquete_tur;
+        $itinerariopaquete->id_itinerario=$request->id_itinerario;
+        $itinerariopaquete->id_calendario_itinerario=$request->id_calendario_itinerario;
+        $itinerariopaquete->save();
+        }catch(Exception $exception)
+        {
+            $errormsg = 'Database error! ' . $exception->getCode();
+        }
+        return redirect()->action('PaquetesTuristicosController@itinerarios',['id' => $request->id_paquete_tur,'errormsg'=>$errormsg]);
     }
+
     public function editarItinerario(Request $request)
     {
         $itinerarios=itinerarios::where('id_itinerario',$request->idit)->first();
         return $itinerarios;
     }
+
     public function guardarItinerario(Request $request)
     {
         $itinerario=itinerarios::find($request->idit);
@@ -187,15 +164,16 @@ class PaquetesTuristicosController extends Controller
 
         $itinerario = itinerarios::where('id_paquete_tur','=',$request->idpaquetetur)->get();
         $item=paqueteturistico::find($request->idpaquetetur)->first();
-        return view('paquetesTuristicos/itinerarioLista', compact('item','itinerario'));
+
+        return redirect()->action('PaquetesTuristicosController@itinerarios',['id' => $request->idpaquetetur]);
     }
 
     public function destroyItinerario(Request $request)
     {
-        $itinerario = itinerarios::find($request->idit)->first();
-        $itinerario->delete($request->idit);
-        $itinerario = itinerarios::where('id_paquete_tur','=',$request->idpt)->get();
-        $item=paqueteturistico::find($request->idpt)->first();
+        $itinerario = itinerarioPaquete::where('id_itinerario',$request->id_itinerario)->where('id_paquete_tur',$request->idpaquetetur)->first();
+        $itinerario->delete();
+        $itinerario = itinerarioPaquete::where('id_paquete_tur','=',$request->idpaquetetur)->get();
+        $item=paqueteturistico::find($request->idpaquetetur)->first();
         return view('paquetesTuristicos/itinerarioLista', compact('item','itinerario'));
     }
 
@@ -205,5 +183,23 @@ class PaquetesTuristicosController extends Controller
         $imageName = time().$image->getClientOriginalName();
         $image->move(public_path('uploads'),$imageName);
         return response()->json(['success'=>$imageName]);
+    }
+
+    public function getItinerario(Request $request)
+    {
+        $itinerarios=itinerarios::where('id_categoria_itinerario',(int)$request->elegido)->
+        where('estado','!=',2)->get();
+        return $itinerarios;
+    }
+
+    public function getFechas(Request $request)
+    {
+        $calendarios=calendarioItinerario::where('id_itinerario',(int)$request->elegido)->
+        where('estado','!=',2)->get();
+
+        $itinerario=itinerarios::where('id_itinerario',(int)$request->elegido)->
+        where('estado','!=',2)->first();
+        $categoriasItinerarios = categoriaItinerario::where('id_categoria_itinerario',$itinerario->id_categoria_itinerario)->first();
+        return $calendarios;
     }
 }

@@ -43,6 +43,7 @@
                 <tr>
                     <th>Categoría de Itinerario</th>
                     <th>Itinerario</th>
+                    <th>Calendario</th>
                     <th>Días</th>
                     <th>Mapa</th>
                     <th>Acción</th>
@@ -52,6 +53,7 @@
                 <tr>
                     <th>Categoría de Itinerario</th>
                     <th>Itinerario</th>
+                    <th>Calendario</th>
                     <th>Días</th>
                     <th>Mapa</th>
                     <th>Acción</th>
@@ -62,18 +64,25 @@
                 @foreach($itinerarios as $k)
                 <tr>
                     <td class="{{$categoriaItinerario=categoriaItinerario::where('id_categoria_itinerario',$k->id_categoria_itinerario)->first()}}">
-                        @if($categoriaItinerario->fecha_fija==1)
-                            <span class="btn btn-xs btn-success">Con fecha fija</span>
-                            <strong>{{$categoriaItinerario->descripcion}}</strong>
-                        @else
-                            <span class="btn btn-xs btn-warning">Sin fecha fija</span>
-                            <strong>{{$categoriaItinerario->descripcion}}</strong>
-                        @endif
+                        <strong>{{$categoriaItinerario->descripcion}}</strong>
                     </td>
                     <td>
                         <a href="{{url('itinerario/'.$k->id_itinerario)}}" class="small-box-footer">
                             <i class="fa fa-arrow-circle-right"></i> <strong>{{$k->titulo}}</strong>
                         </a>
+                    </td>
+                    <td>
+                        @if($categoriaItinerario->fecha_fija==1)
+                            {{--<button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal" onclick="calendario({{$k->id_itinerario}})"></button>--}}
+                            <div class="btn btn-xs btn-success">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                <a href="{{url('calendarios/'.$k->id_itinerario)}}" style="color: #fff">
+                                    Asignar/Ver Calendario
+                                </a>
+                            </div>
+                        @else
+                            <span class="btn btn-xs btn-warning">Sin Calendario</span>
+                        @endif
                     </td>
                     <td>
                         <div class="btn btn-xs btn-primary">
@@ -136,4 +145,37 @@
         </div>
     </div>
 </section><!-- /.content -->
+
+<script>
+    function calendario(id){
+        var url='{{url('calendarios')}}/'+id;
+
+        $('#iframe').attr('src', url);
+        $('#iframe').reload();
+    }
+
+</script>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="calendario()">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Calendario</h4>
+            </div>
+            <div class="modal-body" id="iframes">
+                <iframe src="" style="zoom:0.60" width="99.6%" height="250" frameborder="0" id="iframe"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

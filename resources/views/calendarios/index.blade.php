@@ -5,22 +5,20 @@
 @section('main-content')
 <section class="content-header">
 <h3>
-    <i class="fa fa-archive"></i> Mapas Zonas Turísticas
+    <i class="fa fa-archive"></i> {{$itinerario->titulo}} >> Calendario
     <!--START BUTTON -->
-    <a href="{{url('mapas/'.$itinerario->id_itinerario)}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
+    <a href="{{url('calendarios/'.$itinerario->id_itinerario)}}" id="btn_show_data" class="btn btn-sm btn-primary" title="Ver todos">
         <i class="fa fa-table"></i> Ver todos
     </a>
-    @if(!isset($items[0]->id_mapa))
-    <a href="{{url('mapas/'.$itinerario->id_itinerario.'/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
+    <a href="{{url('calendarios/'.$itinerario->id_itinerario.'/create')}}" id="btn_add_new_data" class="btn btn-sm btn-success" title="Agregar nuevo">
         <i class="fa fa-plus-circle"></i> Agregar nuevo
     </a>
-    @endif
     <!--ADD ACTIon-->
     <!-- END BUTTON -->
 </h3>
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
-    <li class="active">Mapas Zonas turísticas</li>
+    <li class="active">Calendarios</li>
 </ol>
 </section>
 <section id="content_section" class="content">
@@ -39,14 +37,14 @@
             <table id="lista" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <td>Nombre</td>
+                    <td>Calendario</td>
                     <td>Acción</td>
 
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <td>Nombre</td>
+                    <td>Calendario</td>
                     <td>Acción</td>
 
                 </tr>
@@ -56,18 +54,22 @@
                 @foreach($items as $k)
                     <tr>
                         <td>
-                            <a href="{{url('mapas/'.$k->id_mapa.'/show')}}" class="small-box-footer">
-                                <img src="{{asset($k->path.'thumb_'.$k->id_mapa.'_'.$k->imagen)}}" alt="{{$k->nombre_mapa}}">
-                                <div class="caption">
-                                    <h3>{{$k->nombre_mapa}}</h3>
-                                </div>
-                            </a>
+                            <strong>{{$k->fecha_inicio}} || {{$k->fecha_fin}}</strong>
                         </td>
                         <td>
                             <div class='' style='text-align:right'>
-                                <a class='btn btn-xs btn-primary' title='Ver' href='{{url('mapas/'.$k->id_mapa.'/show')}}'> <i class='fa fa-eye'></i></a>
-                                <a class='btn btn-xs btn-success' title='Editar' href='{{url('mapas/'.$k->id_mapa.'/edit')}}'><i class='fa fa-pencil'></i></a>
+                                <a class='btn btn-xs btn-success' title='Editar' href='{{url('calendarios/'.$k->id_calendario_itinerario.'/edit')}}'><i class='fa fa-pencil'></i></a>
                                 <div style='float: right; margin-left: 3px'>
+                                </div>
+                                <div style='float: right; margin-left: 3px'>
+                                    {{ Form::open(['method' => 'DELETE', 'route' => ['calendarios.destroy', $k->id_calendario_itinerario]]) }}
+                                    <fieldset class="buttons">
+                                        <input type="hidden" name="id_itinerario" value="{{$itinerario->id_itinerario}}">
+                                        <button class="delete btn btn-xs btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
+                                            <span class="fa fa-trash"></span>
+                                        </button>
+                                    </fieldset>
+                                    {{ Form::close() }}
                                 </div>
                             </div>
                         </td>
@@ -80,7 +82,6 @@
         <!-- /.box-body -->
     </div>
     <!-- /.box -->
-
 </div>
 </section>
 @endsection
